@@ -1,0 +1,121 @@
+/*  LAYOUT CONSTRAINTS
+	----------------------------- */
+$layoutWidthMax: 1600px;
+$layoutReadingMax: 820px;
+
+/*  FONT SETTINGS
+	----------------------------- */
+$fontSizeDefaults: (
+        'mobile':       16px,
+        'tablet':       18px,
+        'desktop':      20px,
+        'desktop-wide': 22px
+);
+
+$fontWeights: (
+        'normal': 400,
+        'semi':   600,
+        'bold':   700
+);
+
+$fontFamilies: (
+        'default':  ('futura-pt', sans-serif),
+        'heading':  ('futura-pt', sans-serif),
+        'deco':     ('futura-pt', sans-serif),
+        'mono':     (monospace),
+);
+
+/*  SIZES
+	----------------------------- */
+$sizes: (
+        'micro':    0.5,
+        'tiny':     0.75,
+        'small':    0.85,
+        'default':  1,
+        'bump':     1.15,
+        'large':    1.35,
+        'larger':   1.5,
+        'huge':     2,
+        'huger':    2.5,
+        'jumbo':    3.5,
+        'whoa':     5
+);
+
+/*  COLORS
+	----------------------------- */
+$color-black:       #0D0D0D;
+$color-grey:        #C7D1D9;
+$color-white:       #fafafa;
+$color-blue:        #0477BF;
+$color-blue--light: #049DD9;
+$color-peach:       #F2B199;
+
+$colors: (
+        'light':      $color-white,
+        'medium':     $color-grey,
+        'dark':       $color-black,
+        'primary':    $color-blue,
+        'secondary':  $color-blue--light,
+        'accent':     $color-peach,
+        'alt1':       $color-blue,
+        'alt2':       $color-blue,
+        'alt3':       $color-blue,
+);
+
+/*  TRANSITIONS
+	----------------------------- */
+@mixin transition($type, $target: all, $time: 350ms) {
+  @if $type == 'hover' {
+    transition: $target $time cubic-bezier(0.22, 1, 0.36, 1);
+  } @else if $type == 'grow' {
+    transition: $target ($time * 1.25) cubic-bezier(0.34, 1.56, 0.64, 1);
+  } @else if $type == 'move' {
+    transition: $target ($time * 0.75) cubic-bezier(0.5, 1, 0.89, 1);
+  }
+}
+
+/*  PADDING SIZES
+	----------------------------- */
+$spacing: (
+        'mobile':       5vw,
+        'tablet':       3vw,
+        'desktop':      1.5vw,
+        'desktop-wide': 1vw
+);
+
+/*  BREAKPOINTS
+	----------------------------- */
+$breakpoints: (
+        'mobile':       480px,
+        'tablet':       768px,
+        'desktop':      1248px,
+        'desktop-wide': 1920px
+);
+
+/*  BORDER RADIUS
+	----------------------------- */
+$borderRadii: (
+        'small':  0.25em,
+        'medium': 1em,
+        'large':  3em
+);
+
+/*  BOX SHADOWS
+	----------------------------- */
+$shadowColorDefault: map-get($colors, dark);
+
+$shadowSizes: (
+        'small':  0 0 0.25em,
+        'normal': 0 0 0.5em,
+        'large':  0 0 1em
+);
+
+/*  BORDERS
+	----------------------------- */
+$borderColorDefault: map-get($colors, dark);
+
+$borderSizes: (
+        'thin':   1px solid,
+        'normal': 2px solid,
+        'dashed': 4px dashed
+);

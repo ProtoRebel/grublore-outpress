@@ -1,0 +1,265 @@
+/**
+  Hamburger Menu Mixin
+  Style numbers: https://codepen.io/domesticjones/pen/XzGLaM
+  ---------------------------------------------------------------------- */
+@mixin hamburgerMenu($style, $color, $size: 1, $thickness: 2px) {
+  $sizeBaseline: 2rem * $size;
+
+  display: block;
+
+  .line {
+    display: block;
+    width: $sizeBaseline;
+    height: $thickness;
+    background-color: $color;
+    margin: ($sizeBaseline * 0.2) auto;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @if $style == 1 {
+    &.is-active .line:nth-child(2) {
+      opacity: 0;
+    }
+
+    &.is-active .line:nth-child(1) {
+      transform: translateY(($sizeBaseline * 0.26)) rotate(45deg);
+    }
+
+    &.is-active .line:nth-child(3) {
+      transform: translateY(($sizeBaseline * -0.26)) rotate(-45deg);
+    }
+  }
+
+  @else if $style == 2 {
+    &.is-active .line:nth-child(1) {
+      transform: translateY(($sizeBaseline * 0.26));
+    }
+
+    &.is-active .line:nth-child(3) {
+      transform: translateY(($sizeBaseline * -0.26));
+    }
+  }
+
+  @else if $style == 3 {
+    &.is-active .line:nth-child(1),
+    &.is-active .line:nth-child(3) {
+      width: ($sizeBaseline * 0.8);
+    }
+
+    &.is-active .line:nth-child(1) {
+      transform: translateX(($sizeBaseline * -0.2)) rotate(-45deg);
+    }
+
+    &.is-active .line:nth-child(3) {
+      transform: translateX(($sizeBaseline * -0.2)) rotate(45deg);
+    }
+  }
+
+  @else if $style == 4 {
+    &.is-active .line:nth-child(1),
+    &.is-active .line:nth-child(3) {
+      width: ($sizeBaseline * 0.8);
+    }
+
+    &.is-active .line:nth-child(1) {
+      transform: translateX(($sizeBaseline * 0.2)) rotate(45deg);
+    }
+
+    &.is-active .line:nth-child(3) {
+      transform: translateX(($sizeBaseline * 0.2)) rotate(-45deg);
+    }
+  }
+
+  @else if $style == 5 {
+    &.is-active {
+      transform: rotate(90deg);
+    }
+
+    .line:nth-child(2) {
+      transition-delay: 0.3s;
+    }
+
+    &.is-active .line:nth-child(2) {
+      transition: none;
+      opacity: 0;
+    }
+
+    &.is-active .line:nth-child(1),
+    &.is-active .line:nth-child(3) {
+      width: ($sizeBaseline * 0.7);
+      transform-origin: right;
+    }
+
+    &.is-active .line:nth-child(1) {
+      transform: translateY(($sizeBaseline * 0.3)) rotate(45deg);
+    }
+
+    &.is-active .line:nth-child(3) {
+      transform: translateY(($sizeBaseline * -0.3)) rotate(-45deg);
+    }
+  }
+
+  @else if $style == 6 {
+    &.is-active {
+      transition: all 0.3s ease-in-out;
+      transition-delay: 0.6s;
+      transform: rotate(45deg);
+    }
+
+    &.is-active .line:nth-child(2) {
+      width: 1px;
+    }
+
+    &.is-active .line:nth-child(1),
+    &.is-active .line:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+
+    &.is-active .line:nth-child(1) {
+      transform: translateY(($sizeBaseline * 0.26));
+    }
+
+    &.is-active .line:nth-child(3) {
+      transform: translateY(($sizeBaseline * -0.26)) rotate(90deg);
+    }
+  }
+
+  @else if $style == 7 {
+    &.is-active .line {
+      transform: rotate(30deg);
+    }
+
+    &.is-active .line:nth-child(1) {
+      width: ($sizeBaseline * 0.6);
+    }
+
+    &.is-active .line:nth-child(2) {
+      width: ($sizeBaseline * 0.8);
+    }
+  }
+
+  @else if $style == 8 {
+    &.is-active .line:nth-child(2) {
+      opacity: 0;
+    }
+
+    &.is-active .line:nth-child(1) {
+      transform: translateY(($sizeBaseline * 0.26));
+    }
+
+    &.is-active .line:nth-child(3) {
+      transform: translateY(($sizeBaseline * -0.26)) rotate(90deg);
+    }
+  }
+
+  @else if $style == 9 {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+
+    &.is-active {
+      transform: rotate(45deg);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+      width: ($sizeBaseline * 1.4);
+      height: ($sizeBaseline * 1.4);
+      border: 5px solid transparent;
+      top: calc(50% - #{($sizeBaseline * 0.7)});
+      left: calc(50% - #{($sizeBaseline * 0.7)});
+      border-radius: 100%;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &.is-active::before {
+      border: ($sizeBaseline * 0.1) solid $color;
+    }
+
+    &.is-active .line {
+      width: ($sizeBaseline * 0.7);
+    }
+
+    &.is-active .line:nth-child(2) {
+      opacity: 0;
+    }
+
+    &.is-active .line:nth-child(1) {
+      transform: translateY(($sizeBaseline * 0.26));
+    }
+
+    &.is-active .line:nth-child(3) {
+      transform: translateY(($sizeBaseline * -0.26)) rotate(90deg);
+    }
+  }
+
+  @else if $style == 10 {
+    transition: all 0.3s ease-in-out;
+
+    &.is-active {
+      transform: rotate(90deg);
+    }
+
+    &.is-active .line:nth-child(1) {
+      width: ($sizeBaseline * 0.6);
+    }
+
+    &.is-active .line:nth-child(2) {
+      width: ($sizeBaseline * 0.8);
+    }
+  }
+
+  @else if $style == 11 {
+    transition: all 0.3s ease-in-out;
+
+    &.is-active {
+      animation: smallbig 0.6s forwards;
+    }
+
+    @keyframes smallbig {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(0);
+      }
+    }
+
+    &.is-active .line:nth-child(1) {
+      transform: translateY(($sizeBaseline * 0.26)) rotate(45deg);
+    }
+
+    &.is-active .line:nth-child(2) {
+      opacity: 0;
+    }
+
+    &.is-active .line:nth-child(3) {
+      transform: translateY(($sizeBaseline * -0.26)) rotate(-45deg);
+    }
+
+    &.is-active .line:nth-child(1),
+    #hamburger-11.is-active .line:nth-child(2),
+    #hamburger-11.is-active .line:nth-child(3) {
+      transition-delay: 0.2s;
+    }
+  }
+
+  @else if $style == 12 {
+    &.is-active .line:nth-child(1) {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    &.is-active .line:nth-child(3) {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+}

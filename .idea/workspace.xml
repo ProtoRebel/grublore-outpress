@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3a0d63b6-be93-40b6-92dc-709ca85c4d01" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/erdt-outpress.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/erdt-outpress.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/config/_functions.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/config/_functions.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/config/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/config/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/screenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/template/screenshot.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/template/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerConfigs">
+    <option name="configs">
+      <option value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4/cebe/markdown/composer.json" />
+      <option value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/composer.json" />
+      <option value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4/Symfony/Polyfill/Ctype/composer.json" />
+      <option value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4/Symfony/Polyfill/Mbstring/composer.json" />
+      <option value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/composer.json" />
+    </option>
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable path="composer" />
+    </execution>
+  </component>
+  <component name="DrupalConfiguration">
+    <drupalPath />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JoomlaConfiguration">
+    <joomlaConfigPath />
+    <joomlaPath />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.1">
+    <include_path>
+      <path value="$PROJECT_DIR$/../wordpress" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/ffraenz/private-composer-installer" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/gotoandplay/gravityforms-composer-installer" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/coenjacobs/mozart" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/composer" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/vendor/matthiasmullie/path-converter" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="2KAWpQW4zSs5N3sss60QJJu1G45" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/dustinjones/Desktop/PROJECTS/Outpress/outpress-boilerplate&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;/Users/dustinjones/Desktop/Outpress/outpress-boilerplate/node_modules/stylelint&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Docker&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/template/acf-json" />
+      <recent name="$PROJECT_DIR$/src/theme/acf-json" />
+      <recent name="$PROJECT_DIR$/src/theme/functions" />
+      <recent name="$PROJECT_DIR$/src/theme/blocks" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/styles/config" />
+      <recent name="$PROJECT_DIR$/template/tools/controller" />
+      <recent name="$PROJECT_DIR$/src/styles" />
+      <recent name="$PROJECT_DIR$/src/assets/css/blocks" />
+      <recent name="$PROJECT_DIR$/src/assets/css" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Start">
+    <configuration name="Start Docker Instance" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="envFilePath" value="" />
+          <option name="sourceFilePath" value="docker-compose.yml" />
+          <option name="upDetach" value="false" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="Build" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="Start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.Start Docker Instance" />
+      <item itemvalue="npm.Start" />
+      <item itemvalue="npm.Build" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3a0d63b6-be93-40b6-92dc-709ca85c4d01" name="Changes" comment="" />
+      <created>1673418050540</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1673418050540</updated>
+      <workItem from="1673418053609" duration="3525000" />
+      <workItem from="1673421915476" duration="1951000" />
+      <workItem from="1673424315475" duration="49000" />
+      <workItem from="1673424378166" duration="16223000" />
+      <workItem from="1673547272203" duration="8127000" />
+      <workItem from="1673568723060" duration="1331000" />
+      <workItem from="1674844225291" duration="105000" />
+      <workItem from="1676330474676" duration="21198000" />
+      <workItem from="1676677222281" duration="400000" />
+      <workItem from="1676942714046" duration="14172000" />
+      <workItem from="1676998937847" duration="444000" />
+      <workItem from="1677041466535" duration="1886000" />
+      <workItem from="1677083271736" duration="32948000" />
+      <workItem from="1677201732104" duration="1208000" />
+      <workItem from="1677379360577" duration="35951000" />
+      <workItem from="1677616710607" duration="750000" />
+      <workItem from="1677688328756" duration="816000" />
+      <workItem from="1679003981164" duration="68000" />
+      <workItem from="1679014774337" duration="611000" />
+      <workItem from="1680059804924" duration="14573000" />
+      <workItem from="1680299747521" duration="7000" />
+      <workItem from="1681967434758" duration="12000" />
+      <workItem from="1682401716035" duration="4500000" />
+      <workItem from="1682454202810" duration="38611000" />
+      <workItem from="1682711401618" duration="31128000" />
+      <workItem from="1683060820634" duration="36000" />
+      <workItem from="1683101092229" duration="2721000" />
+      <workItem from="1683592913284" duration="8441000" />
+      <workItem from="1683649662959" duration="399000" />
+      <workItem from="1683650071342" duration="3137000" />
+      <workItem from="1683725352266" duration="6402000" />
+      <workItem from="1684218195811" duration="43765000" />
+      <workItem from="1684357412523" duration="3828000" />
+      <workItem from="1684820832629" duration="51700000" />
+      <workItem from="1685295936318" duration="7000" />
+      <workItem from="1685747709938" duration="14738000" />
+      <workItem from="1686151529714" duration="8971000" />
+      <workItem from="1686246312563" duration="689000" />
+      <workItem from="1693510455164" duration="884000" />
+      <workItem from="1699763553993" duration="42375000" />
+      <workItem from="1701891144741" duration="259000" />
+      <workItem from="1702075831198" duration="55000" />
+      <workItem from="1704232668856" duration="1045000" />
+      <workItem from="1704965894217" duration="18000" />
+      <workItem from="1705197086131" duration="9038000" />
+      <workItem from="1705209179280" duration="10000" />
+      <workItem from="1705209316363" duration="110000" />
+      <workItem from="1705261438953" duration="1432000" />
+      <workItem from="1706257111536" duration="19000" />
+      <workItem from="1706257169149" duration="621000" />
+      <workItem from="1706354994250" duration="9321000" />
+      <workItem from="1706368478516" duration="3770000" />
+      <workItem from="1706656690026" duration="1000" />
+      <workItem from="1706656816661" duration="9000" />
+      <workItem from="1706656902285" duration="6000" />
+      <workItem from="1706825384593" duration="588000" />
+      <workItem from="1707253922869" duration="1639000" />
+      <workItem from="1709873745203" duration="32000" />
+      <workItem from="1709873855489" duration="392000" />
+      <workItem from="1711418597448" duration="463000" />
+      <workItem from="1711575520139" duration="235000" />
+      <workItem from="1711669955941" duration="893000" />
+      <workItem from="1712206399097" duration="7000" />
+      <workItem from="1712606774325" duration="165000" />
+      <workItem from="1733584025855" duration="1539000" />
+      <workItem from="1733586985127" duration="133000" />
+      <workItem from="1733588694615" duration="1973000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WordPressConfiguration" enabled="true">
+    <wordpressPath>$PROJECT_DIR$/../wordpress</wordpressPath>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

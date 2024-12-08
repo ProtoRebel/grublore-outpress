@@ -1,0 +1,331 @@
+/*  FIELD & BUTTON VARIABLES
+	----------------------------- */
+// TODO: Make the select fields better
+// TODO: Assign the unassigned values
+
+$field-layout--padding: 0.5em 1em;
+$field-layout--width: 100%;
+$field-layout--width-max: $layoutReadingMax;
+$field-layout--height: 3em;
+$field-layout--gutter: 1em; // Need to use this in the form layouts
+
+$field-style--background: color(light);
+$field-style--background-hover: $field-style--background;
+$field-style--background-focus: $field-style--background;
+$field-style--background-disabled: color(medium);
+
+$field-style--border: border(thin);
+$field-style--border-hover: $field-style--border;
+$field-style--border-focus: $field-style--border;
+$field-style--border-disabled: border(thin, color(accent));
+$field-style--radius: map-get($borderRadii, 'small');
+
+$field-font--family: map-get($fontFamilies, 'default');
+$field-font--size: 1em;
+$field-font--weight: map-get($fontWeights, 'normal');
+$field-font--color: color(dark);
+$field-font--color-hover: $field-font--color;
+$field-font--color-focus: $field-font--color;
+$field-font--color-disabled: $field-font--color;
+
+$field-label--margin: 0.25em;
+$field-label--size: 0.85em;
+$field-label--weight: map-get($fontWeights, 'normal');
+$field-label--color: $field-font--color;
+
+$field-check--border: $field-style--border;
+$field-check--size: 1.5em;
+$field-check--icon: '\2713';
+$field-check--icon-size: 1.25em;
+
+$button--width: auto;
+$button--width-max: 100%;
+$button--height: $field-layout--height;
+$button--padding: 0 1.5em;
+
+$button--background: color(accent);
+$button--background-hover: $button--background;
+$button--background-focus: $button--background-hover;
+$button--background-disabled: color(medium);
+
+$button--font-color: color(light);
+$button--font-color-hover: $button--font-color;
+$button--font-color-focus: $button--font-color; // Not Assigned
+$button--font-color-disabled: $button--font-color;
+$button--font-size: 1em;
+$button--font-family: map-get($fontFamilies, 'default');
+
+$button--border: border(thin, color(accent));
+$button--border-hover: $button--background-hover;
+$button--border-focus: $button--background-focus;
+$button--border-disabled: $button--background-disabled;
+$button--radius: map-get($borderRadii, 'medium');
+
+/*  FIELD STYLES
+	----------------------------- */
+input,
+textarea,
+select,
+option,
+optgroup,
+legend,
+fieldset {
+  box-sizing: border-box;
+  outline: none;
+  font-family: $field-font--family;
+  font-size: $field-font--size;
+  font-weight: $field-label--weight;
+  color: $field-font--color;
+  vertical-align: top;
+  display: block;
+}
+
+datalist {
+  font-family: $field-font--family;
+  font-size: $field-font--size;
+}
+
+label {
+  display: block;
+  color: $field-label--color;
+  line-height: 1;
+  margin: 0 0 $field-label--margin;
+  font-size: $field-label--size;
+  font-weight: $field-label--weight;
+}
+
+/** Inputs & Textareas **/
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='search'],
+input[type='color'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='number'],
+input[type='tel'],
+input[type='time'],
+input[type='url'],
+input[type='week'],
+input[list],
+input[type='file'],
+select,
+textarea {
+  width: $field-layout--width;
+  max-width: $field-layout--width-max;
+  padding: $field-layout--padding;
+  background-color: $field-style--background;
+  border-radius: $field-style--radius;
+  border: $field-style--border;
+}
+
+textarea {
+  appearance: none;
+  overflow: auto;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='search'],
+input[type='color'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='number'],
+input[type='tel'],
+input[type='time'],
+input[type='url'],
+input[type='week'],
+input[list] {
+  height: $field-layout--height;
+  appearance: none;
+}
+
+input[type='range'] {
+  height: $field-layout--height;
+  width: 100%;
+  max-width: $field-layout--height;
+}
+
+input[type='file'] {
+  min-height: $field-layout--height;
+}
+
+input[type='search'] {
+  height: $field-layout--height;
+  appearance: none;
+}
+
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration {
+  appearance: none;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/** Select **/
+select {
+  height: $field-layout--height;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10.625' height='6.3' viewBox='0 0 10.625 6.3'%3E%3Cpath d='M7.166,22.135,2.835,26.466a.981.981,0,0,0,1.388,1.388L7.86,24.228,11.5,27.865a.985.985,0,0,0,1.679-.694.974.974,0,0,0-.291-.694L8.553,22.135A.986.986,0,0,0,7.166,22.135Z' transform='translate(13.175 28.15) rotate(180)' fill='%23163547' opacity='0.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+select[multiple] {
+  height: auto;
+  min-height: $field-layout--height;
+  padding: 0;
+
+  & option {
+    margin: 0;
+  }
+}
+
+/** Checkboxes & Radio Inputs **/
+input[type='checkbox'],
+input[type='radio'] {
+  display: none;
+
+  & label {
+    position: relative;
+    text-transform: none;
+    font-size: $field-font--size;
+    font-weight: $field-font--weight;
+    color: $field-font--color;
+    margin: 0;
+    line-height: 1;
+    padding-left: 30px;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: $field-check--size;
+      height: $field-check--size;
+      left: 0;
+      border: $field-check--border;
+    }
+  }
+
+  &:checked + label {
+    &:after {
+      content: $field-check--icon;
+      position: absolute;
+      left: 5px;
+      font-size: $field-check--icon-size;
+    }
+  }
+}
+
+/** Buttons **/
+
+a.button,
+button,
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
+input[type='image'] {
+  appearance: none;
+  @include flex(center, center);
+  height: $button--height;
+  width: $button--width;
+  text-decoration: none;
+  max-width: $button--width-max;
+  background-color: $button--background;
+  margin: auto;
+  cursor: pointer;
+  color: $button--font-color;
+  padding: $button--padding;
+  border-radius: $button--radius;
+  border: $button--border;
+  font-size: $button--font-size;
+  font-family: $button--font-family;
+}
+
+input[type='image'] {
+  text-align: center;
+}
+
+/**
+  Field States
+  ---------------------------------------------------------------------- */
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='search'],
+input[type='color'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='number'],
+input[type='tel'],
+input[type='time'],
+input[type='url'],
+input[type='week'],
+input[list],
+input[type='file'],
+select {
+  &:hover {
+    background-color: $field-style--background-hover;
+    color: $field-font--color-hover;
+    border: $field-style--border-hover;
+  }
+
+  &:active,
+  &:focus {
+    background-color: $field-style--background-focus;
+    color: $field-font--color-focus;
+    border: $field-style--border-focus;
+  }
+}
+
+input,
+textarea,
+select,
+option {
+  &[disabled],
+  &.disabled {
+    cursor: not-allowed;
+    background-color: $field-style--background-disabled;
+    color: $field-font--color-disabled;
+    border: $field-style--border-disabled;
+  }
+}
+
+a.button,
+button,
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
+input[type='image'] {
+  &:hover {
+    background-color: $button--background-hover;
+    color: $button--font-color-hover;
+    border: $button--border-hover;
+  }
+
+  &:active,
+  &:focus {
+    background-color: $button--background-focus;
+    color: $button--font-color-hover;
+    border: $button--border-focus;
+  }
+
+  &[disabled],
+  &.disabled {
+    background-color: $button--background-disabled;
+    color: $button--font-color-disabled;
+    border: $button--border-disabled;
+  }
+}

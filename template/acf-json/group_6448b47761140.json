@@ -1,0 +1,729 @@
+{
+    "key": "group_6448b47761140",
+    "title": "OUTPRESS - Controller",
+    "fields": [
+        {
+            "key": "field_64496b1a9fbeb",
+            "label": "Switchboard",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6449696a73d28",
+            "label": "Environment",
+            "name": "environment",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "local": "Local",
+                "development": "Development",
+                "staging": "Staging",
+                "production": "Production"
+            },
+            "default_value": "development",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_644a0d6bdb28d",
+            "label": "Controller",
+            "name": "controller",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "row",
+            "sub_fields": [
+                {
+                    "key": "field_65506fb48074f",
+                    "label": "Maintenance Mode",
+                    "name": "maintenance_mode",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "Public users will view a \"coming soon\" page of your choice. Logged in users will view the site as normal.\r\n\r\nNo headers or footers will be shown on this page.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "row",
+                    "sub_fields": [
+                        {
+                            "key": "field_644a0dc1db28e",
+                            "label": "Enable",
+                            "name": "enable",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Enable Maintenance Mode",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_65506f068074e",
+                            "label": "Page",
+                            "name": "page",
+                            "aria-label": "",
+                            "type": "post_object",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_644a0dc1db28e",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "page"
+                            ],
+                            "post_status": "",
+                            "taxonomy": "",
+                            "return_format": "id",
+                            "multiple": 0,
+                            "allow_null": 0,
+                            "bidirectional": 0,
+                            "ui": 1,
+                            "bidirectional_target": []
+                        }
+                    ]
+                },
+                {
+                    "key": "field_65515cdcf87d7",
+                    "label": "Comments",
+                    "name": "comments",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui_on_text": "Comments Enabled",
+                    "ui_off_text": "Comments Disabled",
+                    "ui": 1
+                },
+                {
+                    "key": "field_65515fca0e4b1",
+                    "label": "Admin Bar",
+                    "name": "admin_bar",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui_on_text": "Admin Bar Enabled",
+                    "ui_off_text": "Admin Bar Disabled",
+                    "ui": 1
+                },
+                {
+                    "key": "field_655161edcb745",
+                    "label": "Gutenberg",
+                    "name": "gutenberg",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui_on_text": "Gutenberg Enabled",
+                    "ui_off_text": "Gutenberg Disabled",
+                    "ui": 1
+                },
+                {
+                    "key": "field_65515cb2f87d6",
+                    "label": "Cleaner",
+                    "name": "cleaner",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "Check to remove default WP items",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "table",
+                    "sub_fields": [
+                        {
+                            "key": "field_65516d6a46d83",
+                            "label": "Scripts",
+                            "name": "scripts",
+                            "aria-label": "",
+                            "type": "checkbox",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "jquery": "jQuery",
+                                "jquery-migrate": "jQuery Migrate",
+                                "sccripts-wp-version": "WP Version on Scripts"
+                            },
+                            "default_value": [
+                                "jquery",
+                                "jquery-migrate",
+                                "sccripts-wp-version"
+                            ],
+                            "return_format": "value",
+                            "allow_custom": 0,
+                            "layout": "vertical",
+                            "toggle": 0,
+                            "save_custom": 0,
+                            "custom_choice_button_text": "Add new choice"
+                        },
+                        {
+                            "key": "field_65516e1a46d84",
+                            "label": "Styles",
+                            "name": "styles",
+                            "aria-label": "",
+                            "type": "checkbox",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "global-styles": "Global Styles",
+                                "classic-theme-styles": "Classic Theme",
+                                "wp-block-library": "Block Library",
+                                "wp-block-library-theme": "Block Library Theme",
+                                "recent-comments": "Recent Comments",
+                                "gallery": "Gallery",
+                                "emojis": "Emojis"
+                            },
+                            "default_value": [
+                                "global-styles",
+                                "classic-theme-styles",
+                                "wp-block-library",
+                                "wp-block-library-theme",
+                                "recent-comments",
+                                "gallery",
+                                "emojis"
+                            ],
+                            "return_format": "value",
+                            "allow_custom": 0,
+                            "layout": "vertical",
+                            "toggle": 0,
+                            "save_custom": 0,
+                            "custom_choice_button_text": "Add new choice"
+                        },
+                        {
+                            "key": "field_65516e2346d85",
+                            "label": "Data",
+                            "name": "data",
+                            "aria-label": "",
+                            "type": "checkbox",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "rss-version": "RSS Version",
+                                "p-wrap": "&lt;p&gt; wrap on images",
+                                "feed-links": "Feed Links in &lt;head&gt;",
+                                "rest-links": "Rest API Links in  &lt;head&gt;",
+                                "oembed-discovery": "oEmbed Discovery Links in  &lt;head&gt;",
+                                "post-family": "Post Family LInks in  &lt;head&gt;",
+                                "windows-livewriter": "Windows Live Writer in  &lt;head&gt;"
+                            },
+                            "default_value": [
+                                "rss-version",
+                                "p-wrap",
+                                "feed-links",
+                                "rest-links",
+                                "oembed-discovery",
+                                "post-family",
+                                "windows-livewriter"
+                            ],
+                            "return_format": "value",
+                            "allow_custom": 0,
+                            "layout": "vertical",
+                            "toggle": 0,
+                            "save_custom": 0,
+                            "custom_choice_button_text": "Add new choice"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "field_65b4f85885cbf",
+            "label": "Security",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_65b4f35577b3f",
+            "label": "reCAPTCHA Keys",
+            "name": "recaptcha_keys",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "Appears on the Login and Lost Password forms. Generate a V2 key by <a href=\"https:\/\/www.google.com\/recaptcha\/admin\/create\" target=\"_blank\">here<\/a>.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "row",
+            "sub_fields": [
+                {
+                    "key": "field_65b4f36d77b40",
+                    "label": "Site",
+                    "name": "site",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_65b4f37377b41",
+                    "label": "Secret",
+                    "name": "secret",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
+        },
+        {
+            "key": "field_65b4f89085cc0",
+            "label": "Limit Login Attempts",
+            "name": "limit_login_attempts",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "Limit the amount of times that a user can attempt to log in.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "sub_fields": [
+                {
+                    "key": "field_65b4f90685cc1",
+                    "label": "Enable",
+                    "name": "enable",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 1,
+                    "ui_on_text": "Limit Attempts",
+                    "ui_off_text": "Do Not Limit",
+                    "ui": 1
+                },
+                {
+                    "key": "field_65b4f99ce7d3f",
+                    "label": "Tries",
+                    "name": "tries",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_65b4f90685cc1",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 3,
+                    "min": "",
+                    "max": "",
+                    "placeholder": "",
+                    "step": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_65b4fc5dd12a3",
+                    "label": "Wait",
+                    "name": "wait",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_65b4f90685cc1",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 5,
+                    "min": "",
+                    "max": "",
+                    "placeholder": "",
+                    "step": "",
+                    "prepend": "",
+                    "append": "minutes"
+                }
+            ]
+        },
+        {
+            "key": "field_64496b2ff3496",
+            "label": "Code Injection",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_644a1304633e6",
+            "label": "Code Blocks",
+            "name": "code_blocks",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Code that is injected on every post\/page throughout the website",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Code Block",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_644a1331633e7",
+                    "label": "Name",
+                    "name": "name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_644a1304633e6"
+                },
+                {
+                    "key": "field_644a1340633e8",
+                    "label": "Location",
+                    "name": "location",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "head": "Head",
+                        "foot": "Footer",
+                        "disable": "Disable"
+                    },
+                    "default_value": "head",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "layout": "horizontal",
+                    "parent_repeater": "field_644a1304633e6"
+                },
+                {
+                    "key": "field_644a1375633e9",
+                    "label": "Code",
+                    "name": "code",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": "",
+                    "parent_repeater": "field_644a1304633e6"
+                }
+            ]
+        },
+        {
+            "key": "field_644a200c3abbb",
+            "label": "Redirects",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_644a20023abba",
+            "label": "Redirects",
+            "name": "redirects",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 1,
+            "rows_per_page": 20,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Redirect",
+            "sub_fields": [
+                {
+                    "key": "field_644a205b3abbc",
+                    "label": "Code",
+                    "name": "code",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "301": "301 (Permanent)",
+                        "302": "302 (Temporary)",
+                        "304": "304 (Use Cached Page)"
+                    },
+                    "default_value": false,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_644a20023abba"
+                },
+                {
+                    "key": "field_644a207c3abbd",
+                    "label": "Old URL",
+                    "name": "old_url",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_644a20023abba"
+                },
+                {
+                    "key": "field_644a20843abbe",
+                    "label": "New URL",
+                    "name": "new_url",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url",
+                    "parent_repeater": "field_644a20023abba"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "controller"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1,
+    "modified": 1706360003
+}

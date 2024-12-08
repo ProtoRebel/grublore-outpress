@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/src" isTestSource="false" packagePrefix="Breakdance\MatthiasMullie\Minify\" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4" isTestSource="false" packagePrefix="Breakdance\Lib\Vendor\" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4/Symfony/Polyfill/Ctype/" isTestSource="false" packagePrefix="Symfony\Polyfill\Ctype\" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4/Symfony/Polyfill/Mbstring/" isTestSource="false" packagePrefix="Symfony\Polyfill\Mbstring\" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4/cebe/markdown/" isTestSource="false" packagePrefix="cebe\markdown\" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4/cebe/markdown/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/vendor/matthiasmullie/path-converter" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/coenjacobs/mozart" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/league/flysystem" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/league/mime-type-detection" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/console" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-intl-grapheme" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-intl-normalizer" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-php73" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/service-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/string" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

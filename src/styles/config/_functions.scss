@@ -1,0 +1,208 @@
+/*  STRING REPLACE
+	----------------------------- */
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+/*  COLOR CHOICE
+	----------------------------- */
+@function color($color, $selector: color) {
+  @if map-has-key($colors, $color) {
+    @return #{map-get($colors, $color)}
+  } @else {
+    @return false
+  }
+}
+
+/*  BREAKPOINT
+	----------------------------- */
+@mixin breakpoint($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == min {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+/*  PSEUDO ELEMENTS
+	----------------------------- */
+@mixin pseudo($place, $display: block, $pos: relative, $content: '') {
+  &::#{$place} {
+    content: $content;
+    display: $display;
+    position: $pos;
+    @content;
+  }
+}
+
+/*  TRUNCATE TEXT
+	----------------------------- */
+@mixin truncate($truncationBoundary: 100%, $atEnd: ellipsis) {
+  max-width: $truncationBoundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: $atEnd;
+}
+
+/*  LIST STRIPPING
+	----------------------------- */
+@mixin list($display: block, $margin: 0, $padding: 0) {
+  display: $display;
+  list-style-type: none;
+  margin: $margin;
+  padding: $padding;
+}
+
+/*  INTERACTION STATES
+	----------------------------- */
+@mixin interact($type: all) {
+  @if $type == all {
+    &:hover,
+    &:active,
+    &:focus {
+      @content
+    }
+  } @else {
+    &:#{$type} {
+      @content
+    }
+  }
+}
+
+/*  HARDWARE ACCELERATION
+	----------------------------- */
+@mixin hardware($backface: true, $perspective: 1000) {
+  @if $backface {
+    backface-visibility: hidden;
+  }
+  perspective: $perspective;
+}
+
+/*  SPACING (was PADDING & MARGIN)
+	----------------------------- */
+@mixin spacing($property, $multiplier: 1) {
+  $valueOutput: map-get($spacing, 'mobile') * $multiplier;
+  #{$property}: $valueOutput;
+  @each $space, $spaceAmount in $spacing {
+    @if $space != 'mobile' {
+      $subOutput: $spaceAmount * $multiplier;
+      @include breakpoint($space) {
+        #{$property}: $subOutput;
+      }
+    }
+  }
+}
+
+@function spacing($breakpoint, $multiplier: 1) {
+  @return #{map-get($spacing, $breakpoint) * $multiplier}
+}
+
+/*  SIZING
+	----------------------------- */
+@function size($size: 'default', $unit: 'em') {
+  @return #{map-get($sizes, $size)} + #{$unit}
+}
+
+/*  FLEXBOX
+	----------------------------- */
+@mixin flex($alignx: flex-start, $aligny: flex-start, $direction: row, $wrapping: nowrap, $alignwrap: flex-start) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrapping;
+  @if $direction == 'column' or $direction == 'column-reverse' {
+    justify-content: $aligny;
+    align-items: $alignx;
+  } @else {
+    justify-content: $alignx;
+    align-items: $aligny;
+  }
+  align-content: $alignwrap;
+}
+
+/*  HIDE WITH ACCESSIBILITY
+	----------------------------- */
+@mixin hidden {
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  position: absolute;
+}
+
+/*  CLEARFIX
+	----------------------------- */
+@mixin clearfix {
+  *zoom: 1;
+  clear: both;
+
+  &::before,
+  &::after {
+    content: '';
+    display: table;
+    line-height: 0;
+    clear: both;
+  }
+}
+
+/*  FONT TOOLS
+	----------------------------- */
+@mixin fontSize($size) {
+  @if map-has-key($fontSizes, $size) {
+    font-size: #{map-get($fontSizes, $size)};
+  }
+}
+
+@mixin fontWeight($weight) {
+  @if map-has-key($fontWeights, $weight) {
+    font-weight: #{map-get($fontWeights, $weight)};
+  }
+}
+
+@mixin fontFamily($family) {
+  @if map-has-key($fontFamilies, $family) {
+    font-family: #{map-get($fontFamilies, $family)};
+  }
+}
+
+/*  BORDER RADIUS
+	----------------------------- */
+@mixin borderRadius($size, $target: all) {
+  @if map-has-key($borderRadii, $size) {
+    $sizeChosen: map-get($borderRadii, $size);
+    @if $target == all {
+      border-radius: $sizeChosen;
+    } @else {
+      $corners: str-replace($target, '1', #{$sizeChosen});
+      border-radius: unquote($corners);
+    }
+  }
+}
+
+/*  SHADOWS
+	----------------------------- */
+@mixin shadow($size, $type: box, $color: #{$shadowColorDefault}) {
+  @if map-has-key($shadowSizes, $size) {
+    #{$type}-shadow: #{map-get($shadowSizes, $size)} #{$color};
+  }
+}
+
+/*  BORDERS
+	----------------------------- */
+@function border($size, $color: #{$borderColorDefault}) {
+  $sizeChosen: map-get($borderSizes, $size);
+  @if map-has-key($borderSizes, $size) {
+    @return #{$sizeChosen} + #{$color}
+  } @else {
+    @return false
+  }
+}

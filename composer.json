@@ -1,0 +1,42 @@
+{
+  "name": "idahowebsites/outpress",
+  "description": "Outpress theme framework based on Presspack",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "composer",
+      "url": "https://connect.advancedcustomfields.com"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "gravityforms/gravityforms",
+        "version": "2.7.13",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}"
+        },
+        "require": {
+          "composer/installers": "^1.4",
+          "gotoandplay/gravityforms-composer-installer": "^2.3"
+        }
+      }
+    }
+  ],
+  "require": {
+    "wpackagist-plugin/pexlechris-adminer": "*",
+    "gravityforms/gravityforms": "*",
+    "wpengine/advanced-custom-fields-pro": "*"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "ffraenz/private-composer-installer": true,
+      "gotoandplay/gravityforms-composer-installer": true
+    }
+  }
+}

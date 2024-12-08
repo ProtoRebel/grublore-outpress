@@ -1,0 +1,23 @@
+{
+    "key": "ui_options_page_655086c8793c4",
+    "title": "Business Information",
+    "active": true,
+    "menu_order": 0,
+    "page_title": "Business Information",
+    "menu_slug": "business-information",
+    "parent_slug": "outpress",
+    "advanced_configuration": 1,
+    "icon_url": "",
+    "menu_title": "Business Info",
+    "position": 10,
+    "redirect": false,
+    "description": "",
+    "update_button": "Update Info",
+    "updated_message": "Business information successfully updated! It'd be a good idea to clear the cache.",
+    "capability": "edit_posts",
+    "data_storage": "options",
+    "post_id": "",
+    "autoload": 0,
+    "_parent": 486,
+    "modified": 1699776932
+}

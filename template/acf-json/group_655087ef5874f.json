@@ -1,0 +1,259 @@
+{
+    "key": "group_655087ef5874f",
+    "title": "OUTPRESS - Design",
+    "fields": [
+        {
+            "key": "field_655087eff2648",
+            "label": "Design Colors",
+            "name": "design_colors",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "Use in CSS with the var() attribute<br \/>\r\ne.g. <code>background-color: var(--color-dark); color: var(--color-light);<\/code>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "sub_fields": [
+                {
+                    "key": "field_6550882d21dae",
+                    "label": "Basic",
+                    "name": "basic",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6550885e21daf",
+                            "label": "Dark",
+                            "name": "dark",
+                            "aria-label": "",
+                            "type": "color_picker",
+                            "instructions": "--color-dark",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "#000000",
+                            "enable_opacity": 1,
+                            "return_format": "string"
+                        },
+                        {
+                            "key": "field_655088ae21db0",
+                            "label": "Medium",
+                            "name": "medium",
+                            "aria-label": "",
+                            "type": "color_picker",
+                            "instructions": "--color-medium",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "#cccccc",
+                            "enable_opacity": 1,
+                            "return_format": ""
+                        },
+                        {
+                            "key": "field_655088d521db1",
+                            "label": "Light",
+                            "name": "light",
+                            "aria-label": "",
+                            "type": "color_picker",
+                            "instructions": "--color-light",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "#ffffff",
+                            "enable_opacity": 1,
+                            "return_format": "string"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_6550891d122aa",
+                    "label": "Colors",
+                    "name": "colors",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6550891d122ab",
+                            "label": "Accent",
+                            "name": "accent",
+                            "aria-label": "",
+                            "type": "color_picker",
+                            "instructions": "--color-accent",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "#cc0000",
+                            "enable_opacity": 1,
+                            "return_format": "string"
+                        },
+                        {
+                            "key": "field_6550891d122ac",
+                            "label": "Primary",
+                            "name": "primary",
+                            "aria-label": "",
+                            "type": "color_picker",
+                            "instructions": "--color-primary",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "#0000cc",
+                            "enable_opacity": 1,
+                            "return_format": "string"
+                        },
+                        {
+                            "key": "field_6550891d122ad",
+                            "label": "Secondary",
+                            "name": "secondary",
+                            "aria-label": "",
+                            "type": "color_picker",
+                            "instructions": "--color-secondary",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "#0000aa",
+                            "enable_opacity": 1,
+                            "return_format": "string"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_65508a499e791",
+                    "label": "Alternate",
+                    "name": "alternate",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_65508a499e792",
+                            "label": "Alt 1",
+                            "name": "alt_1",
+                            "aria-label": "",
+                            "type": "color_picker",
+                            "instructions": "--color-alt1",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "#0c00c0",
+                            "enable_opacity": 1,
+                            "return_format": "string"
+                        },
+                        {
+                            "key": "field_65508a7c9e795",
+                            "label": "Alt 2",
+                            "name": "alt_2",
+                            "aria-label": "",
+                            "type": "color_picker",
+                            "instructions": "--color-alt2",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "#00cc00",
+                            "enable_opacity": 1,
+                            "return_format": "string"
+                        },
+                        {
+                            "key": "field_65508a889e796",
+                            "label": "Alt 3",
+                            "name": "alt_3",
+                            "aria-label": "",
+                            "type": "color_picker",
+                            "instructions": "--color-alt3",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "#000cc0",
+                            "enable_opacity": 1,
+                            "return_format": "string"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "design"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1706357284
+}
