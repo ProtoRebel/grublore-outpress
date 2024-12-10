@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/tests" />
         <option value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/tests" />
         <option value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4/cebe/markdown/tests" />
+        <option value="$PROJECT_DIR$/tests" />
       </list>
     </option>
   </component>

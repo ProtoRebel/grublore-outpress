@@ -11,6 +11,8 @@
       <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4/cebe/markdown/" isTestSource="false" packagePrefix="cebe\markdown\" />
       <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/mozart-scoped-psr4/cebe/markdown/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/advanced-custom-fields-pro/includes" isTestSource="false" packagePrefix="ACF" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/advanced-custom-fields-pro/includes/Updater" isTestSource="false" packagePrefix="ACF" />
       <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/vendor/matthiasmullie/path-converter" />
       <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/breakdance/plugin/vendor/coenjacobs/mozart" />

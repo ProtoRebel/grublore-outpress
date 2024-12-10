@@ -77,7 +77,7 @@ add_filter('body_class', 'op_configBodyAddClass');
 
 // Admin footer attribution
 function op_configAdminAttribution() {
-    echo '<span id="footer-thankyou">Outpress by <a href="https://domesticjones.com/" target="_blank">Domestic Jones</a></span>';
+    echo '<span id="footer-thankyou">Outpress by <a href="https://protorebel.com/" target="_blank">ProtoRebel</a></span>';
 }
 add_filter('admin_footer_text', 'op_configAdminAttribution');
 
