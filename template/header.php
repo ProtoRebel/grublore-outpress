@@ -7,7 +7,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-<header id="header">
-	<?php get_template_part('images/deco', 'horizontal'); ?>
-</header>
 <main id="content">
+	<header id="header">
+		<?php get_template_part('images/deco', 'horizontal'); ?>
+	</header>

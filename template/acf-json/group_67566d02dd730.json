@@ -115,8 +115,8 @@
                 },
                 {
                     "key": "field_67566d03dd5e8",
-                    "label": "Descrption",
-                    "name": "descrption",
+                    "label": "Description",
+                    "name": "description",
                     "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
@@ -686,5 +686,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1733735133
+    "modified": 1733939846
 }

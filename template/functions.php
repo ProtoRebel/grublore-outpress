@@ -26,7 +26,6 @@ if(function_exists('the_field')) {
         require_once('tools/controller/index.php');
         require_once('tools/controller/login.php');
         require_once('tools/business/index.php');
-        require_once('tools/design/index.php');
     }
 } else {
     add_action('admin_notices', 'op_errorAcf');

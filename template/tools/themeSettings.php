@@ -24,8 +24,8 @@ if (!isset($content_width)) {
 
 // Overwrite Existing Image Options
 function op_settingsImagesResizeDefaults() {
-    update_option('thumbnail_size_w', 200);
-    update_option('thumbnail_size_h', 200);
+    update_option('thumbnail_size_w', 300);
+    update_option('thumbnail_size_h', 300);
     update_option('thumbnail_crop', 1);
     update_option('medium_size_w', 800);
     update_option('medium_size_h', 800);

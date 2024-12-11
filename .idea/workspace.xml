@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a0d63b6-be93-40b6-92dc-709ca85c4d01" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_base.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/config/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/config/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/acf-json/group_67566d02dd730.json" beforeDir="false" afterPath="$PROJECT_DIR$/template/acf-json/group_67566d02dd730.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/tools/design/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/tools/themeSettings.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/tools/themeSettings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/tools/utils.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/tools/utils.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +211,7 @@
       <workItem from="1733586985127" duration="133000" />
       <workItem from="1733588694615" duration="1973000" />
       <workItem from="1733679566903" duration="5578000" />
-      <workItem from="1733868419645" duration="3253000" />
+      <workItem from="1733868419645" duration="21623000" />
     </task>
     <servers />
   </component>

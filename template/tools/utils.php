@@ -19,6 +19,19 @@ function util_phone($number) {
 	return $number;
 }
 
+// Pull values from a list of array indexes
+function util_listPluck($idArray, $associativeArray, $sep = ', ') {
+    if (!is_array($idArray) || !is_array($associativeArray) || empty($idArray)) {
+        return '';
+    }
+    $result = array_map(function($id) use ($associativeArray) {
+        return isset($associativeArray[$id]) ? $associativeArray[$id] : null;
+    }, $idArray);
+    $result = array_filter($result);
+
+    return implode($sep, $result);
+}
+
 // Return get_template_part() instead of echo
 function util_templateReturn($template_name, $part_name = null, $args = null) {
 	ob_start();
@@ -59,22 +72,9 @@ function util_stringLint($string) {
     return strtolower(str_replace(' ', '-', $string));
 }
 
-// Wrapper Creator
-function util_wrapper($type, $content, $classes = array(), $id = '', $attrs = '') {
-    $classList = implode(' ', $classes);
-    $id_clean = $id ? util_stringLint($id) : util_randomString(6);
-    $output = '';
-    if($type === 'outer') {
-        $output = sprintf('<section id="%s" class="%s" style="%s">%s</section>', $id_clean, $classList, $attrs, $content);
-    } elseif($type === 'inner') {
-        $output = sprintf('<div class="container %s">%s</div>', $classList, $content);
-    }
-    return $output;
-}
-
 // Icon Display
 function util_icon($icon) {
-    $output = '<span class="icon icon-' . $icon . '"></span>';
+    $output = util_templateReturn('images/icons', null, ['icon' => $icon]);
     return $output;
 }
 
@@ -110,4 +110,26 @@ function util_timeAway($timestamp) {
         $output = "$difference $periods[$i]";
         return $output;
     }
+}
+
+
+// Minutes to Hours + Minutes Conversion
+function util_hoursMins($totalMinutes) {
+    $hours = floor($totalMinutes / 60);
+    $minutes = $totalMinutes % 60;
+
+    if ($hours == 0) {
+        return sprintf("%d minutes", $minutes);
+    }
+
+    if ($minutes == 0) {
+        return sprintf("%d hour%s", $hours, $hours > 1 ? 's' : '');
+    }
+
+    return sprintf("%d hour%s %d minute%s",
+        $hours,
+        $hours > 1 ? 's' : '',
+        $minutes,
+        $minutes > 1 ? 's' : ''
+    );
 }

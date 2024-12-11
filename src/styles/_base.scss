@@ -29,14 +29,15 @@ body {
   font-smoothing: antialiased;
 }
 
+#content {
+  width: 100%;
+  max-width: $layoutWidthMax;
+  margin: 0 auto;
+}
+
 a {
   color: color(primary);
   text-decoration: underline;
-}
-
-.container {
-  max-width: $layoutWidthMax;
-  margin: 0 auto;
 }
 
 .video-container {

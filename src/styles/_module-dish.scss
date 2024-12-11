@@ -1,0 +1,19 @@
+.dish {
+  header {
+    .close-dish {
+      svg {
+        display: block;
+        width: 1rem;
+      }
+    }
+  }
+
+  section {
+    .photo {
+      & > * {
+        display: block;
+        aspect-ratio: 16/9;
+      }
+    }
+  }
+}
