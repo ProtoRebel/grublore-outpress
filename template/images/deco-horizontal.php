@@ -1,0 +1,1 @@
+SVG of Horizontal Divider

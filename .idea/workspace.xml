@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a0d63b6-be93-40b6-92dc-709ca85c4d01" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/tools/themeConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/tools/themeConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/header.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +47,6 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.1">
     <include_path>
-      <path value="$PROJECT_DIR$/../wordpress" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/vendor/ffraenz/private-composer-installer" />
@@ -60,22 +56,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/vendor/gotoandplay/gravityforms-composer-installer" />
       <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/coenjacobs/mozart" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/composer" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-php73" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-intl-grapheme" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/league/mime-type-detection" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/league/flysystem" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/vendor/matthiasmullie/path-converter" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/vendor/composer" />
+      <path value="$PROJECT_DIR$/../../Outpress/wordpress" />
     </include_path>
   </component>
   <component name="ProjectId" id="2KAWpQW4zSs5N3sss60QJJu1G45" />
@@ -86,24 +67,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/dustinjones/Desktop/PROJECTS/Humanism/grublore-outpress&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;/Users/dustinjones/Desktop/Outpress/outpress-boilerplate/node_modules/stylelint&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Docker&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/dustinjones/Desktop/PROJECTS/Humanism/grublore-outpress",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "/Users/dustinjones/Desktop/Outpress/outpress-boilerplate/node_modules/stylelint",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.php.frameworks",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/template/acf-json" />
@@ -221,6 +202,7 @@
       <workItem from="1733586985127" duration="133000" />
       <workItem from="1733588694615" duration="1973000" />
       <workItem from="1733679566903" duration="5578000" />
+      <workItem from="1733868419645" duration="3253000" />
     </task>
     <servers />
   </component>
@@ -228,7 +210,7 @@
     <option name="version" value="3" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
-    <wordpressPath>$PROJECT_DIR$/../wordpress</wordpressPath>
+    <wordpressPath>$PROJECT_DIR$/../../Outpress/wordpress</wordpressPath>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

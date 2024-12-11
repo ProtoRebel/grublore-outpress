@@ -11,7 +11,6 @@
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
-      <path value="$PROJECT_DIR$/../wordpress" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/vendor/ffraenz/private-composer-installer" />
@@ -21,22 +20,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/vendor/gotoandplay/gravityforms-composer-installer" />
       <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/coenjacobs/mozart" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/composer" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-php73" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-intl-grapheme" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/league/mime-type-detection" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/league/flysystem" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/vendor/matthiasmullie/path-converter" />
-      <path value="$PROJECT_DIR$/wp-content/plugins/breakdance/plugin/lib/minify/vendor/composer" />
+      <path value="$PROJECT_DIR$/../../Outpress/wordpress" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
