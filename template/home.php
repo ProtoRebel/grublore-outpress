@@ -82,8 +82,9 @@ util_layer('meal', $layerMeal);
 //// Layer: Controls, z-index=6000
 //util_layer('controls', 'Ccontrols Layer');
 //
-//// Layer: Alert, z-index=8000
-//util_layer('alert', 'Alert Layer');
+// Layer: Alert, z-index=8000
+$layerAlert = util_templateReturn('modules/layer', 'alert');
+util_layer('alert', $layerAlert);
 
 get_footer();
 ?>

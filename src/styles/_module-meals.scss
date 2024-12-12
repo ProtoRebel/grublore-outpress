@@ -59,6 +59,10 @@
   }
 }
 
+#meal-template {
+  display: none;
+}
+
 #meal-add {
   @include spacing(margin-top, 2);
 

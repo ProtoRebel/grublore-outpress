@@ -1,11 +1,22 @@
-
+#content {
+  &.is-meal {
+    #layer-meal {
+      top: 0;
+    }
+  }
+  &.is-alert {
+    #layer-alert {
+      top: 0;
+    }
+  }
+}
 
 .layer {
   position: fixed;
   width: 100%;
   min-height: 100vh;
   height: 100%;
-  top: 0;
+  top: 100%;
   left: 0;
 }
 
@@ -22,8 +33,46 @@
 .layer-content {
   position: relative;
   max-width: $layoutWidthMax;
+  height: 100%;
   margin: 0 auto;
   z-index: 1;
+}
+
+.layer-close {
+  position: relative;
+  right: -1px;
+  display: block;
+  background-color: color(darkest);
+  width: 3rem;
+  height: 3rem;
+  clip-path: polygon(0.75rem 0, 100% 0, 100% 100%, 0.75rem 100%, 0 calc(100% - 0.75rem), 0 0.75rem);
+  @include flex(center, center);
+
+  svg {
+    fill: color(light);
+    width: 1rem;
+    height: auto;
+    transform: translateX(0.125rem);
+  }
+}
+
+.layer-heading {
+  width: 100%;
+  position: absolute;
+  top: -2rem;
+  filter: drop-shadow(map-get($shadowSizes, 'small') color(darkest));
+  @include flex(space-between, center);
+
+  h1 {
+    background-color: color(darkest);
+    height: 4rem;
+    max-width: calc(100% - 4rem);
+    clip-path: polygon(0 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0 100%);
+    color: color(light);
+    @include flex(center, center);
+    @include spacing(padding-left);
+    @include spacing(padding-right);
+  }
 }
 
 #layer-list {
@@ -78,4 +127,18 @@
 
 #layer-meal {
   z-index: 2000;
+  @include flex(center, flex-end, column);
+
+  .layer-content {
+    width: 100%;
+    height: auto;
+    background-color: color(medium);
+    max-height: calc(100% - 2rem);
+    min-height: 50vh;
+    padding-top: 2rem;
+  }
+}
+
+#layer-alert {
+  z-index: 8000;
 }

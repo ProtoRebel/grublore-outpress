@@ -1,0 +1,21 @@
+#meal {
+  width: 100%;
+}
+
+#meal-name {
+  @include truncate();
+  @include interact(focus) {
+    outline: none;
+
+    & + svg {
+      fill: color(light);
+    }
+  }
+
+  & + svg {
+    display: block;
+    fill: color(dark);
+    height: 1em;
+    margin-left: 0.5ex;
+  }
+}

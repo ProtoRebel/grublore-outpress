@@ -9,4 +9,12 @@ switch($icon) {
 </svg>
         ');
         break;
+    case 'pencil':
+        printf('
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+    <path d="M20 3.9 16.1 0l-2.7 2.7 3.9 3.9ZM4 16l4.293-.39 7.387-7.387-3.9-3.9-7.39 7.384Z"/>
+    <path fill-rule="evenodd" d="M13 20H0v-2h13Z"/>
+</svg>
+        ');
+        break;
 }
