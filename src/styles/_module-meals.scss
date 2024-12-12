@@ -1,0 +1,87 @@
+#meals {
+  @include list();
+  width: 100%;
+}
+
+.meal-listing {
+  position: relative;
+  background-color: color(medium);
+  cursor: pointer;
+  @include spacing(padding-left);
+  @include spacing(padding-right);
+  @include spacing(padding-top, 0.5);
+  @include spacing(padding-bottom, 0.5);
+  @include spacing(margin-bottom, 0.5);
+  @include shadow(small, color(dark), inset);
+  @include transition();
+  @include interact() {
+    background-color: color(dark);
+    transform: scale(1.025);
+    @include shadow(medium);
+
+    .deco {
+
+      svg {
+        fill: color(light);
+      }
+    }
+  }
+
+  .deco {
+    position: absolute;
+    top: 0;
+    right: -1px;
+    width: auto;
+    height: 100%;
+
+    svg {
+      display: block;
+      width: auto;
+      height: 100%;
+      fill: color(dark);
+      @include transition(slow);
+    }
+  }
+
+  h2 {
+    position: relative;
+    margin: 0;
+    color: color(light);
+  }
+
+  p {
+    position: relative;
+    padding: 0;
+
+    strong {
+      display: block;
+    }
+  }
+}
+
+#meal-add {
+  @include spacing(margin-top, 2);
+
+  & + .deco-add {
+    display: block;
+    width: 50%;
+    @include spacing(margin-top, -1);
+
+    svg {
+      fill: color(darkest);
+    }
+  }
+}
+
+.list-nav {
+  @include spacing(margin-top);
+}
+
+.list-logo {
+  width: 75%;
+  @include spacing(margin-top);
+
+  svg {
+    fill: color(darkest);
+  }
+}

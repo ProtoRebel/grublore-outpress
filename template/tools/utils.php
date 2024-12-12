@@ -135,6 +135,6 @@ function util_hoursMins($totalMinutes) {
 }
 
 function util_layer($name, $content) {
-    $overlay = '<div class="modal-overlay"></div>';
+    $overlay = '<div class="layer-overlay"></div>';
     printf('<section id="layer-%s" class="layer">%s<div class="layer-content">%s</div></section>', $name, $overlay, $content);
 }

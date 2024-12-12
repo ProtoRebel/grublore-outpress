@@ -69,11 +69,12 @@ wp_reset_postdata();
 // App Layers
 
 // Layer: List, z-index=0
-$mealContent = util_templateReturn('modules/layer', 'list');
-util_layer('list', $mealContent);
+$layerList = util_templateReturn('modules/layer', 'list');
+util_layer('list', $layerList);
 
-//// Layer: Meal, z-index=2000
-//util_layer('meal', 'Meal Layer');
+// Layer: Meal, z-index=2000
+$layerMeal = util_templateReturn('modules/layer', 'meal');
+util_layer('meal', $layerMeal);
 //
 //// Layer: Dish, z-index=4000
 //util_layer('dish', 'Dish Layer');

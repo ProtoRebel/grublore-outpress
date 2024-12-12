@@ -24,14 +24,11 @@ body {
   @include fontFamily(default);
   @include fontWeight(normal);
   color: color(lightest);
-  background: linear-gradient(to bottom, color(dark), color(darkest));
+  background-color: color(darkest);
+  background-image: linear-gradient(to bottom, color(dark), color(darkest));
   font-size: 1rem;
   font-smoothing: antialiased;
-}
-
-a {
-  color: color(primary);
-  text-decoration: underline;
+  font-style: italic;
 }
 
 .video-container {
@@ -59,43 +56,25 @@ h6 {
   padding: 0;
   margin: 0;
   line-height: 1.5;
+  font-style: normal;
   @include fontFamily(heading);
-  @include fontWeight(bold);
+  @include fontWeight(normal);
   @include clearfix;
 }
 
-h1 {
+h1, h2 {
   font-size: size(huge);
   margin-bottom: 0.5em;
 }
 
-h2 {
-  font-size: size(larger);
-  margin-bottom: 0.75em;
-}
-
-h3 {
+h3, h4 {
   font-size: size(large);
   margin-bottom: 1em;
 }
 
-h4 {
-  font-size: size(bump);
-  font-style: italic;
-  margin-bottom: 1em;
-}
-
-h5 {
+h5, h6 {
   font-size: size(default);
   margin-bottom: 1em;
-  text-transform: uppercase;
-}
-
-h6 {
-  font-size: size(small);
-  margin-bottom: 1em;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
 }
 
 /** List Level Elements **/
@@ -148,11 +127,12 @@ blockquote {
   }
 }
 
-/**
-  Inline Level Elements
-  ---------------------------------------------------------------------- */
+
+/** Inline Level Elements **/
+
 strong {
   @include fontWeight(bold);
+  font-style: normal;
 }
 
 em {
@@ -173,4 +153,54 @@ sub {
   line-height: 1;
   font-size: 0.65em;
   vertical-align: sub;
+}
+
+/** Global Components **/
+
+a {
+  color: color(light);
+  text-decoration: none;
+  font-style: normal;
+  @include fontWeight(bold);
+  @include transition(fast);
+  @include interact() {
+    color: color(lightest);
+  }
+}
+
+button {
+  display: block;
+  appearance: none;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  width: 50%;
+  padding: 0.5rem;
+  background-color: color(darkest);
+  cursor: pointer;
+  @include transition(slow);
+  @include shadow(medium);
+
+  span {
+    @include flex(center, center);
+    background-color: color(light);
+    height: 3rem;
+    text-transform: uppercase;
+    color: color(dark);
+    clip-path: polygon(0.75rem 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0.75rem 100%, 0 calc(100% - 0.75rem), 0 0.75rem);
+    @include transition();
+    @include fontWeight(bold);
+    @include shadow(medium, color(darkest), inset);
+  }
+
+  @include interact() {
+    @include shadow(small);
+    transform: scale(1.025);
+
+    span {
+      transform: scale(0.975);
+      color: color(darkest);
+      @include shadow(large, color(darkest), inset);
+    }
+  }
 }

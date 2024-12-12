@@ -33,10 +33,10 @@ $layoutReadingMax: 720px;
 }
 
 $fontSizeDefaults: (
-        'mobile':       16px,
-        'tablet':       18px,
-        'desktop':      20px,
-        'desktop-wide': 22px
+        'mobile':       15px,
+        'tablet':       16px,
+        'desktop':      18px,
+        'desktop-wide': 20px
 );
 
 $fontWeights: (
@@ -89,13 +89,13 @@ $colors: (
 
 /*  TRANSITIONS
 	----------------------------- */
-@mixin transition($type, $target: all, $time: 350ms) {
-  @if $type == 'hover' {
+@mixin transition($type: default, $target: all, $time: 300ms) {
+  @if $type == 'default' {
     transition: $target $time cubic-bezier(0.22, 1, 0.36, 1);
-  } @else if $type == 'grow' {
-    transition: $target ($time * 1.25) cubic-bezier(0.34, 1.56, 0.64, 1);
-  } @else if $type == 'move' {
-    transition: $target ($time * 0.75) cubic-bezier(0.5, 1, 0.89, 1);
+  } @else if $type == 'fast' {
+    transition: $target ($time * 0.5) cubic-bezier(0.34, 1.56, 0.64, 1);
+  } @else if $type == 'slow' {
+    transition: $target ($time * 1.5) cubic-bezier(0.5, 1, 0.89, 1);
   }
 }
 
@@ -130,9 +130,9 @@ $borderRadii: (
 $shadowColorDefault: map-get($colors, darkest);
 
 $shadowSizes: (
-        'small':  0 0 0.5rem,
-        'medium': 0 0 1rem,
-        'large':  0 0 1.5rem
+        'small':  0 0 1rem,
+        'medium': 0 0 1.5rem,
+        'large':  0 0 2rem
 );
 
 /*  BORDERS
