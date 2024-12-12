@@ -5,6 +5,33 @@ $layoutReadingMax: 720px;
 
 /*  FONT SETTINGS
 	----------------------------- */
+@font-face {
+  font-family: 'Pirata One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/wp-content/themes/outpress/fonts/pirataone.ttf')
+  format('truetype');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/wp-content/themes/outpress/fonts/ptsans-italic.ttf')
+  format('truetype');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/wp-content/themes/outpress/fonts/ptsans-bold.ttf')
+  format('truetype');
+}
+
 $fontSizeDefaults: (
         'mobile':       16px,
         'tablet':       18px,
@@ -14,14 +41,12 @@ $fontSizeDefaults: (
 
 $fontWeights: (
         'normal': 400,
-        'semi':   600,
         'bold':   700
 );
 
 $fontFamilies: (
-        'default':  ('futura-pt', sans-serif),
-        'heading':  ('futura-pt', sans-serif),
-        'deco':     ('futura-pt', sans-serif),
+        'default':  ('PT Sans', sans-serif),
+        'heading':  ('Pirata One', serif),
         'mono':     (monospace),
 );
 
@@ -43,23 +68,23 @@ $sizes: (
 
 /*  COLORS
 	----------------------------- */
-$color-black:       #0D0D0D;
-$color-grey:        #C7D1D9;
-$color-white:       #fafafa;
-$color-blue:        #0477BF;
-$color-blue--light: #049DD9;
-$color-peach:       #F2B199;
+$color-white: #FFFFFF;
+$color-slateLight: #B0D1DA;
+$color-slate: #7BA0A6;
+$color-marine: #486A73;
+$color-marine-dark: #233A40;
+$color-mandarin: #F2790F;
+$color-cherry: #D90708;
 
 $colors: (
-        'light':      $color-white,
-        'medium':     $color-grey,
-        'dark':       $color-black,
-        'primary':    $color-blue,
-        'secondary':  $color-blue--light,
-        'accent':     $color-peach,
-        'alt1':       $color-blue,
-        'alt2':       $color-blue,
-        'alt3':       $color-blue,
+        'lightest':     $color-white,
+        'light':        $color-slateLight,
+        'medium':       $color-slate,
+        'dark':         $color-marine,
+        'darkest':      $color-marine-dark,
+        'alert-text':   $color-white,
+        'alert-color':  $color-mandarin,
+        'alert-shade':  $color-cherry
 );
 
 /*  TRANSITIONS
@@ -102,12 +127,12 @@ $borderRadii: (
 
 /*  BOX SHADOWS
 	----------------------------- */
-$shadowColorDefault: map-get($colors, dark);
+$shadowColorDefault: map-get($colors, darkest);
 
 $shadowSizes: (
-        'small':  0 0 0.25em,
-        'normal': 0 0 0.5em,
-        'large':  0 0 1em
+        'small':  0 0 0.5rem,
+        'medium': 0 0 1rem,
+        'large':  0 0 1.5rem
 );
 
 /*  BORDERS

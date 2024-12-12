@@ -7,12 +7,12 @@
     <list default="true" id="3a0d63b6-be93-40b6-92dc-709ca85c4d01" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_header.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/config/_hamburger.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_base.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_fields.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_layers.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_layers.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/config/_functions.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/config/_functions.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/config/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/config/_variables.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/tools/utils.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/tools/utils.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +78,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/dustinjones/Desktop/PROJECTS/Humanism/grublore-outpress&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/dustinjones/Desktop/PROJECTS/Humanism/grublore-outpress/template/fonts&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -92,17 +92,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/template/fonts" />
       <recent name="$PROJECT_DIR$/template/acf-json" />
       <recent name="$PROJECT_DIR$/src/theme/acf-json" />
       <recent name="$PROJECT_DIR$/src/theme/functions" />
       <recent name="$PROJECT_DIR$/src/theme/blocks" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/template/fonts" />
       <recent name="$PROJECT_DIR$/src/styles/config" />
       <recent name="$PROJECT_DIR$/template/tools/controller" />
       <recent name="$PROJECT_DIR$/src/styles" />
       <recent name="$PROJECT_DIR$/src/assets/css/blocks" />
-      <recent name="$PROJECT_DIR$/src/assets/css" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Start">
@@ -208,7 +209,8 @@
       <workItem from="1733588694615" duration="1973000" />
       <workItem from="1733679566903" duration="5578000" />
       <workItem from="1733868419645" duration="22267000" />
-      <workItem from="1733971287305" duration="5496000" />
+      <workItem from="1733971287305" duration="6196000" />
+      <workItem from="1733980449068" duration="5655000" />
     </task>
     <servers />
   </component>

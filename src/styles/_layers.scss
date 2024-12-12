@@ -1,4 +1,34 @@
+.layer {
+  width: 100%;
+  max-width: $layoutWidthMax;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
 #layer-list {
   position: relative;
   z-index: 0;
+  @include pseudo(before, block, absolute) {
+    z-index: -1;
+    left: spacing(mobile);
+    width: calc(100% - #{spacing(mobile, 2)});
+    height: 100%;
+    @include shadow(large, inset);
+    @include breakpoint(tablet) {
+      left: spacing(tablet);
+      width: calc(100% - #{spacing(tablet, 2)});
+    }
+    @include breakpoint(desktop) {
+      left: spacing(desktop);
+      width: calc(100% - #{spacing(desktop, 2)});
+    }
+    @include breakpoint(desktop-wide) {
+      left: spacing(desktop-wide);
+      width: calc(100% - #{spacing(desktop-wide, 2)});
+    }
+  }
+
+  .modal-overlay {
+    display: none;
+  }
 }

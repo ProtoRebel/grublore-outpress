@@ -190,9 +190,9 @@
 
 /*  SHADOWS
 	----------------------------- */
-@mixin shadow($size, $type: box, $color: #{$shadowColorDefault}) {
+@mixin shadow($size, $inset: '', $color: #{$shadowColorDefault}) {
   @if map-has-key($shadowSizes, $size) {
-    #{$type}-shadow: #{map-get($shadowSizes, $size)} #{$color};
+    box-shadow: $inset #{map-get($shadowSizes, $size)} #{$color};
   }
 }
 

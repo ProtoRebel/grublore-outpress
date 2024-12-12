@@ -69,7 +69,8 @@ wp_reset_postdata();
 // App Layers
 
 // Layer: List, z-index=0
-util_layer('list', 'List Layer');
+$mealContent = util_templateReturn('modules/layer', 'list');
+util_layer('list', $mealContent);
 
 //// Layer: Meal, z-index=2000
 //util_layer('meal', 'Meal Layer');
