@@ -56,16 +56,32 @@ $allDishQuery = new WP_Query($allDishQueryArgs);
 
 if ($allDishQuery->have_posts()) {
     foreach ($allDishQuery->posts as $dish) {
-        get_template_part('modules/dish', null, array(
+        $allDishes[] = util_templateReturn('modules/dish', null, [
             'courses'       => $allCourses,
             'cuisines'      => $allCuisines,
             'ingredients'   => $allIngredients,
             'dish'          => $dish
-        ));
+        ]);
     }
 }
-
 wp_reset_postdata();
+
+// App Layers
+
+// Layer: List, z-index=0
+util_layer('list', 'List Layer');
+
+//// Layer: Meal, z-index=2000
+//util_layer('meal', 'Meal Layer');
+//
+//// Layer: Dish, z-index=4000
+//util_layer('dish', 'Dish Layer');
+//
+//// Layer: Controls, z-index=6000
+//util_layer('controls', 'Ccontrols Layer');
+//
+//// Layer: Alert, z-index=8000
+//util_layer('alert', 'Alert Layer');
 
 get_footer();
 ?>
