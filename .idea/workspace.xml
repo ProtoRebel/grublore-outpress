@@ -6,17 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3a0d63b6-be93-40b6-92dc-709ca85c4d01" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/_base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_base.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/config/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/config/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/acf-json/group_67566d02dd730.json" beforeDir="false" afterPath="$PROJECT_DIR$/template/acf-json/group_67566d02dd730.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/tools/design/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/tools/themeSettings.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/tools/themeSettings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/tools/utils.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/tools/utils.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_module-dish.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_module-dish.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/modules/dish.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/modules/dish.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,24 +67,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/dustinjones/Desktop/PROJECTS/Humanism/grublore-outpress",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.stylelint": "/Users/dustinjones/Desktop/Outpress/outpress-boilerplate/node_modules/stylelint",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.php.frameworks",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/dustinjones/Desktop/PROJECTS/Humanism/grublore-outpress&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;/Users/dustinjones/Desktop/Outpress/outpress-boilerplate/node_modules/stylelint&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.php.frameworks&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/template/acf-json" />
@@ -211,7 +202,8 @@
       <workItem from="1733586985127" duration="133000" />
       <workItem from="1733588694615" duration="1973000" />
       <workItem from="1733679566903" duration="5578000" />
-      <workItem from="1733868419645" duration="21623000" />
+      <workItem from="1733868419645" duration="22267000" />
+      <workItem from="1733971287305" duration="3463000" />
     </task>
     <servers />
   </component>

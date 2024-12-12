@@ -55,7 +55,7 @@ if(!empty($dishGoes)) {
     foreach($dishGoes as $dishGoesDish) {
         $dishGoesWithList[] = sprintf('<a href="#%s" class="link-dish">%s</a>', $dishGoesDish, get_the_title($dishGoesDish));
     }
-    $dishGoesWith = sprintf('%s<em>Goes With: %s', util_icon('heart-add'), implode(', ', $dishGoesWithList));
+    $dishGoesWith = sprintf('%s<em>Goes With: %s</em>', util_icon('heart-add'), implode(', ', $dishGoesWithList));
 }
 
 $dishDetailsListItems = array_filter([
@@ -81,12 +81,48 @@ $dishDisplayDetails = sprintf('<section><div class="photo">%s</div>%s</section>'
 
 // Dish Ingredients Section
 $dishDisplayIngredients = '';
+if(!empty($dishIngredients)) {
+    $dishIngredientsList = [];
+    foreach($dishIngredients as $dishIngredient) {
+        $dishIngredientAmount = sprintf('<span>%s%s</span><em>%s</em>', $dishIngredient['amount']['whole'], $dishIngredient['amount']['fraction'], $dishIngredient['amount']['unit']);
+        $dishIngredientPrep = !empty($dishIngredient['notes']['prep']) ? sprintf(', %s', $dishIngredient['notes']['prep']) : '';
+        $dishIngredientName = sprintf('<strong>%s%s</strong><em>%s</em>', get_the_title($dishIngredient['ingredient']), $dishIngredientPrep, $dishIngredient['notes']['note']);
+        $dishIngredientsList[] = sprintf('<li data-ingredient="%s"><div>%s</div><p>%s</p></li>', $dishIngredient['ingredient'], $dishIngredientAmount, $dishIngredientName);
+    }
+    $dishDisplayIngredients = sprintf('<ul class="ingredients">%s</ul>', implode('', $dishIngredientsList));
+}
 
 // Dish Steps Section
 $dishDisplaySteps = '';
+$dishDisplayStepNumber = 0;
+if(!empty($dishSteps)) {
+    $dishStepsList = [];
+    foreach($dishSteps as $dishStep) {
+        $dishDisplayStepNumber++;
+        $dishDisplayStepText = sprintf('<span>Step<em>%s</em></span>', $dishDisplayStepNumber);
+        if(!empty($dishStep['direction']) || !empty($dishStep['goal'])) {
+            $dishStepDirection = $dishStep['direction'];
+            $dishStepGoal = !empty($dishStep['goal']) ? sprintf('<strong>%s</strong>', $dishStep['goal']) : '';
+            if(!empty($dishStep['direction']) && !empty($dishStep['goal'])) {
+                $dishStepsList[] = sprintf('<li>%s<p>%s%s%s</p></li>', $dishDisplayStepText, $dishStepDirection, $dishDetailSep, $dishStepGoal);
+            } else {
+                $dishStepsList[] = sprintf('<li>%s<p>%s%s</p></li>', $dishDisplayStepText, $dishStepDirection, $dishStepGoal);
+            }
+        }
+    }
+    $dishDisplaySteps = sprintf('<ol class="steps">%s</ol>', implode('', $dishStepsList));
+}
 
 // Dish Notes Section
 $dishDisplayNotes = '';
+if(!empty($dishNotes)) {
+    $dishNotesList = [];
+    foreach($dishNotes as $dishNote) {
+        $dishNotesList[] = sprintf('<p>%s</p>', $dishNote['note']);
+    }
+
+    $dishDisplayNotes = sprintf('<footer class="notes">%s</footer>', implode('', $dishNotesList));
+}
 
 // Final Dish Output
 printf('<article id="%s" class="dish">%s%s%s%s%s</article>', $d, $dishDisplayHeader, $dishDisplayDetails, $dishDisplayIngredients, $dishDisplaySteps, $dishDisplayNotes);
