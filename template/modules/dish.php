@@ -23,7 +23,7 @@ $dishDisplayHeader = sprintf('<header><h1>%s</h1>%s</header>', $dishTitle, $dish
 
 // Dish Details Section
 $dishDetailSep = ' <span class="bullet">&bull;</span> ';
-$dishCoursesList = util_listPluck($dishCourses, $courses);
+$dishCoursesList = sprintf('<span class="course">%s</span>', util_listPluck($dishCourses, $courses));
 $dishCuisineList = util_listPluck($dishCuisines, $cuisines);
 $dishCourseMeta = sprintf('<em>%s</em>', implode($dishDetailSep, [$dishCoursesList,$dishCuisineList]));
 

@@ -5,11 +5,6 @@ export default {
   init() {
   },
   finalize() {
-    // State Options
-    let mealActive = 0;
-    let dishActive = 0;
-    let alertAction = '';
-
     // Reused Items
     const appContent = $('#content');
     const mealsList = $('#meals');
@@ -18,6 +13,35 @@ export default {
     const alertBox = $('#alert');
     const alertConfirm = $('#alert-confirm');
     const alertCancel = $('#alert-cancel');
+    const mealDishesEmpty = 'No dishes have been added to this meal';
+
+    // State: Variables
+    let mealActive = '';
+    let dishActive = '';
+    let alertAction = '';
+    let glState = JSON.parse(localStorage.getItem('gl-state'));
+
+    // State: Pull on load
+    function glStateLoad() {
+      if(glState !== null) {
+        mealActive = glState['meal'];
+        dishActive = glState['dish'];
+        appContent.addClass(glState['display']);
+        mealDataLoad(mealActive);
+      }
+    }
+    glStateLoad();
+
+    // State: Update Function
+    function glStateUpdate() {
+      const stateDisplay = appContent.attr('class');
+      localStorage.setItem('gl-state', `{"display": "${stateDisplay}", "meal": "${mealActive}", "dish": "${dishActive}"}`);
+    }
+
+    // State: Update on every click
+    document.addEventListener('click', event => {
+      glStateUpdate();
+    });
 
     // Util: Generate random 6 digit code
     function mealIdGen() {
@@ -42,15 +66,52 @@ export default {
       alertCancel.find('em').text(cancel);
       alertAction = action;
     }
-
     function alertClear() {
       appContent.removeClass('is-alert');
-      alertBox.find('h1').text();
-      $('#alert-message').html();
-      alertBox.find('h1').text();
-      alertConfirm.text();
-      alertCancel.text();
+      alertBox.find('h1').text('');
+      $('#alert-message').html('');
+      alertBox.find('h1').text('');
+      alertConfirm.text('');
+      alertCancel.find('em').text('');
       alertAction = '';
+    }
+
+    // Meal: Construct Dishes
+    function mealDishes(dishes, returnType) {
+      dishes = typeof dishes === 'string' ? dishes : String(dishes);
+      if(dishes.trim() === '') {
+        if(mealActive.length > 0) {
+          $(`#${mealActive}`).find('em').text(mealDishesEmpty);
+        }
+      } else {
+        const dishesArray = dishes.split(',');
+        let listMealDishes = [];
+        let mealDishes = [];
+        dishesArray.forEach(dish => {
+          const dishData = $(`#${dish}`);
+          const dishName = dishData.find('h1').text();
+          const dishCourse = dishData.find('.course').text();
+          listMealDishes.push(dishName);
+          mealDishes.push({id: dish, name: dishName, course: dishCourse});
+        });
+        if(returnType === 'short') {
+          return listMealDishes.join(' + ');
+        } else if(returnType === 'list') {
+          return 'should be a list here';
+        }
+      }
+    }
+    function mealListDishes() {
+      $('.meal-listing').each((i,e) => {
+        const dishesList = $(e).data('dishes');
+        const dishesListSpace = $(e).find('strong');
+        if(dishesList > 0 || dishesList.length > 0) {
+          dishesListSpace.text(mealDishes(dishesList, 'short'));
+        } else {
+          dishesListSpace.text('');
+          dishesListSpace.next('em').text(mealDishesEmpty);
+        }
+      });
     }
 
     // Meal: Update localStorage single value at a time
@@ -78,6 +139,7 @@ export default {
           mealsList.append(mealNewItem);
         }
       }
+      mealListDishes();
     }
     mealsStorageLoad();
 
@@ -99,20 +161,27 @@ export default {
       appContent.addClass('is-meal');
     });
 
-    // Meal: View Meal on List Item click
-    mealsList.on('click', '.meal-listing', (e) => {
-      const mealId = $(e.currentTarget).attr('id');
-      const mealName = $(e.currentTarget).find('h2').text();
+    // Meal: Load Data into Layer
+    function mealDataLoad(mealId) {
+      const meal = $(`#${mealId}`);
+      const mealName = meal.find('h2').text();
+      const dishesList = meal.data('dishes');
       mealActive = mealId;
       mealNameInput.text(mealName);
+      mealDishes(dishesList, 'list');
       appContent.addClass('is-meal');
+    }
+
+    // Meal: View Meal on List Item click
+    mealsList.on('click', '.meal-listing', (e) => {
+      mealDataLoad($(e.currentTarget).attr('id'));
     });
 
     // Meal: Close View Function
     function mealClose() {
       mealActive = 0;
       appContent.removeClass('is-meal');
-      mealNameInput.text();
+      mealNameInput.text('');
     }
 
     // Meal: Close View Button
@@ -132,10 +201,24 @@ export default {
     $('#meal-remove').click(e => {
       e.preventDefault();
       const mealName = $(`#${mealActive}`).find('h2').text();
-
       alertThrow('mealRemove', 'Whoa!', `You are about to remove the meal <strong>${mealName}</strong> and its dishes and notes.`, 'Remove Meal', 'Keep Meal');
-
     });
+
+    // State: Pull on load
+    function glStateLoad() {
+      if(glState !== null) {
+        mealActive = glState['meal'];
+        dishActive = glState['dish'];
+        let displayFull =  glState['display'];
+        const displayTrim = ' is-alert';
+        if (displayFull.indexOf(displayTrim) !== -1) {
+          displayFull = displayFull.replace(displayTrim, '').trim();
+        }
+        mealDataLoad(glState['meal']);
+        appContent.attr('class', displayFull);
+      }
+    }
+    glStateLoad();
 
     // Alert: Actions
     alertConfirm.click(e => {

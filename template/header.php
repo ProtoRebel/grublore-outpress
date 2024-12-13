@@ -7,4 +7,4 @@
 </head>
 
 <body <?php body_class(); ?>>
-<main id="content">
+<main id="content" class="">

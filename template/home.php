@@ -76,8 +76,9 @@ util_layer('list', $layerList);
 $layerMeal = util_templateReturn('modules/layer', 'meal');
 util_layer('meal', $layerMeal);
 //
-//// Layer: Dish, z-index=4000
-//util_layer('dish', 'Dish Layer');
+// Layer: Dish, z-index=4000
+$layerDish = sprintf('<section id="dish">%s</section>', implode('', $allDishes));
+util_layer('dish', $layerDish);
 //
 //// Layer: Controls, z-index=6000
 //util_layer('controls', 'Ccontrols Layer');
