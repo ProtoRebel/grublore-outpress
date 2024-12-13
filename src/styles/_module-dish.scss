@@ -24,23 +24,14 @@
       @include flex(flex-start, flex-start, row, wrap);
       @include spacing(padding-left);
       @include spacing(padding-right);
+      @include spacing(padding-top);
       @include spacing(gap);
-
     }
 
     .dish {
       @include flex(flex-start, flex-start, column-reverse);
-      width: calc(50% - calc(#{spacing(mobile)} * 0.5));
+      width: 100%;
       cursor: pointer;
-      @include breakpoint(tablet) {
-        width: calc(50% - calc(#{spacing(tablet)} * 0.5));
-      }
-      @include breakpoint(desktop) {
-        width: calc(50% - calc(#{spacing(desktop)} * 0.5));
-      }
-      @include breakpoint(desktop-wide) {
-        width: calc(50% - calc(#{spacing(desktop-wide)} * 0.5));
-      }
 
       .layer-heading {
         position: relative;
@@ -57,13 +48,15 @@
         }
       }
 
+      .data {
+        width: 100%;
+        margin: 0;
+      }
+
       .photo {
+        position: relative;
         width: 100%;
         background-color: color(medium);
-
-        & > * {
-          aspect-ratio: 1/1;
-        }
       }
 
       .layer-close,
