@@ -2,22 +2,17 @@
   &.is-select {
     .layer-content {
       max-height: 100%;
+      background-color: color(dark);
+      @include shadow(large, color(darkest), inset);
 
       & > * {
         position: relative;
-      }
-
-      @include pseudo(before, block, absolute) {
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-image: linear-gradient(to bottom, color(darkest), color(dark));
       }
     }
 
     #dishes-select-header {
       display: block;
+      color: color(darkest);
     }
 
     #dishes {
@@ -86,6 +81,10 @@
   display: none;
 }
 
+#dishes {
+  padding-bottom: 6rem;
+}
+
 .dish {
   display: none;
   position: relative;
@@ -98,6 +97,10 @@
     top: 0;
     position: sticky;
     z-index: 4100;
+
+    h1 {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0 100%);
+    }
   }
 
   .data {

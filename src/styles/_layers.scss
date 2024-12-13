@@ -164,6 +164,24 @@
   position: absolute;
 }
 
+#layer-control {
+  z-index: 6000;
+  position: fixed;
+  top: unset;
+  bottom: 0;
+  min-height: 1px;
+
+  .layer-overlay {
+    display: none;
+  }
+
+  .layer-content {
+    & > * {
+      z-index: 2;
+    }
+  }
+}
+
 #layer-alert {
   z-index: 8000;
 }

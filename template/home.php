@@ -75,14 +75,15 @@ util_layer('list', $layerList);
 // Layer: Meal, z-index=2000
 $layerMeal = util_templateReturn('modules/layer', 'meal');
 util_layer('meal', $layerMeal);
-//
+
 // Layer: Dish, z-index=4000
 $layerDish = util_templateReturn('modules/layer', 'dish', ['dishes' => $allDishes]);
 util_layer('dish', $layerDish);
-//
-//// Layer: Controls, z-index=6000
-//util_layer('controls', 'Ccontrols Layer');
-//
+
+// Layer: Controls, z-index=6000
+$layerControl = util_templateReturn('modules/layer', 'control');
+util_layer('control', $layerControl);
+
 // Layer: Alert, z-index=8000
 $layerAlert = util_templateReturn('modules/layer', 'alert');
 util_layer('alert', $layerAlert);

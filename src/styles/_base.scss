@@ -222,6 +222,13 @@ button {
     }
   }
 
+  &.dark {
+    span {
+      background-color: color(dark);
+      color: color(darkest);
+    }
+  }
+
   &.clear {
     background-color: transparent;
     width: auto;

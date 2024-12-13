@@ -1,0 +1,33 @@
+#control {
+  background-color: color(darkest);
+  @include shadow(medium);
+
+  nav {
+    @include flex(center, center);
+    display: none;
+
+    &.is-active {
+      display: flex;
+    }
+  }
+
+  button,
+  p {
+    width: 50%;
+  }
+
+  button {
+    box-shadow: none;
+  }
+
+  p {
+    @include flex(center, center, column);
+    line-height: 1;
+    padding: 0;
+    color: color(light);
+
+    strong {
+      color: color(lightest);
+    }
+  }
+}

@@ -18,6 +18,7 @@ export default {
     // State: Variables
     let mealActive = '';
     let dishActive = '';
+    let controlAction = '';
     let alertAction = '';
     let glState = JSON.parse(localStorage.getItem('gl-state'));
 
@@ -26,6 +27,7 @@ export default {
       if(glState !== null) {
         mealActive = glState['meal'];
         dishActive = glState['dish'];
+        controlAction = glState['control'];
         appContent.addClass(glState['display']);
         mealDataLoad(mealActive);
       }
@@ -35,7 +37,7 @@ export default {
     // State: Update Function
     function glStateUpdate() {
       const stateDisplay = appContent.attr('class');
-      localStorage.setItem('gl-state', `{"display": "${stateDisplay}", "meal": "${mealActive}", "dish": "${dishActive}"}`);
+      localStorage.setItem('gl-state', `{"display": "${stateDisplay}", "meal": "${mealActive}", "dish": "${dishActive}", "control": "${controlAction}"}`);
     }
 
     // State: Update on every click
@@ -55,6 +57,48 @@ export default {
 
       return randomCode;
     }
+
+    // Control: Toggle Drawer
+    function controlToggle(control) {
+      controlAction = control;
+      $('#control nav').removeClass('is-active');
+      $(`#control-${control}`).addClass('is-active');
+      if(control === 'preview') {
+        const mealDishes = $(`#${mealActive}`).data('dishes');
+        if(mealDishes !== undefined) {
+          mealDishes.split(',');
+          if(mealDishes.includes(dishActive)) {
+            const mealName = $(`#${mealActive}`).find('h2').text();
+            $('#control-preview-add').hide();
+            $('#control-preview-added strong').text(mealName);
+          } else {
+            $('#control-preview-added').hide();
+          }
+        }
+      }
+    }
+
+    // Control: Clean Out
+    function controlClean() {
+      controlAction = '';
+      $('#control *').removeClass('is-active');
+      $('#control-preview-add, #control-preview-added').show();
+      $('#control-preview-added strong').text('');
+    }
+
+    // Control: Preview Back
+    $('#control-preview-back').click(e => {
+      appContent.removeClass('is-preview is-dish');
+      appContent.addClass('is-select');
+      controlClean();
+      controlToggle('select');
+    });
+
+    // Control: Select Back
+    $('#control-select-back').click(e => {
+      appContent.removeClass('is-select');
+      controlClean();
+    });
 
     // Alert: Throw confirmations
     function alertThrow(action,heading, message, confirm, cancel) {
@@ -207,6 +251,7 @@ export default {
     // Meal: Add Dish Button
     $('#dish-add').click(e => {
       appContent.addClass('is-select');
+      controlToggle('select');
     });
 
     // Dish: Populate Details Function
@@ -216,6 +261,7 @@ export default {
       appContent.removeClass('is-select');
       $('.dish').removeClass('is-active');
       $(`#${dishId}`).addClass('is-active');
+      $('html, body').scrollTop(0);
     }
 
     // Dish: View from List
@@ -223,7 +269,8 @@ export default {
       const dishTarget = $(e.currentTarget).attr('id');
       if(appContent.hasClass('is-select')) {
         dishDetails(dishTarget);
-        appContent.addClass('is-preview')
+        appContent.addClass('is-preview');
+        controlToggle('preview');
       }
     });
 
@@ -232,6 +279,10 @@ export default {
       e.preventDefault();
       const dishTarget = $(e.currentTarget).attr('href').replace('#', '');
       dishDetails(dishTarget);
+      controlClean();
+      if(appContent.hasClass('is-preview')) {
+        controlToggle('preview');
+      }
     });
 
     // State: Pull on load
@@ -239,6 +290,7 @@ export default {
       if(glState !== null) {
         mealActive = glState['meal'];
         dishActive = glState['dish'];
+        controlAction = glState['control'];
         let displayFull =  glState['display'];
         const displayTrim = ' is-alert';
         if (displayFull.indexOf(displayTrim) !== -1) {
@@ -249,6 +301,9 @@ export default {
         }
         if(dishActive.length > 0) {
           dishDetails(dishActive);
+        }
+        if(controlAction.length > 0) {
+          controlToggle(controlAction);
         }
         appContent.attr('class', displayFull);
       }
