@@ -5,6 +5,79 @@ export default {
   init() {
   },
   finalize() {
+    /*
+    ----------
+    App Elements & Globals
+    ----------
+     */
+    const elContent = $('#content');
+    const elMealsList = $('#meals');
+    const elMealsTemplate = $('#meal-template');
+    const elMealName = $('#meal-name');
+    const elMealEmpty = 'No dishes have been added to this meal';
+    const elAlert = $('#alert');
+    const elAlertConfirm = $('#alert-confirm');
+    const elAlertCancel = $('#alert-cancel');
+
+    /*
+    ----------
+    State Management
+    ----------
+     */
+
+    // State - Variables: Initiate
+    let stateLayer = '';
+    let stateMeal = '';
+    let stateDish = '';
+    let stateControl = '';
+    let glState = JSON.parse(localStorage.getItem('gl-state'));
+
+    // State - Action: Create on Load
+
+    // State - Function: Create
+    function statePopulate() {
+      if(glState && typeof glState === 'object') {
+        stateLayer = String(glState['layer'] || '');
+        stateMeal = String(glState['meal'] || '');
+        stateDish = String(glState['dish'] || '');
+        stateControl = String(glState['control'] || '');
+        elContent.attr('class', stateLayer);
+      } else {
+        stateUpdate();
+      }
+    }
+    statePopulate();
+
+    // State - Function: Update
+    // Note: Run this function anytime a State Var is updated
+    function stateUpdate() {
+      stateLayer = elContent.attr('class').replace(' is-alert', '');
+      localStorage.setItem('gl-state', `{"layer":"${stateLayer}","meal":"${stateMeal}","dish":"${stateDish}","control":"${stateControl}"}`);
+    }
+
+
+
+    /*
+    ----------
+    List
+    ----------
+     */
+
+    // List - Function: Populate the List
+
+    // List - Function: Clone and Add Item
+
+
+
+
+
+
+
+    /* Known Working
+
+
+
+
     // Reused Items
     const appContent = $('#content');
     const mealsList = $('#meals');
@@ -63,12 +136,15 @@ export default {
       controlAction = control;
       $('#control nav').removeClass('is-active');
       $(`#control-${control}`).addClass('is-active');
-      if(control === 'preview') {
-        const mealDishes = $(`#${mealActive}`).data('dishes');
+      const mealFetch = $(`#${mealActive}`);
+      const mealDishes = mealFetch.data('dishes');
+      const mealName = mealFetch.find('h2').text();
+      if(control === 'select') {
+        $('#control-select').find('p strong').text(mealName);
+      } else if(control === 'preview') {
         if(mealDishes !== undefined) {
           mealDishes.split(',');
           if(mealDishes.includes(dishActive)) {
-            const mealName = $(`#${mealActive}`).find('h2').text();
             $('#control-preview-add').hide();
             $('#control-preview-added strong').text(mealName);
           } else {
@@ -169,6 +245,11 @@ export default {
       }
     }
 
+    // Dish: Update the List function
+    function dishMealListBuild() {
+      return;
+    }
+
     // Meal: Find localStorage items and create entries
     function mealsStorageLoad() {
       for (let i = 0; i < localStorage.length; i++) {
@@ -178,8 +259,10 @@ export default {
           const newId = key.replace('gl-meal_', '');
           const mealNewItem = mealTemplate.clone();
           const mealNewItemName = JSON.parse(localStorage.getItem(key))['name'];
+          const mealNewItemDishes = JSON.parse(localStorage.getItem(key))['dishes'];
           mealNewItem.attr('id', newId);
           mealNewItem.find('h2').text(mealNewItemName);
+          mealNewItem.data('dishes', mealNewItemDishes);
           mealsList.append(mealNewItem);
         }
       }
@@ -192,7 +275,7 @@ export default {
       const mealNewItem = mealTemplate.clone();
       const mealNewId = mealIdGen();
       mealNewItem.attr('id', mealNewId);
-      localStorage.setItem(`gl-meal_${mealNewId}`, '{"name":"Unnamed Meal","dishes":[]}');
+      localStorage.setItem(`gl-meal_${mealNewId}`, '{"name":"Unnamed Meal","dishes":""}');
       mealsList.append(mealNewItem);
       mealActive = mealNewId;
     }
@@ -285,6 +368,28 @@ export default {
       }
     });
 
+    // Dish: Add to Meal Function
+    function dishAdd() {
+      const mealActiveElem = $(`#${mealActive}`);
+      let mealDishes = mealActiveElem.data('dishes');
+      const mealDishesCurrent = mealDishes.split(',');
+      controlClean();
+      console.log();
+      if(mealDishesCurrent.includes(dishActive)) {
+        mealDishesCurrent.push(dishActive);
+        mealDishes = mealDishesCurrent.join(',');
+        mealStorageUpdate(mealActive,'dishes', mealDishes);
+        mealActiveElem.attr('data-dishes', mealDishes);
+      }
+    }
+
+    // Dish: Add from Preview
+    $('#control-preview-add').click(e => {
+      dishAdd();
+      controlClean();
+      controlToggle('preview');
+    });
+
     // State: Pull on load
     function glStateLoad() {
       if(glState !== null) {
@@ -325,5 +430,6 @@ export default {
     alertCancel.click(e => {
       alertClear();
     });
+     */
   },
 };

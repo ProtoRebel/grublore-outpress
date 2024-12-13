@@ -7,11 +7,8 @@
     <list default="true" id="3a0d63b6-be93-40b6-92dc-709ca85c4d01" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/_base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_base.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/_layers.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_layers.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/_module-dish.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_module-dish.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/modules/layer-control.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/modules/layer-control.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/modules/layer-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/modules/layer-list.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -210,7 +207,7 @@
       <workItem from="1733679566903" duration="5578000" />
       <workItem from="1733868419645" duration="22267000" />
       <workItem from="1733971287305" duration="6196000" />
-      <workItem from="1733980449068" duration="58450000" />
+      <workItem from="1733980449068" duration="70836000" />
     </task>
     <servers />
   </component>
