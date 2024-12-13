@@ -1,4 +1,8 @@
 <?php
 
-printf('<aside id="alert"><header><h1></h1></header><p id="alert-message"></p><p>This cannot be undone.</p><footer><button id="alert-confirm" type="button"></button></footer></aside><button id="alert-cancel" type="button"></button>');
+$alertMessage = '<p id="alert-message"></p><p>This cannot be undone.</p>';
+$alertConfirm = '<button id="alert-confirm" type="button" class="danger"></button>';
+$alertCancel = sprintf('<button id="alert-cancel" type="button" class="clear">%s<em></em></button>', util_templateReturn('images/icons', null, ['icon' => 'cancel']));
+
+printf('<aside id="alert"><header><h1></h1></header>%s<footer>%s</footer></aside>%s', $alertMessage, $alertConfirm, $alertCancel);
 ?>

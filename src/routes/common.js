@@ -39,7 +39,7 @@ export default {
       $('#alert-message').html(message);
       alertBox.find('h1').text(heading);
       alertConfirm.text(confirm);
-      alertCancel.text(cancel);
+      alertCancel.find('em').text(cancel);
       alertAction = action;
     }
 
@@ -133,7 +133,7 @@ export default {
       e.preventDefault();
       const mealName = $(`#${mealActive}`).find('h2').text();
 
-      alertThrow('mealRemove', 'Whoa!', `You are about to remove the meal <strong>${mealName}</strong> and its dishes and notes.`, 'Delete Meal', 'Keep Meal');
+      alertThrow('mealRemove', 'Whoa!', `You are about to remove the meal <strong>${mealName}</strong> and its dishes and notes.`, 'Remove Meal', 'Keep Meal');
 
     });
 

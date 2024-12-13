@@ -1,7 +1,8 @@
 #alert {
+  background-color: color(light);
+  color: color(darkest);
   @include spacing(padding-left);
   @include spacing(padding-right);
-  background-color: color(light);
   @include shadow(large, color(dark), inset);
 
   h1 {
@@ -9,5 +10,11 @@
     color: color(light);
     text-align: center;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 1rem 100%, 0 calc(100% - 0.75rem));
+  }
+
+  button.danger {
+    margin-top: 0;
+    margin-bottom: 3rem;
+    transform: translateY(50%);
   }
 }

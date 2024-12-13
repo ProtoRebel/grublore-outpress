@@ -178,6 +178,8 @@ button {
   padding: 0.5rem;
   background-color: color(darkest);
   cursor: pointer;
+  line-height: 1;
+  text-transform: uppercase;
   @include transition(slow);
   @include shadow(medium);
 
@@ -185,7 +187,6 @@ button {
     @include flex(center, center);
     background-color: color(light);
     height: 3rem;
-    text-transform: uppercase;
     color: color(dark);
     clip-path: polygon(0.75rem 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0.75rem 100%, 0 calc(100% - 0.75rem), 0 0.75rem);
     @include transition();
@@ -201,6 +202,43 @@ button {
       transform: scale(0.975);
       color: color(darkest);
       @include shadow(large, color(darkest), inset);
+    }
+  }
+
+  &.danger {
+    margin: 2rem auto;
+    width: auto;
+    background-color: color(alert-color);
+    padding: 0 2rem;
+    height: 2.5rem;
+    color: color(lightest);
+    font-size: size(small);
+    clip-path: polygon(0 0, 0.5rem 0.5rem, 1rem 0, calc(100% - 1rem) 0, calc(100% - 0.5rem) 0.5rem, 100% 0, 100% calc(50% - 0.5rem), calc(100% - 1rem) 50%, 100% calc(50% + 0.5rem), 100% 100%, calc(100% - 0.5rem) calc(100% - 0.5rem), calc(100% - 1rem) 100%, 1rem 100%, 0.5rem calc(100% - 0.5rem), 0 100%, 0 calc(50% + 0.5rem), 1rem 50%, 0 calc(50% - 0.5rem));
+    @include fontWeight(bold);
+    @include shadow(large, color(alert-shade), inset);
+    @include transition();
+    @include interact() {
+      background-color: color(alert-shade);
+    }
+  }
+
+  &.clear {
+    background-color: transparent;
+    width: auto;
+    margin: 2rem auto;
+    color: color(light);
+    font-size: size(small);
+    @include flex(center, center);
+
+    svg {
+      fill: color(light);
+      height: 1em;
+      width: auto;
+      margin-right: 1ex;
+    }
+
+    em {
+      font-style: normal;
     }
   }
 }
