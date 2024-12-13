@@ -18,8 +18,8 @@ $dishCuisines = wp_list_pluck(get_the_terms($d, 'cuisine'), 'term_id');
 $dishPhoto = has_post_thumbnail($d) ? get_the_post_thumbnail($d, 'medium') : util_templateReturn('images/logo', 'emblem');
 
 // Dish Header Section
-$dishClose = sprintf('<a href="#" class="close-dish">%s</a>', util_icon('close'));
-$dishDisplayHeader = sprintf('<header><h1>%s</h1>%s</header>', $dishTitle, $dishClose);
+$dishClose = sprintf('<a href="#" class="layer-close">%s</a>', util_icon('close'));
+$dishDisplayHeader = sprintf('<header class="layer-heading"><h1>%s</h1>%s</header>', $dishTitle, $dishClose);
 
 // Dish Details Section
 $dishDetailSep = ' <span class="bullet">&bull;</span> ';
@@ -53,7 +53,7 @@ $dishGoesWith = '';
 if(!empty($dishGoes)) {
     $dishGoesWithList = [];
     foreach($dishGoes as $dishGoesDish) {
-        $dishGoesWithList[] = sprintf('<a href="#%s" class="link-dish">%s</a>', $dishGoesDish, get_the_title($dishGoesDish));
+        $dishGoesWithList[] = sprintf('<a href="#%s" class="dish-link">%s</a>', $dishGoesDish, get_the_title($dishGoesDish));
     }
     $dishGoesWith = sprintf('%s<em>Goes With: %s</em>', util_icon('heart-add'), implode(', ', $dishGoesWithList));
 }
@@ -125,4 +125,4 @@ if(!empty($dishNotes)) {
 }
 
 // Final Dish Output
-printf('<article id="%s" class="dish">%s%s%s%s%s</article>', $d, $dishDisplayHeader, $dishDisplayDetails, $dishDisplayIngredients, $dishDisplaySteps, $dishDisplayNotes);
+printf('<article id="%s" class="dish">%s<div class="data">%s%s%s%s</div></article>', $d, $dishDisplayHeader, $dishDisplayDetails, $dishDisplayIngredients, $dishDisplaySteps, $dishDisplayNotes);

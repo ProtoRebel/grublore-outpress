@@ -3,7 +3,9 @@ $mealClose = sprintf('<a href="#" class="layer-close">%s</a>', util_templateRetu
 $mealEditIcon = util_templateReturn('images/icons', null, ['icon' => 'pencil']);
 $mealHeader = sprintf('<header class="layer-heading"><h1><span id="meal-name" contenteditable="true">Nothing Loaded</span>%s</h1>%s</header>', $mealEditIcon, $mealClose);
 
+$mealDishAdd = '<button id="dish-add" type="button"><span>Add Dish</span></button>';
+
 $mealRemove = sprintf('<footer><button id="meal-remove" type="button" class="danger">Remove Meal</button></footer>');
 
-printf('<aside id="meal">%s%s</aside>', $mealHeader, $mealRemove);
+printf('<aside id="meal">%s%s%s</aside>', $mealHeader, $mealDishAdd, $mealRemove);
 ?>

@@ -1,19 +1,143 @@
-.dish {
-  header {
-    .close-dish {
-      svg {
-        display: block;
-        width: 1rem;
+#content {
+  &.is-select {
+    .layer-content {
+      max-height: 100%;
+
+      & > * {
+        position: relative;
+      }
+
+      @include pseudo(before, block, absolute) {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(to bottom, color(darkest), color(dark));
+      }
+    }
+
+    #dishes-select-header {
+      display: block;
+    }
+
+    #dishes {
+      @include flex(flex-start, flex-start, row, wrap);
+      @include spacing(padding-left);
+      @include spacing(padding-right);
+      @include spacing(gap);
+
+    }
+
+    .dish {
+      @include flex(flex-start, flex-start, column-reverse);
+      width: calc(50% - calc(#{spacing(mobile)} * 0.5));
+      cursor: pointer;
+      @include breakpoint(tablet) {
+        width: calc(50% - calc(#{spacing(tablet)} * 0.5));
+      }
+      @include breakpoint(desktop) {
+        width: calc(50% - calc(#{spacing(desktop)} * 0.5));
+      }
+      @include breakpoint(desktop-wide) {
+        width: calc(50% - calc(#{spacing(desktop-wide)} * 0.5));
+      }
+
+      .layer-heading {
+        position: relative;
+        top: unset;
+
+        h1 {
+          @include fontFamily(default);
+          font-size: size(default);
+          padding: 0;
+          height: auto;
+          background-color: transparent;
+          clip-path: unset;
+          color: color(lightest);
+        }
+      }
+
+      .photo {
+        width: 100%;
+        background-color: color(medium);
+
+        & > * {
+          aspect-ratio: 1/1;
+        }
+      }
+
+      .layer-close,
+      .details,
+      .ingredients,
+      .steps,
+      .notes {
+        display: none;
       }
     }
   }
 
+  &.is-preview {
+    .dish {
+      .layer-close {
+        display: none;
+      }
+    }
+  }
+}
+
+#dishes-select-header {
+  @include spacing(padding-top);
+  @include spacing(padding-right);
+  @include spacing(padding-left);
+  color: color(light);
+  display: none;
+}
+
+.dish {
+  display: none;
+  position: relative;
+
+  &.is-active {
+    display: block;
+  }
+
+  .layer-heading {
+    top: 0;
+    position: sticky;
+    z-index: 4100;
+  }
+
+  .data {
+    background-color: color(dark);
+    margin-top: -2rem;
+    @include shadow(large, color(darkest), inset);
+    z-index: 4001;
+  }
+
   section {
+    width: 100%;
+
     .photo {
-      & > img,
-      & > svg {
+      position: relative;
+      aspect-ratio: 16/9;
+      @include flex(center, center);
+
+      img,
+      svg {
         display: block;
-        aspect-ratio: 16/9;
+        position: absolute;
+      }
+
+      svg {
+        height: 90%;
+        opacity: 0.2;
+        fill: color(darker);
+      }
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
       }
     }
   }

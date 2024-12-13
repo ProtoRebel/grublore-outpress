@@ -4,6 +4,12 @@
       top: 0;
     }
   }
+  &.is-dish,
+  &.is-select {
+    #layer-dish {
+      top: 0;
+    }
+  }
   &.is-alert {
     #layer-alert {
       top: 0;
@@ -14,20 +20,23 @@
 .layer {
   position: fixed;
   width: 100%;
-  min-height: 100vh;
-  height: 100%;
+  min-height: 100%;
   top: 100%;
   left: 0;
 }
 
 // TODO: Switch to CSS vars for color to make color theming work
 .layer-overlay {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   z-index: 0;
   background-color: transparentize($color-marine-dark, 0.1);
   backdrop-filter: blur(0.25rem);
+}
+
+.layer-overlay::-webkit-scrollbar {
+  display:none;
 }
 
 .layer-content {
@@ -46,13 +55,23 @@
   width: 3rem;
   height: 3rem;
   clip-path: polygon(0.75rem 0, 100% 0, 100% 100%, 0.75rem 100%, 0 calc(100% - 0.75rem), 0 0.75rem);
+  transform-origin: right center;
   @include flex(center, center);
+  @include transition(slow);
+  @include interact() {
+    transform: scale(1.05);
+
+    svg {
+      fill: color(lightest);
+    }
+  }
 
   svg {
     fill: color(light);
     width: 1rem;
     height: auto;
     transform: translateX(0.125rem);
+    @include transition();
   }
 }
 
@@ -69,6 +88,7 @@
     max-width: calc(100% - 4rem);
     clip-path: polygon(0 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0 100%);
     color: color(light);
+    margin: 0;
     @include flex(center, center);
     @include spacing(padding-left);
     @include spacing(padding-right);
@@ -141,6 +161,7 @@
 
 #layer-dish {
   z-index: 4000;
+  position: absolute;
 }
 
 #layer-alert {

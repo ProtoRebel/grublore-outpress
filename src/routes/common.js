@@ -204,6 +204,36 @@ export default {
       alertThrow('mealRemove', 'Whoa!', `You are about to remove the meal <strong>${mealName}</strong> and its dishes and notes.`, 'Remove Meal', 'Keep Meal');
     });
 
+    // Meal: Add Dish Button
+    $('#dish-add').click(e => {
+      appContent.addClass('is-select');
+    });
+
+    // Dish: Populate Details Function
+    function dishDetails(dishId) {
+      dishActive = dishId;
+      appContent.addClass('is-dish');
+      appContent.removeClass('is-select');
+      $('.dish').removeClass('is-active');
+      $(`#${dishId}`).addClass('is-active');
+    }
+
+    // Dish: View from List
+    $('.dish').click(e => {
+      const dishTarget = $(e.currentTarget).attr('id');
+      if(appContent.hasClass('is-select')) {
+        dishDetails(dishTarget);
+        appContent.addClass('is-preview')
+      }
+    });
+
+    // Dish: Navigate Between Dishes
+    $('.dish .dish-link').click(e => {
+      e.preventDefault();
+      const dishTarget = $(e.currentTarget).attr('href').replace('#', '');
+      dishDetails(dishTarget);
+    });
+
     // State: Pull on load
     function glStateLoad() {
       if(glState !== null) {
@@ -214,7 +244,12 @@ export default {
         if (displayFull.indexOf(displayTrim) !== -1) {
           displayFull = displayFull.replace(displayTrim, '').trim();
         }
-        mealDataLoad(glState['meal']);
+        if(mealActive.length > 0) {
+          mealDataLoad(mealActive);
+        }
+        if(dishActive.length > 0) {
+          dishDetails(dishActive);
+        }
         appContent.attr('class', displayFull);
       }
     }

@@ -77,7 +77,7 @@ $layerMeal = util_templateReturn('modules/layer', 'meal');
 util_layer('meal', $layerMeal);
 //
 // Layer: Dish, z-index=4000
-$layerDish = sprintf('<section id="dish">%s</section>', implode('', $allDishes));
+$layerDish = util_templateReturn('modules/layer', 'dish', ['dishes' => $allDishes]);
 util_layer('dish', $layerDish);
 //
 //// Layer: Controls, z-index=6000
