@@ -21,6 +21,7 @@
   position: fixed;
   width: 100%;
   min-height: 100%;
+  height: 100%;
   top: 100%;
   left: 0;
 }
@@ -35,14 +36,12 @@
   backdrop-filter: blur(0.25rem);
 }
 
-.layer-overlay::-webkit-scrollbar {
-  display:none;
-}
-
 .layer-content {
-  position: relative;
+  position: fixed;
+  width: 100%;
   max-width: $layoutWidthMax;
   height: 100%;
+  max-height: 100%;
   margin: 0 auto;
   z-index: 1;
 }
@@ -75,35 +74,16 @@
   }
 }
 
-.layer-heading {
-  width: 100%;
-  position: absolute;
-  top: -2rem;
-  filter: drop-shadow(map-get($shadowSizes, 'small') color(darkest));
-  @include flex(space-between, center);
-
-  h1 {
-    background-color: color(darkest);
-    height: 4rem;
-    max-width: calc(100% - 4rem);
-    clip-path: polygon(0 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0 100%);
-    color: color(light);
-    margin: 0;
-    @include flex(center, center);
-    @include spacing(padding-left);
-    @include spacing(padding-right);
-  }
-}
-
 #layer-list {
-  position: relative;
   z-index: 0;
+  top: 0;
 
   .layer-overlay {
     display: none;
   }
 
   .layer-content {
+    position: relative;
     @include pseudo(before, block, absolute) {
       z-index: -1;
       left: spacing(mobile);
@@ -155,16 +135,38 @@
     background-color: color(medium);
     max-height: calc(100% - 2rem);
     min-height: 50vh;
-    padding-top: 2rem;
+  }
+
+  .layer-heading {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    filter: drop-shadow(map-get($shadowSizes, 'small') color(darkest));
+    transform: translateY(-2rem);
+    @include flex(space-between, center);
+
+    h1 {
+      background-color: color(darkest);
+      height: 4rem;
+      max-width: calc(100% - 4rem);
+      clip-path: polygon(0 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0 100%);
+      color: color(light);
+      margin: 0;
+      @include flex(center, center);
+      @include spacing(padding-left);
+      @include spacing(padding-right);
+    }
   }
 }
 
 #layer-dish {
+  display: none;
   z-index: 4000;
   position: absolute;
 }
 
 #layer-control {
+  display: none;
   z-index: 6000;
   position: fixed;
   top: unset;

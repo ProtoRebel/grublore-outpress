@@ -10,14 +10,26 @@ export default {
     App Elements & Globals
     ----------
      */
+
+    // App - Elements
     const elContent = $('#content');
     const elMealsList = $('#meals');
-    const elMealsTemplate = $('#meal-template');
+    const elMealTemplate = $('#meal-template');
+    const elMealAdd = $('#meal-add');
     const elMealName = $('#meal-name');
-    const elMealEmpty = 'No dishes have been added to this meal';
+    const elMealNote = $('#meal-note');
     const elAlert = $('#alert');
     const elAlertConfirm = $('#alert-confirm');
     const elAlertCancel = $('#alert-cancel');
+
+    // App - Strings
+    const elMealEmptyName = 'Unnamed Meal';
+    const elMealEmptyNote = '• No dishes have been added to this meal';
+
+    // Util - Function: Current UNIX Timestamp
+    function unixTimestamp() {
+      return Math.floor(Date.now() / 1000);
+    }
 
     /*
     ----------
@@ -49,12 +61,11 @@ export default {
     statePopulate();
 
     // State - Function: Update
-    // Note: Run this function anytime a State Var is updated
+    // NOTE: Run this function anytime a State Var is updated
     function stateUpdate() {
       stateLayer = elContent.attr('class').replace(' is-alert', '');
       localStorage.setItem('gl-state', `{"layer":"${stateLayer}","meal":"${stateMeal}","dish":"${stateDish}","control":"${stateControl}"}`);
     }
-
 
 
     /*
@@ -64,11 +75,158 @@ export default {
      */
 
     // List - Function: Populate the List
+    function listPopulate() {
+      elMealsList.children().not('#meal-template').remove();
+      Object.keys(localStorage).forEach((key) => {
+        if(key.startsWith('gl-meal_')) {
+          const meal = JSON.parse(localStorage.getItem(key));
+          if(meal) {
+            const $newMeal = elMealTemplate.clone();
+            const mealId = key.replace('gl-meal_', '');
+            $newMeal.attr('id', mealId);
+            $newMeal.find('h2').text(meal.name);
+            $newMeal.find('p strong').text(meal.dishes || '');
+            $newMeal.find('p em').text(Array.isArray(meal.dishes) && (meal.dishes).length > 0 ? meal.note : `${meal.note} ${elMealEmptyNote}`);
+            elMealsList.prepend($newMeal);
+            mealPopulate(mealId);
+          }
+        }
+      });
+    }
+    listPopulate();
+
+    // List - Function: Clone & Add Meal
+    function listCreate() {
+      const newMealId = unixTimestamp();
+      localStorage.setItem(`gl-meal_${newMealId}`, `{"name":"${elMealEmptyName}","dishes":[],"note":""}`);
+      stateMeal = newMealId;
+      stateUpdate();
+      listPopulate();
+    }
+
+    // List - Action: Add Meal
+    elMealAdd.click(e => {
+      listCreate();
+      elContent.addClass('is-meal');
+      stateUpdate();
+      elMealName.text(elMealEmptyName);
+    });
+
+    // List - Action: View Meal
+    elMealsList.on('click', '.meal-listing', (e) => {
+      stateMeal = $(e.currentTarget).attr('id');
+      elContent.addClass('is-meal');
+      stateUpdate();
+      mealPopulate(stateMeal);
+      // TODO: Add focus() to title, highlight text
+    });
+
+
+    /*
+    ----------
+    Meal
+    ----------
+     */
+
+    // Meal - Function: Fetch Meal data
+    function mealData(meal) {
+      if(meal.trim() !== '') {
+        const mealElement = $(`#${meal}`);
+        const mealName = mealElement.find('h2').text();
+        const mealDishes = mealElement.attr('data-dishes');
+        const mealNote = mealElement.find('p em').text();
+        let mealDishesArray = [];
+        if(mealDishes.includes(',')) {
+          mealDishesArray = mealDishes.split(',');
+        } else {
+          mealDishesArray = [mealDishes]
+        }
+        return {name: mealName, dishes: mealDishesArray, note: mealNote};
+      }
+    }
+
+
+    // Meal - Function: Update Meal Data
+    function mealUpdate(meal, key, newValue) {
+      const storedData = localStorage.getItem('gl-meal_' + meal);
+      if(storedData) {
+        const dataObj = JSON.parse(storedData);
+        dataObj[key] = newValue;
+        localStorage.setItem('gl-meal_' + meal, JSON.stringify(dataObj));
+      }
+      stateUpdate();
+    }
+
+    // Meal - Function: Populate the Details
+    function mealPopulate(meal) {
+      elMealName.text();
+      elMealName.text(mealData(meal)['name']);
+    }
+
+    // Meal - Function: Remove Meal
+
+    // Meal - Action: Remove Meal
+
+    // Meal - Action: Update Meal Name
+    elMealName.on('keyup', e => {
+      const mealNameUpdate = $(e.currentTarget).text();
+      mealUpdate(stateMeal, 'name', mealNameUpdate);
+      $(`#${stateMeal}`).find('h2').text(mealNameUpdate);
+    });
+
+    // Meal - Function: Close Details
+    function mealClose() {
+      stateMeal = '';
+      elContent.removeClass('is-meal');
+      stateUpdate();
+      listPopulate();
+    }
+
+    // Meal - Action: Close Details
+    $('#meal .layer-close').click(e => {
+      e.preventDefault();
+      mealClose();
+    });
+
+    // Meal - Action: Update Meal Note
+    elMealNote.on('keyup', e => {
+      const mealNoteUpdate = $(e.currentTarget).val();
+      mealUpdate(stateMeal, 'note', mealNoteUpdate);
+      $(`#${stateMeal}`).find('p em').text(mealNoteUpdate);
+    });
+
+
+    /*
+    ----------
+    Dish
+    ----------
+     */
+
+    // Dish - Function: Fetch dish name (look for comma, then split if needed)
 
     // List - Function: Clone and Add Item
 
 
+    /*
+    ----------
+    Control
+    ----------
+     */
 
+    // List - Function: Populate the List
+
+    // List - Function: Clone and Add Item
+
+
+    /*
+    ----------
+    Alert
+    ----------
+     */
+
+    // List - Function: Populate the List
+
+    // List - Function: Clone and Add Item
 
 
 

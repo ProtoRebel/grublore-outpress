@@ -1,5 +1,56 @@
 #meal {
   width: 100%;
+  max-height: calc(100% - 2rem);
+
+  .background {
+    svg {
+      display: block;
+      position: absolute;
+      z-index: 0;
+      height: 100%;
+      width: auto;
+      top: 0;
+      right: 0;
+      fill: color(dark);
+      opacity: 0.3;
+    }
+  }
+
+  .content {
+    @include spacing(padding-left);
+    @include spacing(padding-right);
+  }
+
+  .note {
+    position: relative;
+    z-index: 1;
+    background-color: color(light);
+    padding-left: 2rem;
+    @include spacing(margin-top, 2);
+
+    svg {
+      position: absolute;
+      width: 1rem;
+      fill: color(dark);
+      top: 0.75rem;
+      left: 1rem;
+    }
+  }
+}
+
+#meal-note {
+  appearance: none;
+  border: none;
+  font-size: size(default);
+  font-style: italic;
+  width: 100%;
+  color: color(dark);
+  background-color: transparent;
+  @include spacing(padding, 0.5);
+  @include fontFamily(default);
+  @include interact() {
+    outline: none;
+  }
 }
 
 #meal-name {
@@ -19,6 +70,14 @@
     margin-left: 0.5ex;
     @include transition(fast);
   }
+}
+
+#meal-dishes {
+  display: none;
+}
+
+#meal-dish-template {
+  display: none;
 }
 
 #dish-add {
