@@ -18,6 +18,7 @@ export default {
     const elMealAdd = $('#meal-add');
     const elMealName = $('#meal-name');
     const elMealNote = $('#meal-note');
+    const elDishAdd = $('#dish-add');
     const elAlert = $('#alert');
     const elAlertConfirm = $('#alert-confirm');
     const elAlertCancel = $('#alert-cancel');
@@ -85,7 +86,7 @@ export default {
             const mealId = key.replace('gl-meal_', '');
             $newMeal.attr('id', mealId);
             $newMeal.find('h2').text(meal.name);
-            $newMeal.find('p strong').text(meal.dishes || '');
+            $newMeal.find('p strong').text(dishName(meal.dishes) || '');
             $newMeal.find('p em').text(Array.isArray(meal.dishes) && (meal.dishes).length > 0 ? meal.note : `${meal.note} ${elMealEmptyNote}`);
             elMealsList.prepend($newMeal);
             mealPopulate(mealId);
@@ -145,7 +146,6 @@ export default {
       }
     }
 
-
     // Meal - Function: Update Meal Data
     function mealUpdate(meal, key, newValue) {
       const storedData = localStorage.getItem('gl-meal_' + meal);
@@ -163,10 +163,6 @@ export default {
       elMealName.text(mealData(meal)['name']);
     }
 
-    // Meal - Function: Remove Meal
-
-    // Meal - Action: Remove Meal
-
     // Meal - Action: Update Meal Name
     elMealName.on('keyup', e => {
       const mealNameUpdate = $(e.currentTarget).text();
@@ -182,6 +178,12 @@ export default {
       listPopulate();
     }
 
+    // Meal - Action: Add Dish
+    elDishAdd.click(e => {
+      elContent.addClass('is-select');
+      stateUpdate();
+    });
+
     // Meal - Action: Close Details
     $('#meal .layer-close').click(e => {
       e.preventDefault();
@@ -195,6 +197,10 @@ export default {
       $(`#${stateMeal}`).find('p em').text(mealNoteUpdate);
     });
 
+    // Meal - Function: Remove Meal
+
+    // Meal - Action: Remove Meal
+
 
     /*
     ----------
@@ -203,6 +209,14 @@ export default {
      */
 
     // Dish - Function: Fetch dish name (look for comma, then split if needed)
+    function dishName(dish) {
+      let dishNames = [];
+      dish.forEach(e => {
+        const dishName = $(`#${dish}`).find('h1').text();
+        dishNames.push(dishName);
+      });
+      return dishNames.join(' + ');
+    }
 
     // List - Function: Clone and Add Item
 

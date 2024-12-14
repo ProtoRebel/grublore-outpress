@@ -25,7 +25,6 @@ body {
   @include fontWeight(normal);
   color: color(lightest);
   background-color: color(darkest);
-  background-image: linear-gradient(to bottom, color(dark), color(darkest));
   font-size: 1rem;
   font-smoothing: antialiased;
   font-style: italic;

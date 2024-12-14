@@ -1,11 +1,7 @@
 #content {
   &.is-select {
     .layer-content {
-      max-height: 100%;
-
-      & > * {
-        position: relative;
-      }
+      position: relative;
     }
 
     #dishes-select-header {

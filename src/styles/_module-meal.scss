@@ -1,6 +1,5 @@
 #meal {
   width: 100%;
-  max-height: calc(100% - 2rem);
 
   .background {
     svg {
@@ -17,6 +16,7 @@
   }
 
   .content {
+    position: relative;
     @include spacing(padding-left);
     @include spacing(padding-right);
   }
@@ -26,6 +26,7 @@
     z-index: 1;
     background-color: color(light);
     padding-left: 2rem;
+    @include shadow(medium, color(medium), inset);
     @include spacing(margin-top, 2);
 
     svg {
@@ -44,6 +45,7 @@
   font-size: size(default);
   font-style: italic;
   width: 100%;
+  height: 100vh;
   color: color(dark);
   background-color: transparent;
   @include spacing(padding, 0.5);

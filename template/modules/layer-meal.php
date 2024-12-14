@@ -14,5 +14,5 @@ $mealRemove = sprintf('<footer><button id="meal-remove" type="button" class="dan
 
 $mealDeco = util_templateReturn('images/deco', 'side');
 
-printf('<aside id="meal">%s<span class="background">%s</span><div class="content">%s%s%s%s</div></aside>', $mealHeader, $mealDeco, $mealDishList, $mealDishAdd, $mealNotes, $mealRemove);
+printf('<aside id="meal">%s<div class="content"><span class="background">%s</span>%s%s%s%s</div></aside>', $mealHeader, $mealDeco, $mealDishList, $mealDishAdd, $mealNotes, $mealRemove);
 ?>
