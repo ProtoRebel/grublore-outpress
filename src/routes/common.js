@@ -210,12 +210,14 @@ export default {
 
     // Dish - Function: Fetch dish name (look for comma, then split if needed)
     function dishName(dish) {
-      let dishNames = [];
-      dish.forEach(e => {
-        const dishName = $(`#${dish}`).find('h1').text();
-        dishNames.push(dishName);
-      });
-      return dishNames.join(' + ');
+      if(Array.isArray(dish)) {
+        let dishNames = [];
+        dish.forEach(e => {
+          const dishName = $(`#${dish}`).find('h1').text();
+          dishNames.push(dishName);
+        });
+        return dishNames.join(' + ');
+      }
     }
 
     // List - Function: Clone and Add Item

@@ -1,5 +1,7 @@
 #meal {
+  position: absolute;
   width: 100%;
+  top: auto;
 
   .background {
     svg {
@@ -19,6 +21,9 @@
     position: relative;
     @include spacing(padding-left);
     @include spacing(padding-right);
+    margin-top: -2rem;
+    background-color: color(medium);
+    overflow-x: hidden;
   }
 
   .note {
@@ -45,7 +50,6 @@
   font-size: size(default);
   font-style: italic;
   width: 100%;
-  height: 100vh;
   color: color(dark);
   background-color: transparent;
   @include spacing(padding, 0.5);

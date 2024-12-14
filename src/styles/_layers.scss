@@ -15,7 +15,14 @@
 
     #layer-meal {
       top: 0;
+      position: absolute;
       height: auto;
+
+      .layer-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
     }
   }
   &.is-dish,
@@ -41,7 +48,6 @@
   overflow: hidden;
 }
 
-// TODO: Switch to CSS vars for color to make color theming work
 .layer-overlay {
   position: absolute;
   width: 100%;
@@ -66,7 +72,6 @@
   z-index: 1;
   width: 100%;
   filter: drop-shadow(map-get($shadowSizes, 'small') color(darkest));
-  transform: translateY(-2rem);
   @include flex(space-between, center);
 
   h1 {
@@ -168,9 +173,6 @@
 
   .layer-content {
     position: relative;
-    width: 100%;
-    height: auto;
-    min-height: 50vh;
   }
 }
 
