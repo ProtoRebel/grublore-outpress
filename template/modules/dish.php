@@ -16,6 +16,8 @@ $dishNotes = get_field('eating_notes', $d);
 $dishCourses = wp_list_pluck(get_the_terms($d, 'course'), 'term_id');
 $dishCuisines = wp_list_pluck(get_the_terms($d, 'cuisine'), 'term_id');
 $dishPhoto = has_post_thumbnail($d) ? get_the_post_thumbnail($d, 'medium') : util_templateReturn('images/logo', 'emblem');
+$dishSectionSep = util_templateReturn('images/deco', 'horizontal');
+
 
 // Dish Header Section
 $dishClose = sprintf('<a href="#" class="layer-close">%s</a>', util_icon('close'));
@@ -84,12 +86,12 @@ $dishDisplayIngredients = '';
 if(!empty($dishIngredients)) {
     $dishIngredientsList = [];
     foreach($dishIngredients as $dishIngredient) {
-        $dishIngredientAmount = sprintf('<span>%s%s</span><em>%s</em>', $dishIngredient['amount']['whole'], $dishIngredient['amount']['fraction'], $dishIngredient['amount']['unit']);
+        $dishIngredientAmount = sprintf('<strong>%s%s</strong><em>%s</em>', $dishIngredient['amount']['whole'], $dishIngredient['amount']['fraction'], $dishIngredient['amount']['unit']);
         $dishIngredientPrep = !empty($dishIngredient['notes']['prep']) ? sprintf(', %s', $dishIngredient['notes']['prep']) : '';
         $dishIngredientName = sprintf('<strong>%s%s</strong><em>%s</em>', get_the_title($dishIngredient['ingredient']), $dishIngredientPrep, $dishIngredient['notes']['note']);
         $dishIngredientsList[] = sprintf('<li data-ingredient="%s"><div>%s</div><p>%s</p></li>', $dishIngredient['ingredient'], $dishIngredientAmount, $dishIngredientName);
     }
-    $dishDisplayIngredients = sprintf('<ul class="ingredients">%s</ul>', implode('', $dishIngredientsList));
+    $dishDisplayIngredients = sprintf('<div class="ingredient-sep sep">%s</div><ul class="ingredients">%s</ul>', $dishSectionSep, implode('', $dishIngredientsList));
 }
 
 // Dish Steps Section
@@ -110,7 +112,7 @@ if(!empty($dishSteps)) {
             }
         }
     }
-    $dishDisplaySteps = sprintf('<ol class="steps">%s</ol>', implode('', $dishStepsList));
+    $dishDisplaySteps = sprintf('<div class="steps-sep sep">%s</div><ol class="steps">%s</ol>', $dishSectionSep, implode('', $dishStepsList));
 }
 
 // Dish Notes Section

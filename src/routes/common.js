@@ -172,7 +172,16 @@ export default {
           mealDishes.forEach(e => {
             const $newMealDish = elMealDishTemplate.clone().removeAttr('id');
             $newMealDish.attr('data-dish', e);
-            const dishPhoto =
+            const dishPhoto = '';
+
+
+
+
+
+
+
+
+
             $newMealDish.find('strong').text(dishName([e]));
             const dishCourse = $(`#${e}`).find('.course').text();
             $newMealDish.find('em').text(dishCourse);
@@ -233,7 +242,7 @@ export default {
       if(Array.isArray(dish)) {
         let dishNames = [];
         dish.forEach(e => {
-          const dishName = $(`#${dish}`).find('h1').text();
+          const dishName = $(`#${e}`).find('h1').text();
           dishNames.push(dishName);
         });
         return dishNames.join(' + ');
@@ -258,10 +267,6 @@ export default {
     elMealDishes.on('click', 'li', (e) => {
       const dishTarget = $(e.currentTarget).attr('data-dish');
       dishOpen(dishTarget);
-      // stateMeal = $(e.currentTarget).attr('id');
-      // elContent.addClass('is-meal');
-      // stateUpdate();
-      // mealPopulate(stateMeal);
       // TODO: Add focus() to title, highlight text
     });
 
