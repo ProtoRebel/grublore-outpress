@@ -15,8 +15,6 @@
 
     #layer-meal {
       top: 0;
-      position: absolute;
-      height: auto;
 
       .layer-overlay {
         position: fixed;
@@ -25,10 +23,19 @@
       }
     }
   }
+
   &.is-dish,
   &.is-select {
     #layer-dish {
       top: 0;
+
+      .layer-content {
+        position: absolute;
+        max-height: 100%;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
     }
   }
   &.is-alert {
@@ -69,7 +76,7 @@
 .layer-heading {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 10;
   width: 100%;
   filter: drop-shadow(map-get($shadowSizes, 'small') color(darkest));
   @include flex(space-between, center);
@@ -173,11 +180,17 @@
 
   .layer-content {
     position: relative;
+    @include flex(center, flex-end);
   }
 }
 
 #layer-dish {
   z-index: 4000;
+
+  .layer-content {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 #layer-control {

@@ -1,7 +1,9 @@
 #meal {
   position: absolute;
   width: 100%;
-  top: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
 
   .background {
     svg {
@@ -19,11 +21,13 @@
 
   .content {
     position: relative;
-    @include spacing(padding-left);
-    @include spacing(padding-right);
+    z-index: 1;
     margin-top: -2rem;
     background-color: color(medium);
     overflow-x: hidden;
+    @include spacing(padding-left);
+    @include spacing(padding-right);
+    @include shadow(large, color(darkest), inset);
   }
 
   .note {
@@ -79,7 +83,68 @@
 }
 
 #meal-dishes {
-  display: none;
+  @include list();
+  position: relative;
+  z-index: 1;
+  margin: 2rem auto;
+  width: 100%;
+  @include spacing(gap, 0.5);
+  @include spacing(padding-top);
+  @include flex(center, center, column);
+
+  li {
+    position: relative;
+    background-color: color(dark);
+    cursor: pointer;
+    margin: 0;
+    width: 100%;
+    @include spacing(padding);
+    @include transition();
+    @include shadow(large, color(darkest), inset);
+    @include interact() {
+      transform: scale(1.025);
+      @include shadow(small, color(darkest), inset);
+    }
+
+    strong,
+    em {
+      display: block;
+    }
+
+    em {
+      color: color(light);
+    }
+
+    strong {
+      font-size: size(bump);
+      padding-right: 2rem;
+    }
+  }
+
+  .meal-dish-remove {
+    @include flex(center, center);
+    background-color: color(alert-color);
+    position: absolute;
+    width: 3rem;
+    height: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    clip-path: polygon(0 0, 0.5rem 0.5rem, 1rem 0, 100% 0, 100% 100%, 1rem 100%, 0.5rem calc(100% - 0.5rem), 0 100%, 0 calc(50% + 0.5rem), 0.5rem 50%, 0 calc(50% - 0.5rem));
+    transform-origin: right center;
+    @include spacing(right, -1);
+    @include shadow(medium, color(alert-shade), inset);
+    @include transition();
+    @include interact() {
+      transform: translateY(-50%) scale(1.25);
+      background-color: color(alert-shade);
+    }
+
+    svg {
+      fill: color(lightest);
+      height: 1.25rem;
+      transform: translate(0.25rem, -0.125rem)
+    }
+  }
 }
 
 #meal-dish-template {
@@ -87,5 +152,7 @@
 }
 
 #dish-add {
+  position: relative;
+  z-index: 1;
   margin: 0 auto;
 }

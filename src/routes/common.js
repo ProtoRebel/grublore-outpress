@@ -17,6 +17,8 @@ export default {
     const elMealTemplate = $('#meal-template');
     const elMealAdd = $('#meal-add');
     const elMealName = $('#meal-name');
+    const elMealDishes = $('#meal-dishes');
+    const elMealDishTemplate = $('#meal-dish-template');
     const elMealNote = $('#meal-note');
     const elDishAdd = $('#dish-add');
     const elAlert = $('#alert');
@@ -55,6 +57,7 @@ export default {
         stateDish = String(glState['dish'] || '');
         stateControl = String(glState['control'] || '');
         elContent.attr('class', stateLayer);
+        mealPopulate(stateMeal);
       } else {
         stateUpdate();
       }
@@ -88,8 +91,7 @@ export default {
             $newMeal.find('h2').text(meal.name);
             $newMeal.find('p strong').text(dishName(meal.dishes) || '');
             $newMeal.find('p em').text(Array.isArray(meal.dishes) && (meal.dishes).length > 0 ? meal.note : `${meal.note} ${elMealEmptyNote}`);
-            elMealsList.prepend($newMeal);
-            mealPopulate(mealId);
+            elMealsList.append($newMeal);
           }
         }
       });
@@ -137,7 +139,7 @@ export default {
         const mealDishes = mealElement.attr('data-dishes');
         const mealNote = mealElement.find('p em').text();
         let mealDishesArray = [];
-        if(mealDishes.includes(',')) {
+        if(mealDishes && mealDishes.includes(',')) {
           mealDishesArray = mealDishes.split(',');
         } else {
           mealDishesArray = [mealDishes]
@@ -159,9 +161,27 @@ export default {
 
     // Meal - Function: Populate the Details
     function mealPopulate(meal) {
-      elMealName.text();
-      elMealName.text(mealData(meal)['name']);
+      if(meal.trim() !== '') {
+        const mealDataObj = mealData(meal);
+        elMealName.text(mealDataObj['name']);
+        $('#meal-dishes li').not('#meal-dish-template').remove();
+        const mealStorage = localStorage.getItem('gl-meal_' + meal);
+        const mealStorageObj = JSON.parse(mealStorage);
+        const mealDishes = mealStorageObj['dishes'];
+        if(mealDishes.length > 0) {
+          mealDishes.forEach(e => {
+            const $newMealDish = elMealDishTemplate.clone().removeAttr('id');
+            $newMealDish.attr('data-dish', e);
+            const dishPhoto =
+            $newMealDish.find('strong').text(dishName([e]));
+            const dishCourse = $(`#${e}`).find('.course').text();
+            $newMealDish.find('em').text(dishCourse);
+            elMealDishes.append($newMealDish);
+          });
+        }
+      }
     }
+    mealPopulate(stateMeal);
 
     // Meal - Action: Update Meal Name
     elMealName.on('keyup', e => {
@@ -220,7 +240,46 @@ export default {
       }
     }
 
-    // List - Function: Clone and Add Item
+    // Dish - Function: Open Details
+    function dishOpen(dish) {
+      if(dish.length > 0) {
+        $('.dish').each((i,e) => {
+          $(e).removeClass('is-active');
+        });
+        stateDish = dish;
+        elContent.addClass('is-dish');
+        $(`#${dish}`).addClass('is-active');
+        stateUpdate();
+      }
+    }
+    dishOpen(stateDish);
+
+    // Dish - Action: View Details
+    elMealDishes.on('click', 'li', (e) => {
+      const dishTarget = $(e.currentTarget).attr('data-dish');
+      dishOpen(dishTarget);
+      // stateMeal = $(e.currentTarget).attr('id');
+      // elContent.addClass('is-meal');
+      // stateUpdate();
+      // mealPopulate(stateMeal);
+      // TODO: Add focus() to title, highlight text
+    });
+
+    // Dish - Function: Close Details
+    function dishClose() {
+      elContent.removeClass('is-dish');
+      stateDish = '';
+      $('.dish').each((i,e) => {
+        $(e).removeClass('is-active');
+      });
+      stateUpdate();
+    }
+
+    // Dish - Action: Close view with Button
+    $('#dishes .layer-close').click(e => {
+      e.preventDefault();
+      dishClose();
+    });
 
 
     /*
