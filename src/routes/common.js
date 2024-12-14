@@ -17,11 +17,13 @@ export default {
     const elMealTemplate = $('#meal-template');
     const elMealAdd = $('#meal-add');
     const elMealName = $('#meal-name');
+    const elMealRemove = $('#meal-remove');
     const elMealDishes = $('#meal-dishes');
     const elMealDishTemplate = $('#meal-dish-template');
     const elMealNote = $('#meal-note');
     const elDishAdd = $('#dish-add');
     const elAlert = $('#alert');
+    const elAlertMessage = $('#alert-message');
     const elAlertConfirm = $('#alert-confirm');
     const elAlertCancel = $('#alert-cancel');
 
@@ -45,6 +47,7 @@ export default {
     let stateMeal = '';
     let stateDish = '';
     let stateControl = '';
+    let stateAlert = '';
     let glState = JSON.parse(localStorage.getItem('gl-state'));
 
     // State - Action: Create on Load
@@ -134,17 +137,17 @@ export default {
     // Meal - Function: Fetch Meal data
     function mealData(meal) {
       if(meal.trim() !== '') {
-        const mealElement = $(`#${meal}`);
-        const mealName = mealElement.find('h2').text();
-        const mealDishes = mealElement.attr('data-dishes');
-        const mealNote = mealElement.find('p em').text();
-        let mealDishesArray = [];
-        if(mealDishes && mealDishes.includes(',')) {
-          mealDishesArray = mealDishes.split(',');
-        } else {
-          mealDishesArray = [mealDishes]
+        const mealStorage = localStorage.getItem('gl-meal_' + meal);
+        try {
+          JSON.parse(mealStorage);
+          const mealStorageObj = JSON.parse(mealStorage);
+          const mealName = mealStorageObj['name'];
+          const mealDishes = mealStorageObj['dishes'];
+          const mealNote = mealStorageObj['note'];
+          return {name: mealName, dishes: mealDishes, note: mealNote};
+        } catch {
+          return false;
         }
-        return {name: mealName, dishes: mealDishesArray, note: mealNote};
       }
     }
 
@@ -165,25 +168,16 @@ export default {
         const mealDataObj = mealData(meal);
         elMealName.text(mealDataObj['name']);
         $('#meal-dishes li').not('#meal-dish-template').remove();
-        const mealStorage = localStorage.getItem('gl-meal_' + meal);
-        const mealStorageObj = JSON.parse(mealStorage);
-        const mealDishes = mealStorageObj['dishes'];
+        const mealDishes = mealData(meal)['dishes'];
         if(mealDishes.length > 0) {
           mealDishes.forEach(e => {
+            const currentDishEl = $(`#${e}`);
             const $newMealDish = elMealDishTemplate.clone().removeAttr('id');
             $newMealDish.attr('data-dish', e);
-            const dishPhoto = '';
-
-
-
-
-
-
-
-
-
+            const dishPhoto = currentDishEl.find('.photo').clone();
+            $newMealDish.prepend(dishPhoto);
             $newMealDish.find('strong').text(dishName([e]));
-            const dishCourse = $(`#${e}`).find('.course').text();
+            const dishCourse = currentDishEl.find('.course').text();
             $newMealDish.find('em').text(dishCourse);
             elMealDishes.append($newMealDish);
           });
@@ -226,10 +220,38 @@ export default {
       $(`#${stateMeal}`).find('p em').text(mealNoteUpdate);
     });
 
+    // Meal - Function: Remove Dish from Meal
+    function mealDishRemove(dish, meal) {
+      const mealDishes = mealData(meal)['dishes'];
+      const updatedDishes = mealDishes.filter(num => num !== parseInt(dish));
+      mealUpdate(meal, 'dishes', updatedDishes);
+      mealPopulate(meal);
+
+    }
+
+    // Meal - Action: Remove Dish from Meal
+    elMealDishes.on('click', '.meal-dish-remove', e => {
+      e.stopPropagation();
+      e.preventDefault();
+      const dishToRemove = $(e.currentTarget).parent('li').attr('data-dish');
+      stateDish = dishToRemove;
+      alertRemoveDishFromMeal(dishToRemove, stateMeal);
+    });
+
     // Meal - Function: Remove Meal
+    function mealRemove(meal) {
+      stateMeal = '';
+      localStorage.removeItem(`gl-meal_${meal}`);
+      elContent.removeClass('is-meal');
+      stateUpdate();
+      listPopulate();
+    }
 
     // Meal - Action: Remove Meal
-
+    elMealRemove.click(e => {
+      // mealRemove(stateMeal);
+      // TODO: Send to Alert Confirmation
+    });
 
     /*
     ----------
@@ -270,6 +292,12 @@ export default {
       // TODO: Add focus() to title, highlight text
     });
 
+    // Dish - Action: Navigate to related Dish
+    $('.dish-link').click(e => {
+      const dishLink = $(e.currentTarget).attr('href').replace('#', '');
+      dishOpen(dishLink);
+    });
+
     // Dish - Function: Close Details
     function dishClose() {
       elContent.removeClass('is-dish');
@@ -304,10 +332,48 @@ export default {
     ----------
      */
 
-    // List - Function: Populate the List
+    // Alert - Function: Throw Alert
+    function alertThrow(action, heading, message, confirm, cancel) {
+      elContent.addClass('is-alert');
+      elAlert.find('h1').text(heading);
+      elAlertMessage.html(message);
+      elAlertConfirm.text(confirm);
+      elAlertCancel.find('em').text(cancel);
+      stateAlert = action;
+    }
+    function alertClear() {
+      appContent.removeClass('is-alert');
+      alertBox.find('h1').text('');
+      $('#alert-message').html('');
+      alertBox.find('h1').text('');
+      alertConfirm.text('');
+      alertCancel.find('em').text('');
+      stateAlert = '';
 
-    // List - Function: Clone and Add Item
 
+
+
+
+    }
+
+    // Alert - Function: Remove Dish from Meal
+    function alertRemoveDishFromMeal(dish, meal) {
+      console.log(meal);
+      const message = `You are about to remove <strong>${dishName([dish])}</strong> from the meal <strong>${mealData(meal)['name']}</strong>.`
+      alertThrow('dishRemove', 'Warning!', message, 'Remove Dish', 'Keep Dish');
+    }
+
+    // Alert - Action: Grouped Actions
+    elAlertConfirm.click(e => {
+      if(stateAlert === 'dishRemove') {
+        mealDishRemove(stateDish, stateMeal);
+        stateDish = '';
+        mealPopulate(stateMeal);
+        listPopulate();
+      }
+      elContent.removeClass('is-alert');
+      stateUpdate();
+    });
 
 
 

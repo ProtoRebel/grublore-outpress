@@ -36,7 +36,7 @@ $dishPrepTimeTotal = intval($dishPrep['time']['active']) + intval($dishPrep['tim
 $dishPrepTimeIdle = $dishPrep['time']['idle'] > 0 ? $dishDetailSep . util_hoursMins($dishPrep['time']['idle']) . ' idle' : '';
 $dishPrepTime = $dishPrepTimeTotal > 0 ? sprintf('%s<em><strong>%s</strong>%s</em>', util_icon('timer'), util_hoursMins($dishPrepTimeTotal), $dishPrepTimeIdle) : null;
 
-$dishLink = !empty($dishMeta['recipe_source']['url']) ? sprintf('%s<a href="%s" target="_blank">%s</a>', util_icon('link'), $dishMeta['recipe_source']['url'], $dishMeta['recipe_source']['title']) : '';
+$dishLink = !empty($dishMeta['recipe_source']['url']) ? sprintf('%s<a href="%s" target="_blank">%s &rarr;</a>', util_icon('link'), $dishMeta['recipe_source']['url'], $dishMeta['recipe_source']['title']) : '';
 
 $dishDifficulty = sprintf('%s<em>Attention: <strong>%s/10</strong>%sTechnique: <strong>%s/10</strong></em>', util_icon('bolt'), $dishPrep['difficulty']['attention'], $dishDetailSep, $dishPrep['difficulty']['technique']);
 
@@ -57,7 +57,7 @@ if(!empty($dishGoes)) {
     foreach($dishGoes as $dishGoesDish) {
         $dishGoesWithList[] = sprintf('<a href="#%s" class="dish-link">%s</a>', $dishGoesDish, get_the_title($dishGoesDish));
     }
-    $dishGoesWith = sprintf('%s<em>Goes With: %s</em>', util_icon('heart-add'), implode(', ', $dishGoesWithList));
+    $dishGoesWith = sprintf('%s<em>Goes With: %s</em>', util_icon('heart'), implode(', ', $dishGoesWithList));
 }
 
 $dishDetailsListItems = array_filter([
@@ -120,7 +120,7 @@ $dishDisplayNotes = '';
 if(!empty($dishNotes)) {
     $dishNotesList = [];
     foreach($dishNotes as $dishNote) {
-        $dishNotesList[] = sprintf('<p>%s</p>', $dishNote['note']);
+        $dishNotesList[] = sprintf('<p>%s%s</p>', util_icon('quote'), $dishNote['note']);
     }
 
     $dishDisplayNotes = sprintf('<footer class="notes">%s</footer>', implode('', $dishNotesList));

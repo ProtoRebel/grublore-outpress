@@ -8,7 +8,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/common.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/_module-dish.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_module-dish.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_module-meal.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_module-meal.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/images/icons.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/images/icons.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/modules/dish.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/modules/dish.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/modules/layer-alert.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/modules/layer-alert.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/modules/layer-meal.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/modules/layer-meal.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +210,7 @@
       <workItem from="1733679566903" duration="5578000" />
       <workItem from="1733868419645" duration="22267000" />
       <workItem from="1733971287305" duration="6196000" />
-      <workItem from="1733980449068" duration="107113000" />
+      <workItem from="1733980449068" duration="115479000" />
     </task>
     <servers />
   </component>

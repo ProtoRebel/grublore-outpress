@@ -98,7 +98,10 @@
     cursor: pointer;
     margin: 0;
     width: 100%;
-    @include spacing(padding);
+    padding-left: 6rem;
+    @include spacing(padding-top);
+    @include spacing(padding-right);
+    @include spacing(padding-bottom);
     @include transition();
     @include shadow(large, color(darkest), inset);
     @include interact() {
@@ -118,6 +121,29 @@
     strong {
       font-size: size(bump);
       padding-right: 2rem;
+    }
+
+    .photo {
+      @include flex(center, center);
+      position: absolute;
+      width: 5rem;
+      height: 100%;
+      top: 0;
+      left: 0;
+
+      img {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      svg {
+        height: 80%;
+        margin: auto 2.5% auto auto;
+        fill: color(darkest);
+      }
     }
   }
 
