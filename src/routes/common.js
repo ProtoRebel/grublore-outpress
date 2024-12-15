@@ -111,8 +111,9 @@ export default {
     function listCreate() {
       const newMealId = unixTimestamp();
       localStorage.setItem(`gl-meal_${newMealId}`, `{"name":"${elMealEmptyName}","dishes":[],"note":""}`);
-      stateMeal = newMealId;
+      stateMeal = String(newMealId);
       stateUpdate();
+      controlInit();
       listPopulate();
     }
 
@@ -120,8 +121,8 @@ export default {
     elMealAdd.click(e => {
       listCreate();
       elContent.addClass('is-meal');
-      stateUpdate();
       elMealName.text(elMealEmptyName);
+      stateUpdate();
     });
 
     // List - Action: View Meal
@@ -189,6 +190,7 @@ export default {
           });
         }
       }
+      stateUpdate();
     }
     mealPopulate(stateMeal);
 
@@ -212,8 +214,8 @@ export default {
     elDishAdd.click(e => {
       elContent.addClass('is-select');
       stateControl = 'select';
-      stateUpdate();
       controlInit();
+      stateUpdate();
     });
 
     // Meal - Action: Close Details
