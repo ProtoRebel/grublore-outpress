@@ -218,4 +218,8 @@
 
 #layer-alert {
   z-index: 8000;
+
+  .layer-content {
+    position: relative;
+  }
 }
