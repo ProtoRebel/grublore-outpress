@@ -197,6 +197,7 @@ export default {
     function mealClose() {
       stateMeal = '';
       elContent.removeClass('is-meal');
+      elMealDishes.find('li').not('#meal-dish-template').remove();
       stateUpdate();
       listPopulate();
     }
@@ -249,8 +250,7 @@ export default {
 
     // Meal - Action: Remove Meal
     elMealRemove.click(e => {
-      // mealRemove(stateMeal);
-      // TODO: Send to Alert Confirmation
+      alertRemoveMeal(stateMeal);
     });
 
     /*
@@ -342,34 +342,39 @@ export default {
       stateAlert = action;
     }
     function alertClear() {
-      appContent.removeClass('is-alert');
-      alertBox.find('h1').text('');
-      $('#alert-message').html('');
-      alertBox.find('h1').text('');
-      alertConfirm.text('');
-      alertCancel.find('em').text('');
+      elContent.removeClass('is-alert');
+      elAlert.find('h1').text('');
+      elAlertMessage.html('');
+      elAlertConfirm.text('');
+      elAlertCancel.find('em').text('');
       stateAlert = '';
-
-
-
-
-
     }
+
+    // Alert - Action: Cancel/Clear Action
+    elAlertCancel.click(e => {
+      alertClear();
+    });
 
     // Alert - Function: Remove Dish from Meal
     function alertRemoveDishFromMeal(dish, meal) {
-      console.log(meal);
-      const message = `You are about to remove <strong>${dishName([dish])}</strong> from the meal <strong>${mealData(meal)['name']}</strong>.`
+      const message = `You are about to remove <strong>${dishName([dish])}</strong> from the meal <strong>${mealData(meal)['name']}</strong>.`;
       alertThrow('dishRemove', 'Warning!', message, 'Remove Dish', 'Keep Dish');
     }
 
-    // Alert - Action: Grouped Actions
+    function alertRemoveMeal(meal) {
+      const message = `You are about to remove the meal <strong>${mealData(meal)['name']}</strong> and all the dishes inside it.`
+      alertThrow('mealRemove', 'Whoa!', message, 'Remove Meal', 'Keep Meal');
+    }
+
+    // Alert - Action: Grouped Button Actions
     elAlertConfirm.click(e => {
       if(stateAlert === 'dishRemove') {
         mealDishRemove(stateDish, stateMeal);
         stateDish = '';
         mealPopulate(stateMeal);
         listPopulate();
+      } else if(stateAlert === 'mealRemove') {
+        mealRemove(stateMeal);
       }
       elContent.removeClass('is-alert');
       stateUpdate();
