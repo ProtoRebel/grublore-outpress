@@ -194,18 +194,22 @@
 }
 
 #layer-control {
-  display: none;
   z-index: 6000;
   position: fixed;
   top: unset;
   bottom: 0;
   min-height: 1px;
+  height: auto;
+  overflow: visible;
 
   .layer-overlay {
     display: none;
   }
 
   .layer-content {
+    position: relative;
+    height: auto;
+
     & > * {
       z-index: 2;
     }

@@ -22,6 +22,12 @@ export default {
     const elMealDishTemplate = $('#meal-dish-template');
     const elMealNote = $('#meal-note');
     const elDishAdd = $('#dish-add');
+    const elDishGeneral = $('.dish');
+    const elControl = $('#control');
+    const elControlSelect = $('#control-select');
+    const elControlPreview = $('#control-preview');
+    const elControlDishAdd = $('#control-preview-add');
+    const elControlDishAdded = $('#control-preview-added');
     const elAlert = $('#alert');
     const elAlertMessage = $('#alert-message');
     const elAlertConfirm = $('#alert-confirm');
@@ -167,7 +173,7 @@ export default {
       if(meal.trim() !== '') {
         const mealDataObj = mealData(meal);
         elMealName.text(mealDataObj['name']);
-        $('#meal-dishes li').not('#meal-dish-template').remove();
+        elMealDishes.find('li').not('#meal-dish-template').remove();
         const mealDishes = mealData(meal)['dishes'];
         if(mealDishes.length > 0) {
           mealDishes.forEach(e => {
@@ -205,7 +211,9 @@ export default {
     // Meal - Action: Add Dish
     elDishAdd.click(e => {
       elContent.addClass('is-select');
+      stateControl = 'select';
       stateUpdate();
+      controlInit();
     });
 
     // Meal - Action: Close Details
@@ -221,13 +229,13 @@ export default {
       $(`#${stateMeal}`).find('p em').text(mealNoteUpdate);
     });
 
+
     // Meal - Function: Remove Dish from Meal
     function mealDishRemove(dish, meal) {
       const mealDishes = mealData(meal)['dishes'];
       const updatedDishes = mealDishes.filter(num => num !== parseInt(dish));
       mealUpdate(meal, 'dishes', updatedDishes);
       mealPopulate(meal);
-
     }
 
     // Meal - Action: Remove Dish from Meal
@@ -274,7 +282,7 @@ export default {
     // Dish - Function: Open Details
     function dishOpen(dish) {
       if(dish.length > 0) {
-        $('.dish').each((i,e) => {
+        elDishGeneral.each((i,e) => {
           $(e).removeClass('is-active');
         });
         stateDish = dish;
@@ -296,13 +304,14 @@ export default {
     $('.dish-link').click(e => {
       const dishLink = $(e.currentTarget).attr('href').replace('#', '');
       dishOpen(dishLink);
+      controlInit();
     });
 
     // Dish - Function: Close Details
     function dishClose() {
       elContent.removeClass('is-dish');
       stateDish = '';
-      $('.dish').each((i,e) => {
+      elDishGeneral.each((i,e) => {
         $(e).removeClass('is-active');
       });
       stateUpdate();
@@ -314,6 +323,18 @@ export default {
       dishClose();
     });
 
+    // Dish - Action: Load Preview
+    elDishGeneral.click(e => {
+      if(elContent.hasClass('is-select')) {
+        const selectedDish = $(e.currentTarget).attr('id');
+        elContent.removeClass('is-select');
+        elContent.addClass('is-preview');
+        stateControl = 'preview';
+        dishOpen(selectedDish);
+        stateUpdate();
+        controlInit();
+      }
+    });
 
     /*
     ----------
@@ -321,9 +342,53 @@ export default {
     ----------
      */
 
-    // List - Function: Populate the List
+    // Control - Function: Display Controls
+    function controlInit() {
+      elControl.find('nav').removeClass('is-active');
+      elControl.find('p').show();
+      elControl.find('button').show();
+      if(stateControl === 'select') {
+        elControlSelect.find('p strong').text(mealData(stateMeal)['name']);
+        elControlSelect.addClass('is-active');
+      } else if(stateControl === 'preview') {
+        elControlPreview.find('p strong').text(mealData(stateMeal)['name']);
+        elControlPreview.addClass('is-active');
+        if(mealData(stateMeal)['dishes'].includes(parseInt(stateDish))) {
+          elControlDishAdd.hide();
+        } else {
+          elControlDishAdded.hide();
+        }
+      }
+    }
+    controlInit();
 
-    // List - Function: Clone and Add Item
+    // Control - Action: Back from Select
+    $('#control-select-back').click(e => {
+      stateControl = '';
+      elContent.removeClass('is-select');
+      stateUpdate();
+      controlInit();
+    });
+
+    // Control - Action: Back from Preview
+    $('#control-preview-back').click(e => {
+      stateControl = 'select';
+      stateDish = '';
+      elContent.removeClass('is-dish is-preview');
+      elContent.addClass('is-select');
+      stateUpdate();
+      controlInit();
+    });
+
+    // Control - Action: Add Dish to Meal
+    elControlDishAdd.click(e => {
+      const currentMealList = mealData(stateMeal)['dishes'];
+      currentMealList.push(parseInt(stateDish));
+      mealUpdate(stateMeal, 'dishes', currentMealList);
+      controlInit();
+      mealPopulate(stateMeal);
+      listPopulate();
+    });
 
 
     /*
@@ -361,6 +426,7 @@ export default {
       alertThrow('dishRemove', 'Warning!', message, 'Remove Dish', 'Keep Dish');
     }
 
+    // Alert - Function: Remove Meal
     function alertRemoveMeal(meal) {
       const message = `You are about to remove the meal <strong>${mealData(meal)['name']}</strong> and all the dishes inside it.`
       alertThrow('mealRemove', 'Whoa!', message, 'Remove Meal', 'Keep Meal');

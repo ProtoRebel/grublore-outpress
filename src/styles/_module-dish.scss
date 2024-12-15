@@ -1,12 +1,9 @@
 #content {
   &.is-select {
-    .layer-content {
-      position: relative;
-    }
 
     #dishes-select-header {
       display: block;
-      color: color(darkest);
+      color: color(light);
     }
 
     #dishes {
@@ -15,10 +12,12 @@
       @include spacing(padding-right);
       @include spacing(padding-top);
       @include spacing(gap);
+      padding-bottom: 6rem;
     }
 
     .dish {
       @include flex(flex-start, flex-start, column-reverse);
+      position: relative;
       width: 100%;
       cursor: pointer;
 
@@ -40,6 +39,9 @@
       .data {
         width: 100%;
         margin: 0;
+        height: auto;
+        min-height: 1px;
+        padding: 0;
       }
 
       .photo {
@@ -52,7 +54,8 @@
       .details,
       .ingredients,
       .steps,
-      .notes {
+      .notes,
+      .sep {
         display: none;
       }
     }

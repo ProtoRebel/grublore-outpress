@@ -1,6 +1,6 @@
 #control {
   background-color: color(darkest);
-  @include shadow(medium);
+  @include shadow(large, color(darkest));
 
   nav {
     @include flex(center, center);
