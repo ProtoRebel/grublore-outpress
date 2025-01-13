@@ -85,6 +85,56 @@ export default {
     };
 
     /**
+     * Utility Functions
+     */
+    const utils = {
+      unixTimestamp: () => Math.floor(Date.now() / 1000),
+
+      getMealStorageKey: (mealId) => `${CONSTANTS.STORAGE_PREFIX}${mealId}`,
+
+      formatDishNames: (dishes) => {
+        if (!Array.isArray(dishes)) return '';
+        return dishes.map(id => $(`#${id}`).find('h1').text()).join(' + ');
+      }
+    };
+
+    /**
+     * Alert Management
+     */
+    const alertManager = {
+      throw(action, heading, message, confirm, cancel) {
+        elements.content.addClass(CONSTANTS.LAYER_CLASSES.ALERT);
+        elements.alert.container.find('h1').text(heading);
+        elements.alert.message.html(message);
+        elements.alert.confirm.text(confirm);
+        elements.alert.cancel.find('em').text(cancel);
+        state.alert = action;
+      },
+
+      clear() {
+        elements.content.removeClass(CONSTANTS.LAYER_CLASSES.ALERT);
+        elements.alert.container.find('h1').text('');
+        elements.alert.message.html('');
+        elements.alert.confirm.text('');
+        elements.alert.cancel.find('em').text('');
+        state.alert = '';
+      },
+
+      removeDishFromMeal(dish, meal) {
+        const mealData = mealManager.getData(meal);
+        const dishName = utils.formatDishNames([dish]);
+        const message = `You are about to remove <strong>${dishName}</strong> from the meal <strong>${mealData.name}</strong>.`;
+        this.throw('dishRemove', 'Warning!', message, 'Remove Dish', 'Keep Dish');
+      },
+
+      removeMeal(meal) {
+        const mealData = mealManager.getData(meal);
+        const message = `You are about to remove the meal <strong>${mealData.name}</strong> and all the dishes inside it.`;
+        this.throw('mealRemove', 'Whoa!', message, 'Remove Meal', 'Keep Meal');
+      }
+    };
+
+    /**
      * Control Panel Management
      */
     const controlManager = {
@@ -93,15 +143,17 @@ export default {
         elements.control.main.find('p').show();
         elements.control.main.find('button').show();
 
+        const mealData = mealManager.getData(state.meal);
+        if (!mealData) return;
+
         if (state.control === 'select') {
-          elements.control.select.find('p strong').text(mealManager.getData(state.meal)?.name || '');
+          elements.control.select.find('p strong').text(mealData.name);
           elements.control.select.addClass('is-active');
         } else if (state.control === 'preview') {
-          elements.control.preview.find('p strong').text(mealManager.getData(state.meal)?.name || '');
+          elements.control.preview.find('p strong').text(mealData.name);
           elements.control.preview.addClass('is-active');
 
-          // Handle "Add to Meal" button visibility
-          if (mealManager.getData(state.meal)?.dishes?.includes(parseInt(state.dish))) {
+          if (mealData.dishes.includes(parseInt(state.dish))) {
             elements.control.dishAdd.hide();
             elements.control.dishAdded.show();
           } else {
@@ -169,30 +221,6 @@ export default {
     };
 
     /**
-     * Utility Functions
-     */
-    const utils = {
-      unixTimestamp: () => Math.floor(Date.now() / 1000),
-
-      /**
-       * Gets a meal's storage key
-       * @param {string} mealId - The meal identifier
-       * @returns {string} Storage key for the meal
-       */
-      getMealStorageKey: (mealId) => `${CONSTANTS.STORAGE_PREFIX}${mealId}`,
-
-      /**
-       * Formats dish names for display
-       * @param {Array} dishes - Array of dish IDs
-       * @returns {string} Formatted dish names
-       */
-      formatDishNames: (dishes) => {
-        if (!Array.isArray(dishes)) return '';
-        return dishes.map(id => $(`#${id}`).find('h1').text()).join(' + ');
-      }
-    };
-
-    /**
      * State Management Functions
      */
     const stateManager = {
@@ -203,10 +231,27 @@ export default {
             layer: String(savedState.layer || ''),
             meal: String(savedState.meal || ''),
             dish: String(savedState.dish || ''),
-            control: String(savedState.control || '')
+            control: String(savedState.control || ''),
+            alert: String(savedState.alert || '')
           };
+
+          // Set initial classes
           elements.content.attr('class', state.layer);
-          mealManager.populate(state.meal);
+
+          // Initialize appropriate views based on state
+          if (state.meal) {
+            mealManager.populate(state.meal);
+          }
+
+          if (state.dish) {
+            elements.dishes.general.removeClass('is-active');
+            $(`#${state.dish}`).addClass('is-active');
+          }
+
+          // Initialize control panel if needed
+          if (state.control) {
+            controlManager.init();
+          }
         } else {
           this.update();
         }
@@ -304,23 +349,93 @@ export default {
      * Event Handlers
      */
     function bindEvents() {
+      window.addEventListener('load', () => {
+        if (elements.content.hasClass(CONSTANTS.LAYER_CLASSES.DISH)) {
+          if (state.dish) {
+            // Reset dish view properly
+            elements.dishes.general.removeClass('is-active');
+            $(`#${state.dish}`).addClass('is-active');
+
+            if (state.control === 'preview') {
+              layerManager.showPreview();
+              layerManager.showDish();
+            } else {
+              layerManager.showDish();
+            }
+
+            // Scroll to the correct dish
+            $(`#${state.dish}`)[0].scrollIntoView({ behavior: 'auto', block: 'start' });
+          } else {
+            // If we have no dish state but dish layer is showing, clean up
+            elements.content.removeClass(CONSTANTS.LAYER_CLASSES.DISH);
+            elements.dishes.general.removeClass('is-active');
+          }
+        }
+      });
+
+      // Alert Events
+      elements.alert.cancel.on('click', () => {
+        alertManager.clear();
+      });
+
+      elements.alert.confirm.on('click', () => {
+        if (state.alert === 'dishRemove') {
+          const mealDishes = mealManager.getData(state.meal).dishes;
+          const updatedDishes = mealDishes.filter(id => id !== parseInt(state.dish));
+          mealManager.update(state.meal, 'dishes', updatedDishes);
+          state.dish = '';
+          mealManager.populate(state.meal);
+          listManager.populate();
+        } else if (state.alert === 'mealRemove') {
+          localStorage.removeItem(utils.getMealStorageKey(state.meal));
+          state.meal = '';
+          layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.MEAL);
+          listManager.populate();
+        }
+        alertManager.clear();
+        stateManager.update();
+      });
+
       // Close buttons
       $('.layer-close').on('click', function(e) {
         e.preventDefault();
-        const $parentLayer = $(this).closest('.layer');
+        e.stopPropagation();
+
+        // For any dish view, ensure complete cleanup
+        if (elements.content.hasClass(CONSTANTS.LAYER_CLASSES.DISH)) {
+          elements.dishes.general.removeClass('is-active');
+          state.dish = '';
+
+          // If we're in preview mode, go back to select
+          if (state.control === 'preview') {
+            elements.content.removeClass(CONSTANTS.LAYER_CLASSES.DISH);
+            layerManager.showSelect();
+          } else {
+            // Otherwise just close the dish view completely
+            elements.content.removeClass(CONSTANTS.LAYER_CLASSES.DISH);
+          }
+
+          stateManager.update();
+          return;
+        }
+
+        // For other layers
         const layerClass = Object.values(CONSTANTS.LAYER_CLASSES)
             .find(className => elements.content.hasClass(className));
 
         if (layerClass) {
           layerManager.closeLayer(layerClass);
-          // If we're closing a dish view, go back to select view
-          if (layerClass === CONSTANTS.LAYER_CLASSES.DISH && state.control === 'preview') {
-            layerManager.showSelect();
-          }
         }
       });
 
       // Meal List Events
+      elements.meals.list.on('click', '.meal-listing', function(e) {
+        state.meal = $(this).attr('id');
+        layerManager.showMeal();
+        stateManager.update();
+        mealManager.populate(state.meal);
+      });
+
       elements.meals.addButton.on('click', () => {
         const newMealId = utils.unixTimestamp();
         const initialMeal = {
@@ -341,68 +456,6 @@ export default {
         listManager.populate();
       });
 
-
-      // Meal Listing Click
-      elements.meals.list.on('click', '.meal-listing', function(e) {
-        state.meal = $(this).attr('id');
-        layerManager.showMeal();
-        stateManager.update();
-        mealManager.populate(state.meal);
-      });
-
-      // Control Back Buttons
-      elements.control.backButtons.select.on('click', () => {
-        layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.SELECT);
-        layerManager.showMeal();
-      });
-
-      elements.control.backButtons.preview.on('click', () => {
-        layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.PREVIEW);
-        layerManager.showSelect();
-      });
-
-      // Dish Selection
-      elements.dishes.general.on('click', function(e) {
-        if (elements.content.hasClass(CONSTANTS.LAYER_CLASSES.SELECT)) {
-          const selectedDish = $(this).attr('id');
-          state.dish = selectedDish;
-          $(this).addClass('is-active');
-          layerManager.showPreview();
-          layerManager.showDish();
-          stateManager.update();
-        }
-      });
-
-      // Add Dish Button
-      elements.dishes.addButton.on('click', () => {
-        layerManager.showSelect();
-      });
-
-      // Control Back Buttons
-      elements.control.backButtons.select.on('click', () => {
-        layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.SELECT);
-        layerManager.showMeal();
-      });
-
-      elements.control.backButtons.preview.on('click', () => {
-        layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.DISH);
-        layerManager.showSelect();
-      });
-
-      // Add Dish to Meal
-      elements.control.dishAdd.on('click', () => {
-        const mealData = mealManager.getData(state.meal);
-        if (mealData) {
-          const dishes = mealData.dishes || [];
-          dishes.push(parseInt(state.dish));
-          mealManager.update(state.meal, 'dishes', dishes);
-          layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.PREVIEW);
-          layerManager.showMeal();
-          mealManager.populate(state.meal);
-          listManager.populate();
-        }
-      });
-
       // Meal Name Update
       elements.meals.nameField.on('keyup', function(e) {
         const newName = $(this).text();
@@ -419,19 +472,90 @@ export default {
 
       // Remove Meal
       elements.meals.removeButton.on('click', () => {
-        // Implement meal removal logic
-        localStorage.removeItem(utils.getMealStorageKey(state.meal));
-        state.meal = '';
-        elements.content.removeClass('is-meal');
-        stateManager.update();
-        listManager.populate();
+        alertManager.removeMeal(state.meal);
       });
 
-      // Add Dish
+      // Remove Dish from Meal
+      elements.meals.dishes.on('click', '.meal-dish-remove', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const dishToRemove = $(this).closest('li').attr('data-dish');
+        state.dish = dishToRemove;
+        alertManager.removeDishFromMeal(dishToRemove, state.meal);
+      });
+
+      // View Dish from Meal
+      elements.meals.dishes.on('click', 'li', function(e) {
+        if (!$(e.target).hasClass('meal-dish-remove')) {
+          const dishId = $(this).attr('data-dish');
+          state.dish = dishId;
+          elements.dishes.general.removeClass('is-active');
+          $(`#${dishId}`).addClass('is-active');
+          layerManager.showDish();
+          // Scroll dish into view
+          $(`#${dishId}`)[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          stateManager.update();
+        }
+      });
+
+      // Dish Selection during Add
+      elements.dishes.general.on('click', function(e) {
+        if (elements.content.hasClass(CONSTANTS.LAYER_CLASSES.SELECT)) {
+          elements.dishes.general.removeClass('is-active');
+
+          const selectedDish = $(this).attr('id');
+          state.dish = selectedDish;
+          $(this).addClass('is-active');
+
+          elements.content.removeClass(CONSTANTS.LAYER_CLASSES.DISH);
+
+          layerManager.showPreview();
+          layerManager.showDish();
+          // Scroll dish into view
+          $(this)[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          stateManager.update();
+        }
+      });
+
+      // Add Dish Button
       elements.dishes.addButton.on('click', () => {
-        elements.content.addClass('is-select');
-        state.control = 'select';
-        stateManager.update();
+        // Clear dish state when starting dish selection
+        state.dish = '';
+        elements.dishes.general.removeClass('is-active');
+        layerManager.showSelect();
+      });
+
+      // Control Back Buttons
+      elements.control.backButtons.select.on('click', () => {
+        state.dish = '';
+        elements.dishes.general.removeClass('is-active');
+        layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.SELECT);
+        layerManager.showMeal();
+        // Update meal view to show new dishes
+        mealManager.populate(state.meal);
+      });
+
+      elements.control.backButtons.preview.on('click', () => {
+        state.dish = '';
+        elements.dishes.general.removeClass('is-active');
+        layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.DISH);
+        layerManager.showSelect();
+      });
+
+      // Add Dish to Meal
+      elements.control.dishAdd.on('click', () => {
+        const mealData = mealManager.getData(state.meal);
+        if (mealData) {
+          const dishes = mealData.dishes || [];
+          dishes.push(parseInt(state.dish));
+          mealManager.update(state.meal, 'dishes', dishes);
+
+          // Instead of closing and showing meal, just update control bar
+          controlManager.init();
+
+          // Update the meal list in the background
+          listManager.populate();
+        }
       });
     }
 
