@@ -1,451 +1,450 @@
 import $ from 'jquery';
 window.jQuery = $;
 
+/**
+ * Recipe and Meal Planning Application
+ *
+ * This application manages recipes and meal plans with browser-based storage.
+ * Features include:
+ * - Creating and managing meals
+ * - Adding/removing dishes to meals
+ * - Persistent storage using localStorage
+ * - Notes and annotations for meals
+ */
 export default {
   init() {
   },
   finalize() {
-    /*
-    ----------
-    App Elements & Globals
-    ----------
-     */
-
-    // App - Elements
-    const elContent = $('#content');
-    const elMealsList = $('#meals');
-    const elMealTemplate = $('#meal-template');
-    const elMealAdd = $('#meal-add');
-    const elMealName = $('#meal-name');
-    const elMealRemove = $('#meal-remove');
-    const elMealDishes = $('#meal-dishes');
-    const elMealDishTemplate = $('#meal-dish-template');
-    const elMealNote = $('#meal-note');
-    const elDishAdd = $('#dish-add');
-    const elDishGeneral = $('.dish');
-    const elControl = $('#control');
-    const elControlSelect = $('#control-select');
-    const elControlPreview = $('#control-preview');
-    const elControlDishAdd = $('#control-preview-add');
-    const elControlDishAdded = $('#control-preview-added');
-    const elAlert = $('#alert');
-    const elAlertMessage = $('#alert-message');
-    const elAlertConfirm = $('#alert-confirm');
-    const elAlertCancel = $('#alert-cancel');
-
-    // App - Strings
-    const elMealEmptyName = 'Unnamed Meal';
-    const elMealEmptyNote = '• No dishes have been added to this meal';
-
-    // Util - Function: Current UNIX Timestamp
-    function unixTimestamp() {
-      return Math.floor(Date.now() / 1000);
-    }
-
-    /*
-    ----------
-    State Management
-    ----------
-     */
-
-    // State - Variables: Initiate
-    let stateLayer = '';
-    let stateMeal = '';
-    let stateDish = '';
-    let stateControl = '';
-    let stateAlert = '';
-    let glState = JSON.parse(localStorage.getItem('gl-state'));
-
-    // State - Action: Create on Load
-
-    // State - Function: Create
-    function statePopulate() {
-      if(glState && typeof glState === 'object') {
-        stateLayer = String(glState['layer'] || '');
-        stateMeal = String(glState['meal'] || '');
-        stateDish = String(glState['dish'] || '');
-        stateControl = String(glState['control'] || '');
-        elContent.attr('class', stateLayer);
-        mealPopulate(stateMeal);
-      } else {
-        stateUpdate();
+    // DOM Elements
+    const elements = {
+      content: $('#content'),
+      meals: {
+        list: $('#meals'),
+        template: $('#meal-template'),
+        addButton: $('#meal-add'),
+        nameField: $('#meal-name'),
+        removeButton: $('#meal-remove'),
+        dishes: $('#meal-dishes'),
+        dishTemplate: $('#meal-dish-template'),
+        noteField: $('#meal-note')
+      },
+      dishes: {
+        addButton: $('#dish-add'),
+        general: $('.dish'),
+        closeButton: $('#dishes .layer-close')
+      },
+      control: {
+        main: $('#control'),
+        select: $('#control-select'),
+        preview: $('#control-preview'),
+        dishAdd: $('#control-preview-add'),
+        dishAdded: $('#control-preview-added'),
+        backButtons: {
+          select: $('#control-select-back'),
+          preview: $('#control-preview-back')
+        }
+      },
+      alert: {
+        container: $('#alert'),
+        message: $('#alert-message'),
+        confirm: $('#alert-confirm'),
+        cancel: $('#alert-cancel')
+      },
+      layers: {
+        all: $('.layer'),
+        list: $('#layer-list'),
+        meal: $('#layer-meal'),
+        dish: $('#layer-dish'),
+        control: $('#layer-control'),
+        alert: $('#layer-alert')
       }
-    }
-    statePopulate();
+    };
 
-    // State - Function: Update
-    // NOTE: Run this function anytime a State Var is updated
-    function stateUpdate() {
-      stateLayer = elContent.attr('class').replace(' is-alert', '');
-      localStorage.setItem('gl-state', `{"layer":"${stateLayer}","meal":"${stateMeal}","dish":"${stateDish}","control":"${stateControl}"}`);
-    }
+    // Constants
+    const CONSTANTS = {
+      MEAL_EMPTY_NAME: 'Unnamed Meal',
+      MEAL_EMPTY_NOTE: '• No dishes have been added to this meal',
+      STORAGE_PREFIX: 'gl-meal_',
+      STATE_KEY: 'gl-state',
+      LAYER_CLASSES: {
+        MEAL: 'is-meal',
+        DISH: 'is-dish',
+        SELECT: 'is-select',
+        PREVIEW: 'is-preview',
+        ALERT: 'is-alert'
+      }
+    };
 
+    // State Management
+    let state = {
+      layer: '',
+      meal: '',
+      dish: '',
+      control: '',
+      alert: ''
+    };
 
-    /*
-    ----------
-    List
-    ----------
+    /**
+     * Control Panel Management
      */
+    const controlManager = {
+      init() {
+        elements.control.main.find('nav').removeClass('is-active');
+        elements.control.main.find('p').show();
+        elements.control.main.find('button').show();
 
-    // List - Function: Populate the List
-    function listPopulate() {
-      elMealsList.children().not('#meal-template').remove();
-      Object.keys(localStorage).forEach((key) => {
-        if(key.startsWith('gl-meal_')) {
-          const meal = JSON.parse(localStorage.getItem(key));
-          if(meal) {
-            const $newMeal = elMealTemplate.clone();
-            const mealId = key.replace('gl-meal_', '');
-            $newMeal.attr('id', mealId);
-            $newMeal.find('h2').text(meal.name);
-            $newMeal.find('p strong').text(dishName(meal.dishes) || '');
-            $newMeal.find('p em').text(Array.isArray(meal.dishes) && (meal.dishes).length > 0 ? meal.note : `${meal.note} ${elMealEmptyNote}`);
-            elMealsList.append($newMeal);
+        if (state.control === 'select') {
+          elements.control.select.find('p strong').text(mealManager.getData(state.meal)?.name || '');
+          elements.control.select.addClass('is-active');
+        } else if (state.control === 'preview') {
+          elements.control.preview.find('p strong').text(mealManager.getData(state.meal)?.name || '');
+          elements.control.preview.addClass('is-active');
+
+          // Handle "Add to Meal" button visibility
+          if (mealManager.getData(state.meal)?.dishes?.includes(parseInt(state.dish))) {
+            elements.control.dishAdd.hide();
+            elements.control.dishAdded.show();
+          } else {
+            elements.control.dishAdd.show();
+            elements.control.dishAdded.hide();
+          }
+        }
+      },
+
+      clear() {
+        elements.control.main.find('nav').removeClass('is-active');
+        state.control = '';
+      }
+    };
+
+    /**
+     * Layer Management
+     */
+    const layerManager = {
+      clearAll() {
+        elements.content.removeClass([
+          CONSTANTS.LAYER_CLASSES.MEAL,
+          CONSTANTS.LAYER_CLASSES.DISH,
+          CONSTANTS.LAYER_CLASSES.SELECT,
+          CONSTANTS.LAYER_CLASSES.PREVIEW,
+          CONSTANTS.LAYER_CLASSES.ALERT
+        ].join(' '));
+        controlManager.clear();
+      },
+
+      showMeal() {
+        this.clearAll();
+        elements.content.addClass(CONSTANTS.LAYER_CLASSES.MEAL);
+      },
+
+      showDish() {
+        elements.content.addClass(CONSTANTS.LAYER_CLASSES.DISH);
+      },
+
+      showSelect() {
+        this.clearAll();
+        elements.content.addClass(CONSTANTS.LAYER_CLASSES.SELECT);
+        state.control = 'select';
+        controlManager.init();
+      },
+
+      showPreview() {
+        this.clearAll();
+        elements.content.addClass(CONSTANTS.LAYER_CLASSES.PREVIEW);
+        state.control = 'preview';
+        controlManager.init();
+      },
+
+      closeLayer(layerClass) {
+        elements.content.removeClass(layerClass);
+        if (layerClass === CONSTANTS.LAYER_CLASSES.MEAL) {
+          state.meal = '';
+        } else if (layerClass === CONSTANTS.LAYER_CLASSES.DISH) {
+          state.dish = '';
+          elements.dishes.general.removeClass('is-active');
+        }
+        controlManager.clear();
+        stateManager.update();
+      }
+    };
+
+    /**
+     * Utility Functions
+     */
+    const utils = {
+      unixTimestamp: () => Math.floor(Date.now() / 1000),
+
+      /**
+       * Gets a meal's storage key
+       * @param {string} mealId - The meal identifier
+       * @returns {string} Storage key for the meal
+       */
+      getMealStorageKey: (mealId) => `${CONSTANTS.STORAGE_PREFIX}${mealId}`,
+
+      /**
+       * Formats dish names for display
+       * @param {Array} dishes - Array of dish IDs
+       * @returns {string} Formatted dish names
+       */
+      formatDishNames: (dishes) => {
+        if (!Array.isArray(dishes)) return '';
+        return dishes.map(id => $(`#${id}`).find('h1').text()).join(' + ');
+      }
+    };
+
+    /**
+     * State Management Functions
+     */
+    const stateManager = {
+      load() {
+        const savedState = JSON.parse(localStorage.getItem(CONSTANTS.STATE_KEY));
+        if (savedState && typeof savedState === 'object') {
+          state = {
+            layer: String(savedState.layer || ''),
+            meal: String(savedState.meal || ''),
+            dish: String(savedState.dish || ''),
+            control: String(savedState.control || '')
+          };
+          elements.content.attr('class', state.layer);
+          mealManager.populate(state.meal);
+        } else {
+          this.update();
+        }
+      },
+
+      update() {
+        state.layer = elements.content.attr('class').replace(' is-alert', '');
+        localStorage.setItem(CONSTANTS.STATE_KEY, JSON.stringify(state));
+      }
+    };
+
+    /**
+     * List Management Functions
+     */
+    const listManager = {
+      populate() {
+        elements.meals.list.children().not('#meal-template').remove();
+
+        Object.keys(localStorage).forEach(key => {
+          if (key.startsWith(CONSTANTS.STORAGE_PREFIX)) {
+            const meal = JSON.parse(localStorage.getItem(key));
+            if (meal) {
+              const $newMeal = elements.meals.template.clone();
+              const mealId = key.replace(CONSTANTS.STORAGE_PREFIX, '');
+              $newMeal.attr('id', mealId);
+              $newMeal.find('h2').text(meal.name);
+              $newMeal.find('p strong').text(utils.formatDishNames(meal.dishes) || '');
+              $newMeal.find('p em').text(
+                  Array.isArray(meal.dishes) && meal.dishes.length > 0
+                      ? meal.note
+                      : `${meal.note} ${CONSTANTS.MEAL_EMPTY_NOTE}`
+              );
+              elements.meals.list.append($newMeal);
+            }
+          }
+        });
+      }
+    };
+
+    /**
+     * Meal Management Functions
+     */
+    const mealManager = {
+      getData(mealId) {
+        if (!mealId?.trim()) return null;
+        try {
+          const storage = localStorage.getItem(utils.getMealStorageKey(mealId));
+          return JSON.parse(storage);
+        } catch {
+          return null;
+        }
+      },
+
+      update(mealId, key, newValue) {
+        const data = this.getData(mealId);
+        if (data) {
+          data[key] = newValue;
+          localStorage.setItem(utils.getMealStorageKey(mealId), JSON.stringify(data));
+          stateManager.update();
+        }
+      },
+
+      populate(mealId) {
+        if (!mealId?.trim()) return;
+
+        const mealData = this.getData(mealId);
+        if (!mealData) return;
+
+        // Update name and clear existing dishes
+        elements.meals.nameField.text(mealData.name);
+        elements.meals.noteField.val(mealData.note);
+        elements.meals.dishes.find('li').not('#meal-dish-template').remove();
+
+        // Populate dishes
+        if (mealData.dishes?.length) {
+          mealData.dishes.forEach(dishId => {
+            const dishEl = $(`#${dishId}`);
+            const newDish = elements.meals.dishTemplate.clone().removeAttr('id');
+            newDish.attr('data-dish', dishId);
+
+            const photo = dishEl.find('.photo').clone();
+            newDish.prepend(photo);
+            newDish.find('strong').text(utils.formatDishNames([dishId]));
+            newDish.find('em').text(dishEl.find('.course').text());
+
+            elements.meals.dishes.append(newDish);
+          });
+        }
+
+        stateManager.update();
+      }
+    };
+
+    /**
+     * Event Handlers
+     */
+    function bindEvents() {
+      // Close buttons
+      $('.layer-close').on('click', function(e) {
+        e.preventDefault();
+        const $parentLayer = $(this).closest('.layer');
+        const layerClass = Object.values(CONSTANTS.LAYER_CLASSES)
+            .find(className => elements.content.hasClass(className));
+
+        if (layerClass) {
+          layerManager.closeLayer(layerClass);
+          // If we're closing a dish view, go back to select view
+          if (layerClass === CONSTANTS.LAYER_CLASSES.DISH && state.control === 'preview') {
+            layerManager.showSelect();
           }
         }
       });
-    }
-    listPopulate();
 
-    // List - Function: Clone & Add Meal
-    function listCreate() {
-      const newMealId = unixTimestamp();
-      localStorage.setItem(`gl-meal_${newMealId}`, `{"name":"${elMealEmptyName}","dishes":[],"note":""}`);
-      stateMeal = String(newMealId);
-      stateUpdate();
-      controlInit();
-      listPopulate();
-    }
+      // Meal List Events
+      elements.meals.addButton.on('click', () => {
+        const newMealId = utils.unixTimestamp();
+        const initialMeal = {
+          name: CONSTANTS.MEAL_EMPTY_NAME,
+          dishes: [],
+          note: ''
+        };
 
-    // List - Action: Add Meal
-    elMealAdd.click(e => {
-      listCreate();
-      elContent.addClass('is-meal');
-      elMealName.text(elMealEmptyName);
-      stateUpdate();
-    });
+        localStorage.setItem(
+            utils.getMealStorageKey(newMealId),
+            JSON.stringify(initialMeal)
+        );
 
-    // List - Action: View Meal
-    elMealsList.on('click', '.meal-listing', (e) => {
-      stateMeal = $(e.currentTarget).attr('id');
-      elContent.addClass('is-meal');
-      stateUpdate();
-      mealPopulate(stateMeal);
-      // TODO: Add focus() to title, highlight text
-    });
-
-
-    /*
-    ----------
-    Meal
-    ----------
-     */
-
-    // Meal - Function: Fetch Meal data
-    function mealData(meal) {
-      if(meal.trim() !== '') {
-        const mealStorage = localStorage.getItem('gl-meal_' + meal);
-        try {
-          JSON.parse(mealStorage);
-          const mealStorageObj = JSON.parse(mealStorage);
-          const mealName = mealStorageObj['name'];
-          const mealDishes = mealStorageObj['dishes'];
-          const mealNote = mealStorageObj['note'];
-          return {name: mealName, dishes: mealDishes, note: mealNote};
-        } catch {
-          return false;
-        }
-      }
-    }
-
-    // Meal - Function: Update Meal Data
-    function mealUpdate(meal, key, newValue) {
-      const storedData = localStorage.getItem('gl-meal_' + meal);
-      if(storedData) {
-        const dataObj = JSON.parse(storedData);
-        dataObj[key] = newValue;
-        localStorage.setItem('gl-meal_' + meal, JSON.stringify(dataObj));
-      }
-      stateUpdate();
-    }
-
-    // Meal - Function: Populate the Details
-    function mealPopulate(meal) {
-      if(meal.trim() !== '') {
-        const mealDataObj = mealData(meal);
-        elMealName.text(mealDataObj['name']);
-        elMealDishes.find('li').not('#meal-dish-template').remove();
-        const mealDishes = mealData(meal)['dishes'];
-        if(mealDishes.length > 0) {
-          mealDishes.forEach(e => {
-            const currentDishEl = $(`#${e}`);
-            const $newMealDish = elMealDishTemplate.clone().removeAttr('id');
-            $newMealDish.attr('data-dish', e);
-            const dishPhoto = currentDishEl.find('.photo').clone();
-            $newMealDish.prepend(dishPhoto);
-            $newMealDish.find('strong').text(dishName([e]));
-            const dishCourse = currentDishEl.find('.course').text();
-            $newMealDish.find('em').text(dishCourse);
-            elMealDishes.append($newMealDish);
-          });
-        }
-      }
-      stateUpdate();
-    }
-    mealPopulate(stateMeal);
-
-    // Meal - Action: Update Meal Name
-    elMealName.on('keyup', e => {
-      const mealNameUpdate = $(e.currentTarget).text();
-      mealUpdate(stateMeal, 'name', mealNameUpdate);
-      $(`#${stateMeal}`).find('h2').text(mealNameUpdate);
-    });
-
-    // Meal - Function: Close Details
-    function mealClose() {
-      stateMeal = '';
-      elContent.removeClass('is-meal');
-      elMealDishes.find('li').not('#meal-dish-template').remove();
-      stateUpdate();
-      listPopulate();
-    }
-
-    // Meal - Action: Add Dish
-    elDishAdd.click(e => {
-      elContent.addClass('is-select');
-      stateControl = 'select';
-      controlInit();
-      stateUpdate();
-    });
-
-    // Meal - Action: Close Details
-    $('#meal .layer-close').click(e => {
-      e.preventDefault();
-      mealClose();
-    });
-
-    // Meal - Action: Update Meal Note
-    elMealNote.on('keyup', e => {
-      const mealNoteUpdate = $(e.currentTarget).val();
-      mealUpdate(stateMeal, 'note', mealNoteUpdate);
-      $(`#${stateMeal}`).find('p em').text(mealNoteUpdate);
-    });
-
-
-    // Meal - Function: Remove Dish from Meal
-    function mealDishRemove(dish, meal) {
-      const mealDishes = mealData(meal)['dishes'];
-      const updatedDishes = mealDishes.filter(num => num !== parseInt(dish));
-      mealUpdate(meal, 'dishes', updatedDishes);
-      mealPopulate(meal);
-    }
-
-    // Meal - Action: Remove Dish from Meal
-    elMealDishes.on('click', '.meal-dish-remove', e => {
-      e.stopPropagation();
-      e.preventDefault();
-      const dishToRemove = $(e.currentTarget).parent('li').attr('data-dish');
-      stateDish = dishToRemove;
-      alertRemoveDishFromMeal(dishToRemove, stateMeal);
-    });
-
-    // Meal - Function: Remove Meal
-    function mealRemove(meal) {
-      stateMeal = '';
-      localStorage.removeItem(`gl-meal_${meal}`);
-      elContent.removeClass('is-meal');
-      stateUpdate();
-      listPopulate();
-    }
-
-    // Meal - Action: Remove Meal
-    elMealRemove.click(e => {
-      alertRemoveMeal(stateMeal);
-    });
-
-    /*
-    ----------
-    Dish
-    ----------
-     */
-
-    // Dish - Function: Fetch dish name (look for comma, then split if needed)
-    function dishName(dish) {
-      if(Array.isArray(dish)) {
-        let dishNames = [];
-        dish.forEach(e => {
-          const dishName = $(`#${e}`).find('h1').text();
-          dishNames.push(dishName);
-        });
-        return dishNames.join(' + ');
-      }
-    }
-
-    // Dish - Function: Open Details
-    function dishOpen(dish) {
-      if(dish.length > 0) {
-        elDishGeneral.each((i,e) => {
-          $(e).removeClass('is-active');
-        });
-        stateDish = dish;
-        elContent.addClass('is-dish');
-        $(`#${dish}`).addClass('is-active');
-        stateUpdate();
-      }
-    }
-    dishOpen(stateDish);
-
-    // Dish - Action: View Details
-    elMealDishes.on('click', 'li', (e) => {
-      const dishTarget = $(e.currentTarget).attr('data-dish');
-      dishOpen(dishTarget);
-      // TODO: Add focus() to title, highlight text
-    });
-
-    // Dish - Action: Navigate to related Dish
-    $('.dish-link').click(e => {
-      const dishLink = $(e.currentTarget).attr('href').replace('#', '');
-      dishOpen(dishLink);
-      controlInit();
-    });
-
-    // Dish - Function: Close Details
-    function dishClose() {
-      elContent.removeClass('is-dish');
-      stateDish = '';
-      elDishGeneral.each((i,e) => {
-        $(e).removeClass('is-active');
+        state.meal = String(newMealId);
+        layerManager.showMeal();
+        elements.meals.nameField.text(CONSTANTS.MEAL_EMPTY_NAME);
+        stateManager.update();
+        listManager.populate();
       });
-      stateUpdate();
-    }
 
-    // Dish - Action: Close view with Button
-    $('#dishes .layer-close').click(e => {
-      e.preventDefault();
-      dishClose();
-    });
 
-    // Dish - Action: Load Preview
-    elDishGeneral.click(e => {
-      if(elContent.hasClass('is-select')) {
-        const selectedDish = $(e.currentTarget).attr('id');
-        elContent.removeClass('is-select');
-        elContent.addClass('is-preview');
-        stateControl = 'preview';
-        dishOpen(selectedDish);
-        stateUpdate();
-        controlInit();
-      }
-    });
+      // Meal Listing Click
+      elements.meals.list.on('click', '.meal-listing', function(e) {
+        state.meal = $(this).attr('id');
+        layerManager.showMeal();
+        stateManager.update();
+        mealManager.populate(state.meal);
+      });
 
-    /*
-    ----------
-    Control
-    ----------
-     */
+      // Control Back Buttons
+      elements.control.backButtons.select.on('click', () => {
+        layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.SELECT);
+        layerManager.showMeal();
+      });
 
-    // Control - Function: Display Controls
-    function controlInit() {
-      elControl.find('nav').removeClass('is-active');
-      elControl.find('p').show();
-      elControl.find('button').show();
-      if(stateControl === 'select') {
-        elControlSelect.find('p strong').text(mealData(stateMeal)['name']);
-        elControlSelect.addClass('is-active');
-      } else if(stateControl === 'preview') {
-        elControlPreview.find('p strong').text(mealData(stateMeal)['name']);
-        elControlPreview.addClass('is-active');
-        if(mealData(stateMeal)['dishes'].includes(parseInt(stateDish))) {
-          elControlDishAdd.hide();
-        } else {
-          elControlDishAdded.hide();
+      elements.control.backButtons.preview.on('click', () => {
+        layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.PREVIEW);
+        layerManager.showSelect();
+      });
+
+      // Dish Selection
+      elements.dishes.general.on('click', function(e) {
+        if (elements.content.hasClass(CONSTANTS.LAYER_CLASSES.SELECT)) {
+          const selectedDish = $(this).attr('id');
+          state.dish = selectedDish;
+          $(this).addClass('is-active');
+          layerManager.showPreview();
+          layerManager.showDish();
+          stateManager.update();
         }
-      }
+      });
+
+      // Add Dish Button
+      elements.dishes.addButton.on('click', () => {
+        layerManager.showSelect();
+      });
+
+      // Control Back Buttons
+      elements.control.backButtons.select.on('click', () => {
+        layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.SELECT);
+        layerManager.showMeal();
+      });
+
+      elements.control.backButtons.preview.on('click', () => {
+        layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.DISH);
+        layerManager.showSelect();
+      });
+
+      // Add Dish to Meal
+      elements.control.dishAdd.on('click', () => {
+        const mealData = mealManager.getData(state.meal);
+        if (mealData) {
+          const dishes = mealData.dishes || [];
+          dishes.push(parseInt(state.dish));
+          mealManager.update(state.meal, 'dishes', dishes);
+          layerManager.closeLayer(CONSTANTS.LAYER_CLASSES.PREVIEW);
+          layerManager.showMeal();
+          mealManager.populate(state.meal);
+          listManager.populate();
+        }
+      });
+
+      // Meal Name Update
+      elements.meals.nameField.on('keyup', function(e) {
+        const newName = $(this).text();
+        mealManager.update(state.meal, 'name', newName);
+        $(`#${state.meal}`).find('h2').text(newName);
+      });
+
+      // Meal Note Update
+      elements.meals.noteField.on('keyup', function(e) {
+        const newNote = $(this).val();
+        mealManager.update(state.meal, 'note', newNote);
+        $(`#${state.meal}`).find('p em').text(newNote);
+      });
+
+      // Remove Meal
+      elements.meals.removeButton.on('click', () => {
+        // Implement meal removal logic
+        localStorage.removeItem(utils.getMealStorageKey(state.meal));
+        state.meal = '';
+        elements.content.removeClass('is-meal');
+        stateManager.update();
+        listManager.populate();
+      });
+
+      // Add Dish
+      elements.dishes.addButton.on('click', () => {
+        elements.content.addClass('is-select');
+        state.control = 'select';
+        stateManager.update();
+      });
     }
-    controlInit();
 
-    // Control - Action: Back from Select
-    $('#control-select-back').click(e => {
-      stateControl = '';
-      elContent.removeClass('is-select');
-      stateUpdate();
-      controlInit();
-    });
-
-    // Control - Action: Back from Preview
-    $('#control-preview-back').click(e => {
-      stateControl = 'select';
-      stateDish = '';
-      elContent.removeClass('is-dish is-preview');
-      elContent.addClass('is-select');
-      stateUpdate();
-      controlInit();
-    });
-
-    // Control - Action: Add Dish to Meal
-    elControlDishAdd.click(e => {
-      const currentMealList = mealData(stateMeal)['dishes'];
-      currentMealList.push(parseInt(stateDish));
-      mealUpdate(stateMeal, 'dishes', currentMealList);
-      controlInit();
-      mealPopulate(stateMeal);
-      listPopulate();
-    });
-
-
-    /*
-    ----------
-    Alert
-    ----------
+    /**
+     * Initialize Application
      */
+    const initialize = () => {
+      stateManager.load();
+      bindEvents();
+      listManager.populate();
+    };
 
-    // Alert - Function: Throw Alert
-    function alertThrow(action, heading, message, confirm, cancel) {
-      elContent.addClass('is-alert');
-      elAlert.find('h1').text(heading);
-      elAlertMessage.html(message);
-      elAlertConfirm.text(confirm);
-      elAlertCancel.find('em').text(cancel);
-      stateAlert = action;
-    }
-    function alertClear() {
-      elContent.removeClass('is-alert');
-      elAlert.find('h1').text('');
-      elAlertMessage.html('');
-      elAlertConfirm.text('');
-      elAlertCancel.find('em').text('');
-      stateAlert = '';
-    }
-
-    // Alert - Action: Cancel/Clear Action
-    elAlertCancel.click(e => {
-      alertClear();
-    });
-
-    // Alert - Function: Remove Dish from Meal
-    function alertRemoveDishFromMeal(dish, meal) {
-      const message = `You are about to remove <strong>${dishName([dish])}</strong> from the meal <strong>${mealData(meal)['name']}</strong>.`;
-      alertThrow('dishRemove', 'Warning!', message, 'Remove Dish', 'Keep Dish');
-    }
-
-    // Alert - Function: Remove Meal
-    function alertRemoveMeal(meal) {
-      const message = `You are about to remove the meal <strong>${mealData(meal)['name']}</strong> and all the dishes inside it.`
-      alertThrow('mealRemove', 'Whoa!', message, 'Remove Meal', 'Keep Meal');
-    }
-
-    // Alert - Action: Grouped Button Actions
-    elAlertConfirm.click(e => {
-      if(stateAlert === 'dishRemove') {
-        mealDishRemove(stateDish, stateMeal);
-        stateDish = '';
-        mealPopulate(stateMeal);
-        listPopulate();
-      } else if(stateAlert === 'mealRemove') {
-        mealRemove(stateMeal);
-      }
-      elContent.removeClass('is-alert');
-      stateUpdate();
-    });
-  },
+    // Start the application
+    initialize();
+  }
 };

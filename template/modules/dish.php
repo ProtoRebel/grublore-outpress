@@ -38,7 +38,10 @@ $dishPrepTime = $dishPrepTimeTotal > 0 ? sprintf('%s<em><strong>%s</strong>%s</e
 
 $dishLink = !empty($dishMeta['recipe_source']['url']) ? sprintf('%s<a href="%s" target="_blank">%s &rarr;</a>', util_icon('link'), $dishMeta['recipe_source']['url'], $dishMeta['recipe_source']['title']) : '';
 
-$dishDifficulty = sprintf('%s<em>Attention: <strong>%s/10</strong>%sTechnique: <strong>%s/10</strong></em>', util_icon('bolt'), $dishPrep['difficulty']['attention'], $dishDetailSep, $dishPrep['difficulty']['technique']);
+$dishDifficultyAttention = $dishPrep['difficulty']['attention'] > 0 ? sprintf('<em>Attention: <strong>%s/10</strong></em>', $dishPrep['difficulty']['attention']) : '';
+$dishDifficultyTechnique = $dishPrep['difficulty']['technique'] > 0 ? sprintf('<em>Technique: <strong>%s/10</strong></em>', $dishPrep['difficulty']['technique']) : '';
+$dishDifficultySep = !empty($dishDifficultyAttention && $dishDifficultyTechnique) ? sprintf('&nbsp;%s&nbsp;', $dishDetailSep) : '';
+$dishDifficulty = !empty($dishDifficultyAttention || $dishDifficultyTechnique) ? util_icon('bolt') . $dishDifficultyAttention . $dishDifficultySep . $dishDifficultyTechnique : '';
 
 $dishPrepTools = '';
 if(!empty($dishPrep['special_equipment'])) {
@@ -86,10 +89,16 @@ $dishDisplayIngredients = '';
 if(!empty($dishIngredients)) {
     $dishIngredientsList = [];
     foreach($dishIngredients as $dishIngredient) {
-        $dishIngredientAmount = sprintf('<strong>%s%s</strong><em>%s</em>', $dishIngredient['amount']['whole'], $dishIngredient['amount']['fraction'], $dishIngredient['amount']['unit']);
-        $dishIngredientPrep = !empty($dishIngredient['notes']['prep']) ? sprintf(', %s', $dishIngredient['notes']['prep']) : '';
-        $dishIngredientName = sprintf('<strong>%s%s</strong><em>%s</em>', get_the_title($dishIngredient['ingredient']), $dishIngredientPrep, $dishIngredient['notes']['note']);
-        $dishIngredientsList[] = sprintf('<li data-ingredient="%s"><div>%s</div><p>%s</p></li>', $dishIngredient['ingredient'], $dishIngredientAmount, $dishIngredientName);
+        if($dishIngredient['acf_fc_layout'] === 'ingredient') {
+            $dishIngredientAmount = sprintf('<strong>%s%s</strong><em>%s</em>', $dishIngredient['amount']['whole'], $dishIngredient['amount']['fraction'], $dishIngredient['amount']['unit']);
+            $dishIngredientPrep = !empty($dishIngredient['notes']['prep']) ? sprintf(', %s', $dishIngredient['notes']['prep']) : '';
+            $dishIngredientName = sprintf('<strong>%s%s</strong><em>%s</em>', get_the_title($dishIngredient['ingredient']), $dishIngredientPrep, $dishIngredient['notes']['note']);
+            $dishIngredientsList[] = sprintf('<li class="ingredient" data-ingredient="%s"><div>%s</div><p>%s</p></li>', $dishIngredient['ingredient'], $dishIngredientAmount, $dishIngredientName);
+        } elseif($dishIngredient['acf_fc_layout'] === 'section') {
+            $dishIngredientSectionTitle = empty($dishIngredient['title']) ? '' : sprintf('<h3>%s</h3>', $dishIngredient['title']);
+            $dishIngredientSectionNote = empty($dishIngredient['note']) ? '' : sprintf('<p>%s</p>', $dishIngredient['note']);
+            $dishIngredientsList[] = sprintf('<li class="section">%s%s</li>', $dishIngredientSectionTitle, $dishIngredientSectionNote);
+        }
     }
     $dishDisplayIngredients = sprintf('<div class="ingredient-sep sep">%s</div><ul class="ingredients">%s</ul>', $dishSectionSep, implode('', $dishIngredientsList));
 }

@@ -208,6 +208,23 @@
           font-size: size(bump);
         }
       }
+
+      &.section {
+        @include flex(flex-start, flex-start, column);
+        @include spacing(padding-top, 1.5);
+
+        h3 {
+          margin: 0;
+        }
+
+        p {
+          color: color(light);
+        }
+      }
+
+      &:first-child.section {
+        @include spacing(padding-top, 0.5);
+      }
     }
   }
 

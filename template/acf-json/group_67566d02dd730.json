@@ -264,7 +264,7 @@
                                 "id": ""
                             },
                             "default_value": "",
-                            "min": 1,
+                            "min": 0,
                             "max": 10,
                             "allow_in_bindings": 0,
                             "step": "",
@@ -286,7 +286,7 @@
                                 "id": ""
                             },
                             "default_value": "",
-                            "min": 1,
+                            "min": 0,
                             "max": 10,
                             "allow_in_bindings": 0,
                             "step": "",
@@ -344,11 +344,11 @@
             ]
         },
         {
-            "key": "field_67567e18b7fa2",
+            "key": "field_675f8a5f43443",
             "label": "Ingredients",
             "name": "ingredients",
             "aria-label": "",
-            "type": "repeater",
+            "type": "flexible_content",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -357,36 +357,19 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "table",
-            "pagination": 0,
-            "min": 0,
-            "max": 0,
-            "collapsed": "",
-            "button_label": "Add Ingredient",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_67566ffedd5ea",
-                    "label": "Amount",
-                    "name": "amount",
-                    "aria-label": "",
-                    "type": "group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "layout": "table",
+            "layouts": {
+                "layout_675f8a63b1daa": {
+                    "key": "layout_675f8a63b1daa",
+                    "name": "ingredient",
+                    "label": "Ingredient",
+                    "display": "table",
                     "sub_fields": [
                         {
-                            "key": "field_6756701cdd5eb",
-                            "label": "Whole",
-                            "name": "whole",
+                            "key": "field_67566ffedd5ea",
+                            "label": "Amount",
+                            "name": "amount",
                             "aria-label": "",
-                            "type": "number",
+                            "type": "group",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -395,55 +378,121 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "default_value": "",
-                            "min": "",
-                            "max": "",
-                            "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "step": "",
-                            "prepend": "",
-                            "append": ""
+                            "layout": "table",
+                            "sub_fields": [
+                                {
+                                    "key": "field_6756701cdd5eb",
+                                    "label": "Whole",
+                                    "name": "whole",
+                                    "aria-label": "",
+                                    "type": "number",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "min": "",
+                                    "max": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "",
+                                    "step": "",
+                                    "prepend": "",
+                                    "append": ""
+                                },
+                                {
+                                    "key": "field_6756704fdd5ec",
+                                    "label": "Fraction",
+                                    "name": "fraction",
+                                    "aria-label": "",
+                                    "type": "select",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "⅛": "⅛",
+                                        "¼": "¼",
+                                        "⅓": "⅓",
+                                        "⅜": "⅜",
+                                        "½": "½",
+                                        "⅝": "⅝",
+                                        "⅔": "⅔",
+                                        "¾": "¾",
+                                        "⅞": "⅞"
+                                    },
+                                    "default_value": false,
+                                    "return_format": "value",
+                                    "multiple": 0,
+                                    "allow_null": 1,
+                                    "allow_in_bindings": 0,
+                                    "ui": 0,
+                                    "ajax": 0,
+                                    "placeholder": ""
+                                },
+                                {
+                                    "key": "field_67567c6df0aa4",
+                                    "label": "Unit",
+                                    "name": "unit",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": ""
+                                }
+                            ]
                         },
                         {
-                            "key": "field_6756704fdd5ec",
-                            "label": "Fraction",
-                            "name": "fraction",
+                            "key": "field_6756708add5ed",
+                            "label": "Ingredient",
+                            "name": "ingredient",
                             "aria-label": "",
-                            "type": "select",
+                            "type": "post_object",
                             "instructions": "",
-                            "required": 0,
+                            "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": {
-                                "⅛": "⅛",
-                                "¼": "¼",
-                                "⅓": "⅓",
-                                "⅜": "⅜",
-                                "½": "½",
-                                "⅝": "⅝",
-                                "⅔": "⅔",
-                                "¾": "¾",
-                                "⅞": "⅞"
-                            },
-                            "default_value": false,
-                            "return_format": "value",
+                            "post_type": [
+                                "ingredient"
+                            ],
+                            "post_status": "",
+                            "taxonomy": "",
+                            "return_format": "id",
                             "multiple": 0,
                             "allow_null": 1,
-                            "allow_in_bindings": 0,
-                            "ui": 0,
-                            "ajax": 0,
-                            "placeholder": ""
+                            "allow_in_bindings": 1,
+                            "bidirectional": 0,
+                            "ui": 1,
+                            "bidirectional_target": []
                         },
                         {
-                            "key": "field_67567c6df0aa4",
-                            "label": "Unit",
-                            "name": "unit",
+                            "key": "field_67567a2cbf474",
+                            "label": "Notes",
+                            "name": "notes",
                             "aria-label": "",
-                            "type": "text",
+                            "type": "group",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -452,64 +501,66 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "default_value": "",
-                            "maxlength": "",
-                            "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
+                            "layout": "row",
+                            "sub_fields": [
+                                {
+                                    "key": "field_67567a39bf475",
+                                    "label": "Prep",
+                                    "name": "prep",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": ""
+                                },
+                                {
+                                    "key": "field_67567a4abf476",
+                                    "label": "Note",
+                                    "name": "note",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": ""
+                                }
+                            ]
                         }
                     ],
-                    "parent_repeater": "field_67567e18b7fa2"
+                    "min": "",
+                    "max": ""
                 },
-                {
-                    "key": "field_6756708add5ed",
-                    "label": "Ingredient",
-                    "name": "ingredient",
-                    "aria-label": "",
-                    "type": "post_object",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "post_type": [
-                        "ingredient"
-                    ],
-                    "post_status": "",
-                    "taxonomy": "",
-                    "return_format": "id",
-                    "multiple": 0,
-                    "allow_null": 1,
-                    "allow_in_bindings": 1,
-                    "bidirectional": 0,
-                    "ui": 1,
-                    "bidirectional_target": [],
-                    "parent_repeater": "field_67567e18b7fa2"
-                },
-                {
-                    "key": "field_67567a2cbf474",
-                    "label": "Notes",
-                    "name": "notes",
-                    "aria-label": "",
-                    "type": "group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "layout": "row",
+                "layout_675f8ab343444": {
+                    "key": "layout_675f8ab343444",
+                    "name": "section",
+                    "label": "Section",
+                    "display": "table",
                     "sub_fields": [
                         {
-                            "key": "field_67567a39bf475",
-                            "label": "Prep",
-                            "name": "prep",
+                            "key": "field_675f8abe4344a",
+                            "label": "Title",
+                            "name": "title",
                             "aria-label": "",
                             "type": "text",
                             "instructions": "",
@@ -528,7 +579,7 @@
                             "append": ""
                         },
                         {
-                            "key": "field_67567a4abf476",
+                            "key": "field_675f8ac74344b",
                             "label": "Note",
                             "name": "note",
                             "aria-label": "",
@@ -549,9 +600,13 @@
                             "append": ""
                         }
                     ],
-                    "parent_repeater": "field_67567e18b7fa2"
+                    "min": "",
+                    "max": ""
                 }
-            ]
+            },
+            "min": "",
+            "max": "",
+            "button_label": "Add Ingredient"
         },
         {
             "key": "field_67567eaec1b08",
@@ -686,5 +741,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1733939846
+    "modified": 1734317788
 }
