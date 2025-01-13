@@ -236,9 +236,8 @@ button {
     font-size: size(small);
     @include flex(center, center);
 
-    svg {
-      fill: color(light);
-      height: 1em;
+    .icon {
+      color: color(light);
       width: auto;
       margin-right: 1ex;
     }

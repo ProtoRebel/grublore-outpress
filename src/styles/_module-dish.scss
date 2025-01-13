@@ -160,11 +160,13 @@
       @include flex(flex-start, center);
       margin: 0 0 0.5rem 0;
 
-      svg {
+      .icon {
         display: block;
         height: 1rem;
         width: 2rem;
-        fill: color(light);
+        min-width: 2rem;
+        max-width: 2rem;
+        color: color(light);
       }
     }
   }
@@ -267,12 +269,12 @@
       position: relative;
       padding: 0 0 1rem 2rem;
 
-      svg {
+      .icon {
         position: absolute;
         top: 0.25rem;
         left: 0;
-        width: 1rem;
-        fill: color(light);
+        font-size: 1rem;
+        color: color(light);
       }
     }
   }

@@ -74,7 +74,7 @@ function util_stringLint($string) {
 
 // Icon Display
 function util_icon($icon) {
-    $output = util_templateReturn('images/icons', null, ['icon' => $icon]);
+    $output = sprintf('<i class="icon icon-%s"></i>', $icon);
     return $output;
 }
 

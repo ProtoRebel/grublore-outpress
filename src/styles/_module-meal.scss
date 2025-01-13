@@ -38,10 +38,11 @@
     @include shadow(medium, color(medium), inset);
     @include spacing(margin-top, 2);
 
-    svg {
+    .icon {
       position: absolute;
       width: 1rem;
-      fill: color(dark);
+      font-size: 1.25rem;
+      color: color(dark);
       top: 0.75rem;
       left: 1rem;
     }
@@ -68,16 +69,16 @@
   @include interact(focus) {
     outline: none;
 
-    & + svg {
-      fill: color(light);
+    & + .icon {
+      display: block;
+      color: color(light);
     }
   }
 
-  & + svg {
+  & + .icon {
     display: block;
-    fill: color(dark);
-    height: 1em;
-    margin-left: 0.5ex;
+    color: color(dark);
+    margin-left: 0.5rem;
     @include transition(fast);
   }
 }
@@ -165,9 +166,9 @@
       background-color: color(alert-shade);
     }
 
-    svg {
-      fill: color(lightest);
-      height: 1.25rem;
+    .icon {
+      color: color(lightest);
+      font-size: 1.25rem;
       transform: translate(0.25rem, -0.125rem)
     }
   }

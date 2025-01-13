@@ -108,15 +108,14 @@
   @include interact() {
     transform: scale(1.05);
 
-    svg {
-      fill: color(lightest);
+    .icon {
+      color: color(lightest);
     }
   }
 
-  svg {
-    fill: color(light);
-    width: 1rem;
-    height: auto;
+  .icon {
+    color: color(light);
+    font-size: 1rem;
     transform: translateX(0.125rem);
     @include transition();
   }

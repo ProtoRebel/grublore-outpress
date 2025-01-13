@@ -1,0 +1,121 @@
+$icomoon-font-family: "grublore-icons" !default;
+$icomoon-font-path: "/wp-content/themes/outpress/fonts" !default;
+
+$icon-bolt: "\e900";
+$icon-cancel: "\e901";
+$icon-close: "\e902";
+$icon-dish: "\e903";
+$icon-dishes: "\e904";
+$icon-groceries: "\e905";
+$icon-heart: "\e906";
+$icon-link: "\e907";
+$icon-meals: "\e908";
+$icon-more: "\e909";
+$icon-pencil: "\e90a";
+$icon-quote: "\e90b";
+$icon-timer: "\e90c";
+$icon-tools: "\e90d";
+$icon-trash: "\e90e";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?xbya1n');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?xbya1n#iefix') format('embedded-opentype'),
+  url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?xbya1n') format('truetype'),
+  url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?xbya1n') format('woff'),
+  url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?xbya1n##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bolt {
+  &:before {
+    content: $icon-bolt;
+  }
+}
+.icon-cancel {
+  &:before {
+    content: $icon-cancel;
+  }
+}
+.icon-close {
+  &:before {
+    content: $icon-close;
+  }
+}
+.icon-dish {
+  &:before {
+    content: $icon-dish;
+  }
+}
+.icon-dishes {
+  &:before {
+    content: $icon-dishes;
+  }
+}
+.icon-groceries {
+  &:before {
+    content: $icon-groceries;
+  }
+}
+.icon-heart {
+  &:before {
+    content: $icon-heart;
+  }
+}
+.icon-link {
+  &:before {
+    content: $icon-link;
+  }
+}
+.icon-meals {
+  &:before {
+    content: $icon-meals;
+  }
+}
+.icon-more {
+  &:before {
+    content: $icon-more;
+  }
+}
+.icon-pencil {
+  &:before {
+    content: $icon-pencil;
+  }
+}
+.icon-quote {
+  &:before {
+    content: $icon-quote;
+  }
+}
+.icon-timer {
+  &:before {
+    content: $icon-timer;
+  }
+}
+.icon-tools {
+  &:before {
+    content: $icon-tools;
+  }
+}
+.icon-trash {
+  &:before {
+    content: $icon-trash;
+  }
+}
