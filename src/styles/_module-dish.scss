@@ -127,7 +127,7 @@
       svg {
         height: 90%;
         opacity: 0.2;
-        fill: color(darker);
+        fill: color(darkest);
       }
 
       img {
@@ -162,10 +162,10 @@
 
       .icon {
         display: block;
-        height: 1rem;
-        width: 2rem;
         min-width: 2rem;
         max-width: 2rem;
+        width: 2rem;
+        font-size: 1.25rem;
         color: color(light);
       }
     }
@@ -190,6 +190,8 @@
 
       div {
         width: 5rem;
+        min-width: 5rem;
+        max-width: 5rem;
         padding-right: 1rem;
         color: color(light);
         line-height: 1;
@@ -242,6 +244,8 @@
       & > span {
         @include flex(center, center, column);
         width: 3rem;
+        min-width: 3rem;
+        max-width: 3rem;
         color: color(light);
       }
 

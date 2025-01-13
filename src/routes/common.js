@@ -498,6 +498,19 @@ export default {
         }
       });
 
+      // Handle dish links in details
+      $('.details').on('click', '.dish-link', function(e) {
+        e.preventDefault();
+        const dishId = $(this).attr('href').replace('#', '');
+        state.dish = dishId;
+        elements.dishes.general.removeClass('is-active');
+        $(`#${dishId}`).addClass('is-active');
+        layerManager.showDish();
+        // Scroll dish into view
+        $(`#${dishId}`)[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        stateManager.update();
+      });
+
       // Dish Selection during Add
       elements.dishes.general.on('click', function(e) {
         if (elements.content.hasClass(CONSTANTS.LAYER_CLASSES.SELECT)) {
