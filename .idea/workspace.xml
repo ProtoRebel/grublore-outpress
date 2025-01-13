@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3a0d63b6-be93-40b6-92dc-709ca85c4d01" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/_module-dish.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_module-dish.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/modules/dish.php" beforeDir="false" afterPath="$PROJECT_DIR$/template/modules/dish.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_base.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/config/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/config/_variables.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +106,7 @@
       <recent name="$PROJECT_DIR$/src/assets/css/blocks" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.Start">
+  <component name="RunManager" selected="npm.Build">
     <configuration name="Build" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -215,7 +214,7 @@
       <workItem from="1735797456055" duration="13000" />
       <workItem from="1735808625136" duration="721000" />
       <workItem from="1736673587061" duration="8326000" />
-      <workItem from="1736806774767" duration="4466000" />
+      <workItem from="1736806774767" duration="4729000" />
     </task>
     <servers />
   </component>

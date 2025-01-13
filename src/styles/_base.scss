@@ -15,9 +15,6 @@ html {
   @include breakpoint(desktop) {
     font-size: map-get($fontSizeDefaults, 'desktop');
   }
-  @include breakpoint(desktop-wide) {
-    font-size: map-get($fontSizeDefaults, 'desktop-wide');
-  }
 }
 
 body {
